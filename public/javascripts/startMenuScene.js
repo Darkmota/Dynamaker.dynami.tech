@@ -196,8 +196,7 @@ startMenuScene.prototype = {
 			
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
-			ctx.fillText("IF you use mp3, there might make offset changes a little.", windowWidth * 0.5, windowHeight * 0.87);
-			ctx.fillText("You can register and try DyZ right now. ↑", windowWidth * 0.5, windowHeight * 0.9);
+			ctx.fillText("We recommend .ogg/.wav file to make for smaller offset error.", windowWidth * 0.5, windowHeight * 0.87);
 			ctx.font = "40px Dynamix";
 			ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5, windowHeight * 0.8);
 			
@@ -229,7 +228,7 @@ startMenuScene.prototype = {
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix";
 		ctx.textAlign = "center";
-		ctx.fillText("Version 1.3", windowWidth * 0.5, windowHeight - 35);
+		ctx.fillText("Version 1.0", windowWidth * 0.5, windowHeight - 35);
 		
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";
