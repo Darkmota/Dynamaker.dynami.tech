@@ -169,6 +169,10 @@ function mouse(canvas) {
 			return;
 		}
 		mainMouse.coordinate = getPointOnCanvas(canvas, e.pageX, e.pageY);
+		if (between(mainMouse.coordinate.y, 0, 18)) {
+			setTime(mainMouse.coordinate.x / 1920 * doration);
+			return;
+		}
 		mainMouse.pressed = true;
 		if (scene) {
 			scene.down(mainMouse.coordinate);
@@ -652,10 +656,6 @@ function mouse(canvas) {
 		}
 		mainMouse.e = e;
 		mainMouse.coordinate = getPointOnCanvas(canvas, e.pageX, e.pageY);
-		if (between(mainMouse.coordinate.y, 0, 18)) {
-			setTime(mainMouse.coordinate.x / 1920 * doration);
-			return;
-		}
 		if (mainMouse.movement == "choose" && mainMouse.condition == 0) {
 			var dis = 9999999999;
 			var thisTime = musicCtrl.currentTime + offsetSec;
