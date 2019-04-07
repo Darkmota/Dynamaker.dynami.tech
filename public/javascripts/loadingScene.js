@@ -280,6 +280,37 @@ loadingScene.prototype = {
 								noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset[i].m_id] = ($.extend(true, {}, CMap.m_notesRight.m_notes.CMapNoteAsset[i]));
 								noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset[i].m_id].m_position = Number(noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset[i].m_id].m_position) + noteRight[CMap.m_notesRight.m_notes.CMapNoteAsset[i].m_id].m_width/2;
 							}
+							
+							
+					bpmlist = [];
+					timelist = [];
+					if(typeof CMap.m_argument == "undefined")
+					{
+						bpmlist = [];
+						timelist = [];
+					}
+					else if(typeof CMap.m_argument.m_bpmchange == "undefined")
+					{
+						bpmlist = [];
+						timelist = [];
+					}
+					else if(isEmptyObject(CMap.m_argument.m_bpmchange))
+					{
+						bpmlist = [];
+						timelist = [];
+					}
+					else
+					{
+						for (var i = 0; i < CMap.m_argument.m_bpmchange.CBpmchange.length; ++i)
+						{
+							if (CMap.m_argument.m_bpmchange.CBpmchange[i]) 
+							{
+								bpmlist[i] = ($.extend(true, {}, CMap.m_argument.m_bpmchange.CBpmchange[i]));
+								timelist[i] = ($.extend(true, {}, CMap.m_argument.m_bpmchange.CBpmchange[i]));
+							}
+						}
+						TimelistReset();
+					}
 				}
 
 				onloadRun = true;

@@ -14,33 +14,35 @@ var rx, ry = 0;
 function getPTnow(index) {
 	switch (editSide) {
 		case 0:
+		case 3:
 			if (index == 1) {
 				coverPos1 = xtom(mainMouse.coordinate.x, 0);
-				coverTime1 = ((jb(windowHeight - mainMouse.coordinate.y, ud, windowHeight) - ud)/hiSpeed + thisTime)/spu;
+				coverTime1 = SetBar((jb(windowHeight - mainMouse.coordinate.y, ud, windowHeight) - ud)/hiSpeed + thisTime);
 			}
 			else {
 				coverPos2 = xtom(mainMouse.coordinate.x, 0);
-				coverTime2 = ((jb(windowHeight - mainMouse.coordinate.y, ud, windowHeight) - ud)/hiSpeed + thisTime)/spu;
+				coverTime2 = SetBar((jb(windowHeight - mainMouse.coordinate.y, ud, windowHeight) - ud)/hiSpeed + thisTime);
 			}
 			break;
 		case 1:
 			if (index == 1) {
 				coverPos1 = xtom(mainMouse.coordinate.y, 1);
-				coverTime1 = ((jb(mainMouse.coordinate.x, lr, windowWidth/2) - lr)/hiSpeed + thisTime)/spu;
+				coverTime1 = SetBar((jb(mainMouse.coordinate.x, lr, windowWidth/2) - lr)/hiSpeed + thisTime);
 			}
 			else {
 				coverPos2 = xtom(mainMouse.coordinate.y, 1);
-				coverTime2 = ((jb(mainMouse.coordinate.x, lr, windowWidth/2) - lr)/hiSpeed + thisTime)/spu;
+				coverTime2 = SetBar((jb(mainMouse.coordinate.x, lr, windowWidth/2) - lr)/hiSpeed + thisTime);
 			}
 			break;
+		
 		case 2:
 			if (index == 1) {
 				coverPos1 = xtom(mainMouse.coordinate.y, 2);
-				coverTime1 = ((jb(windowWidth - mainMouse.coordinate.x, lr, windowWidth/2) - lr)/hiSpeed + thisTime)/spu;
+				coverTime1 = SetBar((jb(windowWidth - mainMouse.coordinate.x, lr, windowWidth/2) - lr)/hiSpeed + thisTime);
 			}
 			else {
 				coverPos2 = xtom(mainMouse.coordinate.y, 2);
-				coverTime2 = ((jb(windowWidth - mainMouse.coordinate.x, lr, windowWidth/2) - lr)/hiSpeed + thisTime)/spu;
+				coverTime2 = SetBar((jb(windowWidth - mainMouse.coordinate.x, lr, windowWidth/2) - lr)/hiSpeed + thisTime);
 			}
 			break;
 	}
@@ -187,31 +189,59 @@ function mouse(canvas) {
 					if (between(mainMouse.coordinate.x, rx, rx + 400)) {
 						for (var i = 0; i < basicMenu.length; ++i) {
 							if (between(mainMouse.coordinate.y, ry + basicMenu[i][1], ry + basicMenu[i][1] + basicMenu[i][2])) {
-								switch (i) {
-									case 0: {// Edit
-										break;
+								if(editSide==3)//if BPMOption
+								{
+									switch(i)
+									{
+										case 0: // Edit
+										{
+											break;
+										}
+										case 1: //Bpm Change
+										{
+											resetEdit();
+											mainMouse.condition = 0;
+											mainMouse.movement = "writeBPM";
+											break;	
+										}
+										case 2: //Save for Dynamite
+										{
+											savefixbpm();
+											break;
+										}
 									}
-									case 1: {// NORMAL
-										if ((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER")) return;
-										resetEdit();
-										mainMouse.condition = 0;
-										mainMouse.movement = "writeNormal";
-										break;
+								}
+								else
+								{
+									switch (i) {
+										case 0: {// Edit
+											break;
+										}
+										case 1: {// NORMAL
+											if ((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER")) return;
+											resetEdit();
+											mainMouse.condition = 0;
+											mainMouse.movement = "writeNormal";
+											break;
+										}
+										case 2: {// CHAIN
+											if ((editSide == 1 && CMap.m_leftRegion == "PAD") || (editSide == 2 && CMap.m_rightRegion == "PAD")) return;
+											resetEdit();
+											mainMouse.condition = 0;
+											mainMouse.movement = "writeChain";
+											break;
+										}
+										case 3: {// HOLD
+											if ((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER")) return;
+											resetEdit();
+											mainMouse.condition = 0;
+											mainMouse.movement = "writeHold";
+											break;
+										}
 									}
-									case 2: {// CHAIN
-										if ((editSide == 1 && CMap.m_leftRegion == "PAD") || (editSide == 2 && CMap.m_rightRegion == "PAD")) return;
-										resetEdit();
-										mainMouse.condition = 0;
-										mainMouse.movement = "writeChain";
-										break;
-									}
-									case 3: {// HOLD
-										if ((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER")) return;
-										resetEdit();
-										mainMouse.condition = 0;
-										mainMouse.movement = "writeHold";
-										break;
-									}
+								}
+								switch (i) 
+								{
 									case 4: {// revise
 										resetEdit();
 										mainMouse.condition = 0;
@@ -230,14 +260,15 @@ function mouse(canvas) {
 										}
 									}
 									case 6: { // Mark
-										markSecion = Number((thisTime/spq/32)).toFixed(3);
+										//markSecion = Number((thisTime/spq/32)).toFixed(3);
+										markSecion = Number(SetBar(thisTime)).toFixed(3);
 										break;
 									}
 									case 7: { // Start with Mark
 //										thisTime = musicCtrl.currentTime + offset;
 //										markSecion*spu = thisTime;
 										resetAnime();
-										setTime(markSecion*spu - offsetSec);
+										setTime(GetBar(markSecion) - offsetSec);
 										break;
 									}
 									case 8: {// Replay
@@ -398,6 +429,12 @@ function mouse(canvas) {
 							break;
 					}
 				}
+				else if(mainMouse.movement == "writeBPM")
+				{
+					mainMouse.condition = 0;
+					var bpm=prompt("Write BPM");
+					AddBPMChange(coverTime1, Number(bpm));
+				}
 				else if (mainMouse.movement == "link") {
 					switch (mainMouse.condition) {
 						case 0:
@@ -500,17 +537,22 @@ function mouse(canvas) {
 					switch (editSide) {
 						case 0:
 							nowPos = xtom(mainMouse.coordinate.x, 0);
-							nowTime = ((windowHeight - ud - Math.min(windowHeight - ud, mainMouse.coordinate.y))/hiSpeed + thisTime)/spu;
+							nowTime = SetBar((windowHeight - ud - Math.min(windowHeight - ud, mainMouse.coordinate.y))/hiSpeed + thisTime);
 							break;
 						
 						case 1:
 							nowPos = xtom(mainMouse.coordinate.y, 1);
-							nowTime = ((Math.max(lr, mainMouse.coordinate.x) - lr)/hiSpeed + thisTime)/spu;
+							nowTime = SetBar((Math.max(lr, mainMouse.coordinate.x) - lr)/hiSpeed + thisTime);
 							break;
 						
 						case 2:
 							nowPos = xtom(mainMouse.coordinate.y, 2);
-							nowTime = ((jb(windowWidth - mainMouse.coordinate.x - lr, windowWidth/2 - lr, 0))/hiSpeed + thisTime)/spu;
+							nowTime = SetBar((jb(windowWidth - mainMouse.coordinate.x - lr, windowWidth/2 - lr, 0))/hiSpeed + thisTime);
+							break;
+							
+						case 3:
+							nowPos = xtom(mainMouse.coordinate.x, 0);
+							nowTime = SetBar((windowHeight - ud - Math.min(windowHeight - ud, mainMouse.coordinate.y))/hiSpeed + thisTime);
 							break;
 					}
 					switch (mainMouse.movement) {
@@ -527,6 +569,7 @@ function mouse(canvas) {
 							}
 							break;
 						
+						case "WriteBPM":
 						case "writeNormal":
 						case "writeChain":
 						case "writeHold":
@@ -664,7 +707,7 @@ function mouse(canvas) {
 					for (var i = 0; i < noteDown.length; ++i) {
 						if (noteDown[i] && noteDown[i].m_type != "SUB") {
 							var abx = mainMouse.coordinate.x - mtox(noteDown[i].m_position, 0);
-							var aby = mainMouse.coordinate.y - (windowHeight - hiSpeed*(noteDown[i].m_time*(spu) - thisTime) - ud);
+							var aby = mainMouse.coordinate.y - (windowHeight - hiSpeed*(GetBar(noteDown[i].m_time) - thisTime) - ud);
 							if (movingId === false || (movingId !== false && dis > abx * abx + aby * aby)) {
 								movingId = i;
 								dis = abx * abx + aby * aby;
@@ -675,7 +718,7 @@ function mouse(canvas) {
 				case 1:
 					for (var i = 0; i < noteLeft.length; ++i) {
 						if (noteLeft[i] && noteLeft[i].m_type != "SUB") {
-							var abx = mainMouse.coordinate.x - (hiSpeed*(noteLeft[i].m_time*(spu) - thisTime) + lr);
+							var abx = mainMouse.coordinate.x - (hiSpeed*(GetBar(noteLeft[i].m_time) - thisTime) + lr);
 							var aby = mainMouse.coordinate.y - mtox(noteLeft[i].m_position, 1);
 							if (movingId === false || (movingId !== false && dis > abx * abx + aby * aby)) {
 								movingId = i;
@@ -688,7 +731,7 @@ function mouse(canvas) {
 				case 2:
 					for (var i = 0; i < noteRight.length; ++i) {
 						if (noteRight[i] && noteRight[i].m_type != "SUB") {
-							var abx = mainMouse.coordinate.x - (windowWidth - hiSpeed*(noteRight[i].m_time*(spu) - thisTime) - lr);
+							var abx = mainMouse.coordinate.x - (windowWidth - hiSpeed*(GetBar(noteRight[i].m_time) - thisTime) - lr);
 							var aby = mainMouse.coordinate.y - mtox(noteRight[i].m_position, 2);
 							if (movingId === false || (movingId !== false && dis > abx * abx + aby * aby)) {
 								movingId = i;
@@ -709,7 +752,31 @@ mouse.prototype = {
 	refresh:function() {
 		if (!thisTime) return;
 //		console.log(mainMouse.movement, mainMouse.condition);
-		if (mainMouse.movement == "writeNormal" || mainMouse.movement == "writeChain") {
+		if(mainMouse.movement == "writeBPM")
+		{
+			getPTnow(1);
+			if (! keysDown[88]) { //X
+				coverPos1 = Math.round(coverPos1*10)/10;
+		    }
+		    else {
+				coverPos1 = Math.round(coverPos1*100)/100;
+		    }
+		    if (! keysDown[90]) //Z
+			{
+				coverTime1 = Math.round(coverTime1*magnaticStrength)/(magnaticStrength);
+		    }
+    		coverTime1 = Math.round(coverTime1*1000000)/1000000;
+					
+			noteTemp[0] = {
+	        	"m_id": 0,
+	        	"m_position": coverPos1,
+	        	"m_subId": -1,
+	        	"m_time": coverTime1,
+	        	"m_type": "NORMAL",
+	        	"m_width": 1
+	    	};
+		}
+		else if (mainMouse.movement == "writeNormal" || mainMouse.movement == "writeChain") {
 			switch (mainMouse.condition) {
 				case 0:
 					getPTnow(1);
@@ -813,15 +880,15 @@ mouse.prototype = {
 				case 2:
 					switch (editSide) {
 						case 0:
-							coverTime2 = ((jb(windowHeight - mainMouse.coordinate.y, ud, windowHeight) - ud)/hiSpeed + thisTime)/spu;
+							coverTime2 = SetBar((jb(windowHeight - mainMouse.coordinate.y, ud, windowHeight) - ud)/hiSpeed + thisTime);
 							break;
 						
 						case 1:
-							coverTime2 = ((jb(mainMouse.coordinate.x, lr, windowWidth/2) - lr)/hiSpeed + thisTime)/spu;
+							coverTime2 = SetBar((jb(mainMouse.coordinate.x, lr, windowWidth/2) - lr)/hiSpeed + thisTime);
 							break;
 						
 						case 2:
-							coverTime2 = ((jb(windowWidth - mainMouse.coordinate.x, lr, windowWidth/2) - lr)/hiSpeed + thisTime)/spu;
+							coverTime2 = SetBar((jb(windowWidth - mainMouse.coordinate.x, lr, windowWidth/2) - lr)/hiSpeed + thisTime);
 							break;
 					}
 		    		if (! keysDown[90] || linkMode) { //Z

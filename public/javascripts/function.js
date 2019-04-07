@@ -235,6 +235,78 @@ function countNote() {
 	return note;
 }
 
+function GetBar(bar)
+{
+	
+	var count = bpmlist.length;
+
+	if(count <= 1)
+	{
+		return bar*spu;
+	}
+	var num=0.0;
+	for(var i=1;i<count;i++)
+	{
+		if(bpmlist[i].m_time>= bar)
+		{
+			num += (bar - bpmlist[i-1].m_time) * 60 / bpmlist[i - 1].m_value ;
+			return num;
+		}
+		num += (bpmlist[i].m_time - bpmlist[i - 1].m_time) * 60 / bpmlist[i - 1].m_value ;
+	}
+	num += (bar - bpmlist[count - 1].m_time) * 60 / bpmlist[count - 1].m_value ;
+	
+	return num;
+}
+function SetBar(time)
+{
+	var count = timelist.length;
+	if(count <= 1)
+	{
+		return time/spu;
+	}
+	var num=0.0;
+	for(var i=1;i<count;i++)
+	{
+		if(timelist[i].m_time >= time)
+		{
+			num += (time - timelist[i-1].m_time) * timelist[i - 1].m_value / 60;
+			return num;
+		}
+		num += (timelist[i].m_time - timelist[i - 1].m_time) * timelist[i - 1].m_value / 60;
+	}
+	num += (time - timelist[count - 1].m_time) * timelist[count - 1].m_value / 60;
+	return num;
+}
+
+function AddBPMChange(bar, BPM)
+{
+	var id;
+	for(id=0 ; id<bpmlist.length ; id++)
+	{
+		if(bar<bpmlist[id].m_time)
+		{
+			break;
+		}
+	}
+	var bpmnum={};
+	
+	bpmnum.m_time=bar;
+	bpmnum.m_value=BPM/4;
+	bpmlist.splice(id,0,bpmnum);
+	TimelistReset();
+}
+
+function TimelistReset()
+{
+	timelist = JSON.parse(JSON.stringify(bpmlist));
+	for(var i=0;i<bpmlist.length;i++)
+	{
+		timelist[i].m_time = GetBar(bpmlist[i].m_time);
+		timelist[i].m_value = bpmlist[i].m_value;
+	}
+}
+
 function clearHit(only) {
 	var thisTime = musicCtrl.currentTime + offsetSec;
 	noteDownHit = [];
@@ -525,6 +597,9 @@ function save() {
 	CMap.m_notesRight.m_notes = {};
 	CMap.m_notesRight.m_notes.CMapNoteAsset = $.extend(true, [], t);
 
+	CMap.m_argument={};
+	CMap.m_argument.m_bpmchange={};
+	CMap.m_argument.m_bpmchange.CBpmchange=bpmlist;
 	CMap.m_timeOffset = offsetBar;
 	CMap.m_barPerMin = barpm; //shiftList[0].bar;
 
@@ -536,6 +611,152 @@ function save() {
 	var BB = new Blob([xmlText], {type:"application/xml"});
 	upload(jsonText);
 	saveAs(BB, CMap.m_mapID + " " + getNowFormatDate() + ".xml");
+}
+
+function savefixbpm() 
+{
+	var index, s, ss;
+	
+	index = 1;
+	s = [];
+	ss = $.extend(true, [], noteDown);
+	for (var i = 0; i < ss.length; ++i) {
+		if (ss[i]) {
+			ss[i].m_position = Math.round((Number(ss[i].m_position) - ss[i].m_width/2) * 1000000)/1000000;
+			if (ss[i].m_type == "HOLD") {
+				ss[i].t = index;
+				ss[ss[i].m_subId].t = index;
+				index++;
+			}
+		}
+	}
+	for (var i = 0; i < ss.length; ++i) {
+		if (ss[i]) {
+			s.push(ss[i]);
+		}
+	}
+	s.sort(timeSorter);
+	for (var i = 0; i < s.length; ++i) {
+		s[i].m_id = i;
+		s[i].m_subId = Number(s[i].m_subId);
+		s[i].m_time = Timefixbpm(Number(s[i].m_time));
+		s[i].m_width = Number(s[i].m_width);
+		if (s[i].m_type == "HOLD") {
+			for (var j = 0; j < s.length; ++j) {
+				if (s[j].m_type == "SUB" && s[j].t && s[i].t == s[j].t && i != j) {
+					delete s[i].t;
+					delete s[j].t;
+					s[i].m_subId = j;
+					break;
+				}
+			}
+		}
+	}
+	CMap.m_notes = {};
+	CMap.m_notes.m_notes = {};
+	CMap.m_notes.m_notes.CMapNoteAsset = $.extend(true, [], s);	
+	
+	
+	index = 1;
+	s = [];
+	ss = $.extend(true, [], noteLeft);
+	for (var i = 0; i < ss.length; ++i) {
+		if (ss[i]) {
+			ss[i].m_position = Math.round((Number(ss[i].m_position) - ss[i].m_width/2) * 1000000)/1000000;
+			if (ss[i].m_type == "HOLD") {
+				ss[i].t = index;
+				ss[ss[i].m_subId].t = index;
+				index++;
+			}
+		}
+	}
+	for (var i = 0; i < ss.length; ++i) {
+		if (ss[i]) {
+			s.push(ss[i]);
+		}
+	}
+	s.sort(timeSorter);
+	for (var i = 0; i < s.length; ++i) {
+		s[i].m_id = i;
+		s[i].m_subId = Number(s[i].m_subId);
+		s[i].m_time = Timefixbpm(Number(s[i].m_time));
+		s[i].m_width = Number(s[i].m_width);
+		if (s[i].m_type == "HOLD") {
+			for (var j = 0; j < s.length; ++j) {
+				if (s[j].m_type == "SUB" && s[j].t && s[i].t == s[j].t && i != j) {
+					delete s[i].t;
+					delete s[j].t;
+					s[i].m_subId = j;
+					break;
+				}
+			}
+		}
+	}
+	CMap.m_notesLeft = {};
+	CMap.m_notesLeft.m_notes = {};
+	CMap.m_notesLeft.m_notes.CMapNoteAsset = $.extend(true, [], s);
+		
+		
+	index = 1;
+	s = [];
+	ss = $.extend(true, [], noteRight);
+	for (var i = 0; i < ss.length; ++i) {
+		if (ss[i]) {
+			ss[i].m_position = Math.round((Number(ss[i].m_position) - ss[i].m_width/2) * 1000000)/1000000;
+			if (ss[i].m_type == "HOLD") {
+				ss[i].t = index;
+				ss[ss[i].m_subId].t = index;
+				index++;
+			}
+		}
+	}
+	for (var i = 0; i < ss.length; ++i) {
+		if (ss[i]) {
+			s.push(ss[i]);
+		}
+	}
+	s.sort(timeSorter);
+	for (var i = 0; i < s.length; ++i) {
+		s[i].m_id = i;
+		s[i].m_subId = Number(s[i].m_subId);
+		s[i].m_time = Timefixbpm(Number(s[i].m_time));
+		s[i].m_width = Number(s[i].m_width);
+		if (s[i].m_type == "HOLD") {
+			for (var j = 0; j < s.length; ++j) {
+				if (s[j].m_type == "SUB" && s[j].t && s[i].t == s[j].t && i != j) {
+					delete s[i].t;
+					delete s[j].t;
+					s[i].m_subId = j;
+					break;
+				}
+			}
+		}
+	}
+	CMap.m_notesRight = {};
+	CMap.m_notesRight.m_notes = {};
+	CMap.m_notesRight.m_notes.CMapNoteAsset = $.extend(true, [], s);
+	CMap.m_timeOffset = offset;
+	CMap.m_barPerMin = bpm;
+	
+	delete CMap.m_argument;
+	var xotree = new XML.ObjTree();
+	var CCMap = {CMap};
+	
+	var jsonText = JSON.stringify(CCMap);
+	console.log(jsonText);
+	var xmlText = xotree.writeXML(CCMap);
+	var BB = new Blob([xmlText], {type:"application/xml"});
+	//upload(jsonText);
+	
+	
+	saveAs(BB, CMap.m_mapID + " " + getNowFormatDate() + ".xml");
+
+}
+
+function Timefixbpm(bar)
+{
+	num = GetBar(bar);
+	return num/spu;
 }
 
 function saveAsMinimal() {
@@ -1703,6 +1924,15 @@ function drawLongBoxNote(c, place, width, length, x, height, alpha) {
 			c.globalAlpha = 1;
 			break;
 	}
+}
+
+function drawBpmchange(c,height,value) 
+{
+		c.fillStyle = "rgba(255,255,255,0.6)";
+		c.fillRect(lr, windowHeight - ud - (height + 5),windowWidth - lr,6);
+		c.fillStyle = "rgba(255,255,255,1)";
+		c.fillText(value*4+"",windowWidth-lr-40,windowHeight - ud - (height + 35));
+		return;
 }
 
 function hash(m) {

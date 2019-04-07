@@ -336,7 +336,7 @@ playView.prototype = {
 					break
 			}
 		}
-		ctx.globalAlpha = jb((1 - Math.abs(Math.round(thisTime / spu / 2) - thisTime / spu / 2) * 2) * .6 + .4, 0, 1);
+		ctx.globalAlpha = jb((1 - Math.abs(Math.round(SetBar(thisTime) / 2) - SetBar(thisTime) / 2) * 2) * .6 + .4, 0, 1);
 		if (!playSettings.simpleEffect) {
 			drawJBox(ctx, 0, windowHeight - ud - 450, windowWidth, 450, windowWidth / 2, windowHeight - ud - 450, windowWidth / 2, windowHeight - ud, rgba(0, 255, 255, 0), rgba(0, 255, 255, .32));
 			ctx.globalAlpha = 1;
@@ -689,7 +689,7 @@ playView.prototype = {
 			for(var e = 0; e < noteDown.length; ++e) {
 				thisNote = noteDown[e];
 				if(!thisNote || isMobile && thisNote && thisNote.status != "Untouched" && !(thisNote.status == "Miss" && !missHoldFindD[e]) && thisNote.m_type != "HOLD") continue;
-				var u = thisNote.m_time * spu;
+				var u = GetBar(thisNote.m_time);
 				var f = hiSpeed * (u - thisTime);
 				var g = deeMode && thisNote.m_type != "HOLD" ? mtox(thisNote.m_position, 0) * (1 - f / (windowHeight - ud)) + f / (windowHeight - ud) * windowWidth * .5 : mtox(thisNote.m_position, 0);
 				var b = deeMode && thisNote.m_type != "HOLD" ? mtow(thisNote.m_width, 0) * (1 - f / (windowHeight - ud)) : mtow(thisNote.m_width, 0);
@@ -761,7 +761,7 @@ playView.prototype = {
 						}
 						break;
 					case "HOLD":
-						var H = noteDown[noteDown[e].m_subId].m_time * spu;
+						var H = GetBar(noteDown[noteDown[e].m_subId].m_time);
 						var v = hiSpeed * (H - thisTime);
 						var S = 0;
 						if(f > windowHeight - ud) {
@@ -885,7 +885,7 @@ playView.prototype = {
 			for(var e = 0; e < noteLeft.length; ++e) {
 				thisNote = noteLeft[e];
 				if(!thisNote || isMobile && thisNote && thisNote.status != "Untouched" && !(thisNote.status == "Miss" && !missHoldFindL[e]) && thisNote.m_type != "HOLD") continue;
-				var u = thisNote.m_time * spu;
+				var u = GetBar(thisNote.m_time);
 				var f = hiSpeed * (u - thisTime);
 				var g = deeMode && thisNote.m_type != "HOLD" ? mtox(thisNote.m_position, 1) * (1 - f / (windowWidth / 2 - lr)) : mtox(thisNote.m_position, 1);
 				var b = deeMode && thisNote.m_type != "HOLD" ? mtow(thisNote.m_width, 1) * (1 - f / (windowWidth / 2 - lr)) : mtow(thisNote.m_width, 1);
@@ -971,7 +971,7 @@ playView.prototype = {
 						}
 						break;
 					case "HOLD":
-						var H = noteLeft[noteLeft[e].m_subId].m_time * spu;
+						var H = GetBar(noteLeft[noteLeft[e].m_subId].m_time);
 						var v = hiSpeed * (H - thisTime);
 						var S = 0;
 						if(f > windowWidth / 2 - lr) {
@@ -1094,7 +1094,7 @@ playView.prototype = {
 			for(var e = 0; e < noteRight.length; ++e) {
 				thisNote = noteRight[e];
 				if(!thisNote || isMobile && thisNote && thisNote.status != "Untouched" && !(thisNote.status == "Miss" && !missHoldFindR[e]) && thisNote.m_type != "HOLD") continue;
-				var u = thisNote.m_time * spu;
+				var u = GetBar(thisNote.m_time);
 				var f = hiSpeed * (u - thisTime);
 				var g = deeMode && thisNote.m_type != "HOLD" ? mtox(thisNote.m_position, 2) * (1 - f / (windowWidth / 2 - lr)) : mtox(thisNote.m_position, 2);
 				var b = deeMode && thisNote.m_type != "HOLD" ? mtow(thisNote.m_width, 2) * (1 - f / (windowWidth / 2 - lr)) : mtow(thisNote.m_width, 2);
@@ -1180,7 +1180,7 @@ playView.prototype = {
 						}
 						break;
 					case "HOLD":
-						var H = noteRight[noteRight[e].m_subId].m_time * spu;
+						var H = GetBar(noteRight[noteRight[e].m_subId].m_time);
 						var v = hiSpeed * (H - thisTime);
 						var S = 0;
 						if(f > windowWidth / 2 - lr) {
@@ -1400,7 +1400,14 @@ playView.prototype = {
 					}
 				}
 			}
-			
+			if(editSide==3)//Draw BPMChange Line
+			{
+				for(var v of bpmlist)
+				{
+					var dis = hiSpeed*(GetBar(v.m_time) - thisTime);
+					drawBpmchange(ctx,dis,v.m_value);
+				}
+			}
 					ctx.globalAlpha = 1;
 			
 			for (var i = shadowQueue.head; shadowQueue.data[i]; i = (i + 1)%shadowQueue.maxSize) {
@@ -1674,8 +1681,8 @@ playView.prototype = {
 					case 0:
 						var y = Math.min(mtox(coverPos1, editSide), mtox(coverPos2, editSide));
 						var D = Math.max(mtox(coverPos1, editSide), mtox(coverPos2, editSide));
-						var I = Math.min(windowHeight - ud - hiSpeed * (coverTime1 * spu - thisTime), windowHeight - ud - hiSpeed * (coverTime2 * spu - thisTime));
-						var j = Math.max(windowHeight - ud - hiSpeed * (coverTime1 * spu - thisTime), windowHeight - ud - hiSpeed * (coverTime2 * spu - thisTime));
+						var I = Math.min(windowHeight - ud - hiSpeed * (GetBar(coverTime1) - thisTime), windowHeight - ud - hiSpeed * (GetBar(coverTime2) - thisTime));
+						var j = Math.max(windowHeight - ud - hiSpeed * (GetBar(coverTime1) - thisTime), windowHeight - ud - hiSpeed * (GetBar(coverTime2) - thisTime));
 						if(I > windowHeight - ud) break;
 						if(I >= 0) {
 							ctx.fillRect(y - 3, I - 3, D - y + 6, 6)
@@ -1691,8 +1698,8 @@ playView.prototype = {
 						ctx.fillRect(y + 3, I + 3, D - y - 6, j - I - 6);
 						break;
 					case 1:
-						var y = Math.min(lr + hiSpeed * (coverTime1 * spu - thisTime), lr + hiSpeed * (coverTime2 * spu - thisTime));
-						var D = Math.max(lr + hiSpeed * (coverTime1 * spu - thisTime), lr + hiSpeed * (coverTime2 * spu - thisTime));
+						var y = Math.min(lr + hiSpeed * (GetBar(coverTime1) - thisTime), lr + hiSpeed * (GetBar(coverTime2) - thisTime));
+						var D = Math.max(lr + hiSpeed * (GetBar(coverTime1) - thisTime), lr + hiSpeed * (GetBar(coverTime2) - thisTime));
 						var I = Math.min(mtox(coverPos1, editSide), mtox(coverPos2, editSide));
 						var j = Math.max(mtox(coverPos1, editSide), mtox(coverPos2, editSide));
 						if(D < lr) break;
@@ -1710,8 +1717,8 @@ playView.prototype = {
 						ctx.fillRect(y + 3, I + 3, D - y - 6, j - I - 6);
 						break;
 					case 2:
-						var y = Math.min(windowWidth - lr - hiSpeed * (coverTime1 * spu - thisTime), windowWidth - lr - hiSpeed * (coverTime2 * spu - thisTime));
-						var D = Math.max(windowWidth - lr - hiSpeed * (coverTime1 * spu - thisTime), windowWidth - lr - hiSpeed * (coverTime2 * spu - thisTime));
+						var y = Math.min(windowWidth - lr - hiSpeed * (GetBar(coverTime1) - thisTime), windowWidth - lr - hiSpeed * (GetBar(coverTime2) - thisTime));
+						var D = Math.max(windowWidth - lr - hiSpeed * (GetBar(coverTime1) - thisTime), windowWidth - lr - hiSpeed * (GetBar(coverTime2) - thisTime));
 						var I = Math.min(mtox(coverPos1, editSide), mtox(coverPos2, editSide));
 						var j = Math.max(mtox(coverPos1, editSide), mtox(coverPos2, editSide));
 						if(y > windowWidth - lr) break;
@@ -1732,10 +1739,11 @@ playView.prototype = {
 						break
 				}
 			}
-		} else {
+		} 
+		else {
 			for(var e = 0; e < noteTemp.length; ++e) {
 				thisNote = noteTemp[e];
-				var u = thisNote.m_time * spu;
+				var u = GetBar(thisNote.m_time);
 				var f = hiSpeed * (u - thisTime);
 				var d = f;
 				var l = 5;
@@ -1761,6 +1769,7 @@ playView.prototype = {
 				}
 				switch(editSide) {
 					case 0:
+					case 3:
 						if(f >= 0 && f <= windowHeight - ud) {
 							drawJBox(ctx, 0, windowHeight - ud - d - l, windowWidth, l, 0, windowHeight - ud - d - l, 0, windowHeight - ud - d, s, r);
 							drawJBox(ctx, lr + d, 0, l, windowHeight, lr + d, 0, lr + d + l, 0, "rgba(255, 0, 255, 1.0)", "rgba(255, 0, 255, 0.0)");
@@ -1851,7 +1860,7 @@ playView.prototype = {
 		}
 		for(var e = 0; e < noteTemp.length; ++e) {
 			thisNote = noteTemp[e];
-			var u = thisNote.m_time * spu;
+			var u = GetBar(thisNote.m_time);
 			var f = hiSpeed * (u - thisTime);
 			var g = mtox(thisNote.m_position, editSide);
 			var b = thisNote.m_width * (editSide == 0 ? 300 : 150) - 30;
@@ -1873,7 +1882,7 @@ playView.prototype = {
 					}
 					break;
 				case "HOLD":
-					var H = coverTime2 * spu;
+					var H = GetBar(coverTime2);
 					var v = hiSpeed * (H - thisTime);
 					var S = 0;
 					if(f > ot || v < 0) {
@@ -1907,16 +1916,37 @@ playView.prototype = {
 					basicMenu[1][3] = editSide == 1 && CMap.m_leftRegion == "MIXER" || editSide == 2 && CMap.m_rightRegion == "MIXER" ? rgba(128, 128, 128, .8) : rgba(0, 255, 255, .8);
 					basicMenu[2][3] = editSide == 1 && CMap.m_leftRegion == "PAD" || editSide == 2 && CMap.m_rightRegion == "PAD" ? rgba(128, 128, 128, .8) : rgba(255, 128, 128, .8);
 					basicMenu[3][3] = editSide == 1 && CMap.m_leftRegion == "MIXER" || editSide == 2 && CMap.m_rightRegion == "MIXER" ? rgba(128, 128, 128, .8) : rgba(255, 255, 0, .8);
+					
+					if(editSide==3)//if BPMOption
+					{
+						basicMenu[1][0]="[1]  BPM change";
+						basicMenu[2][0]="[2]  Save for Dynamite";
+						basicMenu[3][0]="[3]  None";
+					}
+					else if(editSide==0||editSide==1||editSide==2)//if Normal Option
+					{
+						basicMenu[1][0]="[1]  NORMAL note";
+						basicMenu[2][0]="[2]  CHAIN note";
+						basicMenu[3][0]="[3]  Hold note";
+					}
+					
 					if(between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 566, ry + 604) && musicCtrl) {
 						musicCtrl.volume = Math.round((mainMouse.coordinate.x - rx) / 400 * 100) / 100
-					} else if(between(mainMouse.coordinate.y, ry + 0, ry + 38)) {
-						if(between(mainMouse.coordinate.x, rx, rx + 400 / 3)) {
-							editSide = 1
-						} else if(between(mainMouse.coordinate.x, rx + 400 / 3, rx + 800 / 3)) {
-							editSide = 0
-						} else if(between(mainMouse.coordinate.x, rx + 800 / 3, rx + 400)) {
-							editSide = 2
+					} 
+					else if (between(mainMouse.coordinate.y, ry + 0, ry + 38)) {
+						if (between(mainMouse.coordinate.x, rx, rx + 100)) {
+							editSide = 1;
 						}
+						else if (between(mainMouse.coordinate.x, rx + 100, rx + 200)) {
+							editSide = 0;
+						}
+						else if (between(mainMouse.coordinate.x, rx + 200, rx + 300)) {
+							editSide = 2;
+						}
+						else if (between(mainMouse.coordinate.x, rx + 300, rx + 400)) {
+							editSide = 3;
+						}
+
 					}
 					if(editSide != at) {
 						changeSide()
@@ -1924,21 +1954,25 @@ playView.prototype = {
 					ctx.fillStyle = rgba(Math.round(jb(255 - musicCtrl.volume * 255), 0, 255), Math.round(jb(musicCtrl.volume * 255, 0, 255)), Math.round(jb(musicCtrl.volume * 255, 0, 255)), .8);
 					ctx.fillRect(rx, ry + 566, musicCtrl.volume * 400, 38);
 					ctx.fillStyle = rgba(128, 128, 128, .8);
-					switch(editSide) {
+					switch (editSide){
 						case 0:
-							ctx.fillRect(rx + 133, ry + 6, 133, 38);
+							ctx.fillRect(rx + 100, ry + 6, 100, 38);
 							basicMenu[0][0] = "[↑]  Edit ↓";
 							break;
 						case 1:
-							ctx.fillRect(rx, ry + 6, 133, 38);
+							ctx.fillRect(rx, ry + 6, 100, 38);
 							basicMenu[0][0] = "[↑]  Edit ←";
 							break;
 						case 2:
-							ctx.fillRect(rx + 267, ry + 6, 133, 38);
+							ctx.fillRect(rx + 200, ry + 6, 100, 38);
 							basicMenu[0][0] = "[↑]  Edit →";
 							break;
+						case 3:
+							ctx.fillRect(rx + 300, ry + 6, 100, 38);
+							basicMenu[0][0] = "[#]  Edit #";
+							break;
 						default:
-							break
+							break;
 					}
 					basicMenu[6][0] = "     Mark at " + (thisTime / spq / 32).toFixed(3) + " bar";
 					basicMenu[7][0] = "[M]  Start at " + Number(markSecion).toFixed(3) + " bar";

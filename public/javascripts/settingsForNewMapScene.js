@@ -39,6 +39,11 @@ function settingsForNewMapScene() {
 	    	"m_notes": {
 	    		"CMapNoteAsset" : []
 	    	}
+	    },
+	    "m_argument": {
+	    	"m_bpmchange": {
+	    		"CBpmchange" : []
+	    	}
 	    }
 	};
 }
@@ -121,6 +126,8 @@ settingsForNewMapScene.prototype = {
 			typeL = CMap.m_leftRegion;
 			typeR = CMap.m_rightRegion;
 			barpm = CMap.m_barPerMin;
+			bpmlist = [];
+			timelist = [];
 			spu = 60 / CMap.m_barPerMin;
 			spq = 60 / CMap.m_barPerMin / 32;
 			offsetBar = Number(CMap.m_timeOffset);

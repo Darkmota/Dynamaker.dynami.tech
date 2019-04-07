@@ -52,21 +52,33 @@ keyboard.prototype = {
 		}
 		if (mainMouse) {
 			var toolOnChange = false;
-			if (keysDown[49] && mainMouse.movement != "writeNormal" && !((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER"))) { // 1!
-				mainMouse.movement = "writeNormal";
-				toolOnChange = true;
+			
+			if(editside==3)
+			{
+				if (keysDown[49] && mainMouse.movement != "writeBPM") //1
+				{
+					mainMouse.movement = "writeBPM";
+					//toolOnChange = true;
+				}
 			}
-			if (keysDown[50] && mainMouse.movement != "writeChain" && !((editSide == 1 && CMap.m_leftRegion == "PAD") || (editSide == 2 && CMap.m_rightRegion == "PAD"))) { // 2@
-				mainMouse.movement = "writeChain";
-				toolOnChange = true;
-			}
-			if (keysDown[51] && mainMouse.movement != "writeHold"  && !((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER"))) { // 3#
-				mainMouse.movement = "writeHold";
-				toolOnChange = true;
-			}
-			if (keysDown[52] && mainMouse.movement != "choose") { // 4$
-				mainMouse.movement = "choose";
-				toolOnChange = true;
+			else
+			{
+				if (keysDown[49] && mainMouse.movement != "writeNormal" && !((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER"))) { // 1!
+					mainMouse.movement = "writeNormal";
+					toolOnChange = true;
+				}
+				if (keysDown[50] && mainMouse.movement != "writeChain" && !((editSide == 1 && CMap.m_leftRegion == "PAD") || (editSide == 2 && CMap.m_rightRegion == "PAD"))) { // 2@
+					mainMouse.movement = "writeChain";
+					toolOnChange = true;
+				}
+				if (keysDown[51] && mainMouse.movement != "writeHold"  && !((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER"))) { // 3#
+					mainMouse.movement = "writeHold";
+					toolOnChange = true;
+				}
+				if (keysDown[52] && mainMouse.movement != "choose") { // 4$
+					mainMouse.movement = "choose";
+					toolOnChange = true;
+				}
 			}
 			if (keysDown[8] || keysDown[46]) { //backspace or del
 				noteChosenList.sort(function (x, y) {
