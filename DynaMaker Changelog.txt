@@ -1,8 +1,0 @@
-1.21.0 (19/3/2021)
-- Initial Release, created by Jmak and Jono99
-
-1.21.1 (19/3/2021)
-- Changed the menu screen fron Dynamix Editor to DynaMaker
-- Removed Dynamix Zone Beta from the menu screen
-- Confirmed Windowed Mode Support
-- Changed some grammar in the descriptions
