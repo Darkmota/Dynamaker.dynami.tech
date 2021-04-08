@@ -1,5 +1,5 @@
 # DynaMaker
-packaged and modified by Jono99, Jmak, Vertrak and TLC
+Packaged and modified by Jmak, Jono997, Vertrak, TLC
 
 This is a modified version of DynaMaker that allows users to create fanmade charts for Dynamite with more features and functionality towards charting through DynaMaker, originally created by omegaPi. 
 This version is packaged with Electron, along with other JavaScript coding to improve the charting experience with DynaMaker
