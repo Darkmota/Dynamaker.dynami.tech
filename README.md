@@ -9,7 +9,5 @@ Windows (64-bit)
 macOS (64-bit), Windows (32-bit) will be implemented in the future
 
 # Creators
-Jmak
-Jono997
-Vertrak
-TLC
+Jmak, Jono997, Vertrak, TLC
+(Originally by omegaPi)
