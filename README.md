@@ -7,10 +7,8 @@ This version is packaged with Electron, along with other JavaScript coding to im
 Created through JavaScript.
 
 # Supported Platforms
-Windows (64-bit)
-
-macOS (64-bit) will be implemented in the future
+Windows (64-bit), macOS (64-bit)
 
 # Creators
-Jmak, Jono997, Vertrak, TLC
+Jmak, Jono997, Vertrak, TLC, keanucode
 (Originally by omegaPi)
