@@ -13,4 +13,4 @@ Windows (64-bit), macOS (64-bit)
 
 # Creators 創作者
 Jmak, Jono997, Vertrak, TLC, keanucode
-(Originally by omegaPi 由omegaPi創建)
+(Originally by omegaPi 由omegaPi創建) 
