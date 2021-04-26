@@ -95,7 +95,7 @@ startMenuScene.prototype = {
 			}
 			
 			//map browse
-			ctx.fillText("Map Browse (.xml/.json/XTTT)", windowWidth * 0.25, windowHeight * 0.4);
+			ctx.fillText("Map Browse (.dy/.xml/.json/XTTT)", windowWidth * 0.25, windowHeight * 0.4);
 			if (mapFileCtrl) {
 				ctx.textAlign = "right";
 				ctx.fillStyle = "#0FF";
@@ -171,7 +171,7 @@ startMenuScene.prototype = {
 				//ctx.fillRect(windowWidth * 0.25, windowHeight * 0.510, windowWidth * 0.50, windowHeight * 0.04);
 				ctx.fillStyle = "#0F0";
 			}
-			ctx.fillText("Audio/Video Browse (.ogg/.wav/.mp3)", windowWidth * 0.25, windowHeight * 0.5);
+			ctx.fillText("Audio/Video Browse (.ogg/.wav/.mp3/[.mp4])", windowWidth * 0.25, windowHeight * 0.5);
 			if (musicFileCtrl) {
 				ctx.textAlign = "right";
 				ctx.fillStyle = "#0FF";
@@ -270,7 +270,7 @@ startMenuScene.prototype = {
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix";
 		ctx.textAlign = "center";
-		ctx.fillText("Version 1.21.2.2", windowWidth * 0.5, windowHeight - 35);
+		ctx.fillText("Version 1.21.3", windowWidth * 0.5, windowHeight - 35);
 		
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";

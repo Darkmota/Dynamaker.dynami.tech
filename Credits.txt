@@ -26,6 +26,5 @@ omegaPi: https://twitter.com/KyuuninnoKiseki
 Testers:
 1. TLC
 2. 錫爾/Sylvex
-3. blaziken2021
-4. Aploplex
-5. 天堂EDHD
+3. Aploplex
+4. 天堂EDHD

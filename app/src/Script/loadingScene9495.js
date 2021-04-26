@@ -15,10 +15,18 @@ var saveInt;
 var dy;
 var remix;
 var hardshipMap = {"C":["CASUAL", "#8F8"],
+					"B":["CASUAL", "#8F8"],
 					"N":["NORMAL", "#88F"],
 					"H":["HARD", "#F44"],
 					"M":["MEGA", "#F4F"],
-					"G":["GIGA", "#888"]}
+					"G":["GIGA", "#888"],
+					"U":["NONE", "#FFF"]},
+var hardshipNameToShort = {"CASUAL":"C",
+							"NORMAL":"N",
+							"HARD":"H",
+							"MEGA":"M",
+							"GIGA":"G",
+							"NONE":"U"}
 
 //TLC .dy - added function to separate contents in .dy file
 function dataURLtoBlob(dataurl) {

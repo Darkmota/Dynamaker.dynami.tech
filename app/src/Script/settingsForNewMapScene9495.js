@@ -111,6 +111,11 @@ settingsForNewMapScene.prototype = {
 					hardship = "GIGA";
 					hardshipColor = "#888";
 					break;
+					
+				case "U":
+					hardship = "NONE";
+					hardshipColor = "#FFF";
+					break;
 			}
 			typeL = CMap.m_leftRegion;
 			typeR = CMap.m_rightRegion;
@@ -184,7 +189,7 @@ settingsForNewMapScene.prototype = {
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix";
 		ctx.textAlign = "center";
-		ctx.fillText("Version 1.21.2.2", windowWidth * 0.5, windowHeight - 35);
+		ctx.fillText("Version 1.21.3", windowWidth * 0.5, windowHeight - 35);
 		
 		this.breath = Math.abs(frameCount - 54) / 54;
 		ctx.fillStyle = rgba(0, 255, 255, this.breath * 0.1 + 0.2);
