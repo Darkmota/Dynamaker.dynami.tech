@@ -4,7 +4,7 @@ This is a modified version of DynaMaker that allows users to create fanmade char
 
 This version is packaged with Electron, along with other JavaScript coding to improve the charting experience with DynaMaker.
 
-這是DynaMaker的修改版本，允許用戶使用更多功能為Dynamite創建的自製譜面，以改善DynaMaker的製譜體驗（由omegaPi創建）。
+這是DynaMaker的修改版本，允許用戶使用更多功能為Dynamite創建更優秀的自製譜面，以改善使用DynaMaker的製譜體驗（由omegaPi創建）。
 
 該版本與Electron以及其他JavaScript編碼打包
 
