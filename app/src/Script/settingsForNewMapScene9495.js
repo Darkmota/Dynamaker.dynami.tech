@@ -111,7 +111,12 @@ settingsForNewMapScene.prototype = {
 					hardship = "GIGA";
 					hardshipColor = "#888";
 					break;
-			}
+
+///				case "U":
+///						hardship = "CUSTOM";
+///						hardshipColor = "#FFF";
+///						break;
+				}
 			typeL = CMap.m_leftRegion;
 			typeR = CMap.m_rightRegion;
 			bpm = CMap.m_barPerMin;

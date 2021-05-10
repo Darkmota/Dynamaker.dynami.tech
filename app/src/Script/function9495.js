@@ -589,11 +589,62 @@ function savefixbpm() {
 
 }
 
+function saveAsMinimal() {
+	var remix = {
+		isMinimal: true
+	};
+	if (bg) {
+		var dataurl = bgCanvas.toDataURL('image/png');
+		remix.bg = dataurl;
+	}
+	else {
+		remix.bg = null;
+	}
+	var reader = new FileReader();
+	reader.readAsDataURL(musicFileCtrl, "UTF-8");
+	reader.onload = function(e) {
+		remix.music = e.target.result;
+		var CCMap = {
+			"CMap": CMap,
+			"remix": remix
+		}
+		var jsonText = JSON.stringify(CCMap);
+		var BB = new Blob([jsonText], {type:"application/json"});
+		//upload(jsonText);
+		saveAs(BB, CMap.m_mapID + " " + getNowFormatDate() + ".dy");
+	}
+}
+
+function saveAsDynaMaker() {
+	var remix = {};
+	if (bg) {
+		var dataurl = bgCanvas.toDataURL('image/png');
+		remix.bg = dataurl;
+	}
+	else {
+		remix.bg = null;
+	}
+	var reader = new FileReader();
+	reader.readAsDataURL(musicFileCtrl, "UTF-8");
+	reader.onload = function(e) {
+		remix.music = e.target.result;
+		var CCMap = {
+			"CMap": CMap,
+			"remix": remix
+		}
+		var jsonText = JSON.stringify(CCMap);
+		var BB = new Blob([jsonText], {type:"application/json"});
+		//upload(jsonText);
+		saveAs(BB, CMap.m_mapID + " " + getNowFormatDate() + ".dy");
+	}
+}
+
 function Timefixbpm(bar)
 {
 	num = GetBar(bar);
 	return num/spu;
 }
+
 var encodeFormData = function(data) {  
     var pairs = [];  
     var regexp = /%20/g;  

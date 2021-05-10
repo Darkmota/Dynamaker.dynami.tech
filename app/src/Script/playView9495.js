@@ -34,14 +34,18 @@ var basicMenu = [
 	["     Mark here", 246, 38, rgba(128, 128, 255, 0.8)],
 	["[M]  Start from mark", 286, 38, rgba(128, 128, 255, 0.8)],
 	["[R]  Replay", 326, 38],
-	["     Save", 366, 38],
-	["     Background", 406, 38],
-	["     Hit sound", 446, 38],
-	["     Animation", 486, 38],
-	["     Music volume", 526, 38]
+	["     Save As .xml", 366, 38],
+	["     Save As .dy", 406, 38],
+	["     Background", 446, 38],
+	["     Hit sound", 486, 38],
+	["     Animation", 526, 38],
+	["     Music volume", 566, 38]
 ];
 var deleteMenu = [
 	["     Delete", 6, 38]
+	//,
+//	["     Copy", 46, 38],
+//	["     Paste", 86, 38]
 ];
 function shootParticle(frames, type, x1, y1, d1, x2, y2, d2) {
 	if (! showParticles || (musicCtrl && musicCtrl.paused)) return;
@@ -236,7 +240,7 @@ playView.prototype = {
 				break;
 			}
 		}
-		ctx.drawImage(hardshipCanvas, 0, 43*hardshipCut, 190, 43, windowWidth*0.022, windowHeight - ud + 88, 190, 43);
+		ctx.drawImage(hardshipCanvas, 0, 43*hardshipCut, 190, 43, windowWidth*0.022, windowHeight - ud + 73, 190, 43);
 		ctx.globalAlpha = 1;
 		
 		if (showCS) ctx.globalAlpha = 0;
@@ -326,29 +330,27 @@ playView.prototype = {
 			ctx.save();
 			ctx.strokeStyle = "black";
 			ctx.lineWidth = 2;
-			for (var qsection = Math.ceil(thisTime/spq); hiSpeed*(qsection*spq - thisTime) <= windowHeight - ud; ++qsection) {
-				var lineDis = hiSpeed*(qsection*spq - thisTime);
-				var lineColor2 = rgba(128, 128, 128, 1.0);
-				var b = 2;
-				if (qsection == 0) {
-					b = 1024;
+			for(var h = Math.ceil(thisTime / spq); hiSpeed * (h * spq - thisTime) <= windowHeight - ud; ++h) {
+				var d = hiSpeed * (h * spq - thisTime);
+				var r = rgba(128, 128, 128, 1);
+				var n = 2;
+				if(h == 0) {
+					n = 1024
+				} else
+					while(h % n == 0) {
+						n = n * 2
+					}
+				if(h % 8 == 0) {
+					r = rgba(255, 255, 255, 1)
+				} else if(h % 4 == 0) {
+					r = rgba(192, 192, 192, 1)
+				} else if(h % 2 == 0) {
+					r = rgba(128, 128, 128, 1)
 				}
-				else while (qsection % b == 0) {
-					b = b*2;
-				}
-				if (qsection % 8 == 0) {
-					lineColor2 = rgba(255, 255, 255, 1.0);
-				}
-				else if (qsection % 4 == 0) {
-					lineColor2 = rgba(192, 192, 192, 1.0);
-				}
-				else if (qsection % 2 == 0) {
-					lineColor2 = rgba(128, 128, 128, 1.0);
-				}
-				ctx.fillStyle = lineColor2;
-				if (hiSpeed*spq >= 50/b) {
-					ctx.strokeText(qsection/32, windowWidth - lr + 5, windowHeight - ud - lineDis - 20);
-					ctx.fillText(qsection/32, windowWidth - lr + 5, windowHeight - ud - lineDis - 20);
+				ctx.fillStyle = r;
+				if(hiSpeed * spq >= 50 / n) {
+					ctx.strokeText(h / 32, windowWidth - lr + 5, windowHeight - ud - d - 20);
+					ctx.fillText(h / 32, windowWidth - lr + 5, windowHeight - ud - d - 20)
 				}
 			}
 			ctx.restore();
@@ -394,29 +396,27 @@ playView.prototype = {
 			ctx.save();
 			ctx.strokeStyle = "black";
 			ctx.lineWidth = 2;
-			for (var qsection = Math.ceil(thisTime/spq); hiSpeed*(qsection*spq - thisTime) <= windowWidth/2 - lr; ++qsection) {
-				var lineDis = hiSpeed*(qsection*spq - thisTime);
-				var lineColor2 = rgba(128, 128, 128, 1.0);
-				var b = 2;
-				if (qsection == 0) {
-					b = 1024;
+			for(var h = Math.ceil(thisTime / spq); hiSpeed * (h * spq - thisTime) <= windowWidth / 2 - lr; ++h) {
+				var d = hiSpeed * (h * spq - thisTime);
+				var r = rgba(128, 128, 128, 1);
+				var n = 2;
+				if(h == 0) {
+					n = 1024
+				} else
+					while(h % n == 0) {
+						n = n * 2
+					}
+				if(h % 8 == 0) {
+					r = rgba(255, 255, 255, 1)
+				} else if(h % 4 == 0) {
+					r = rgba(192, 192, 192, 1)
+				} else if(h % 2 == 0) {
+					r = rgba(128, 128, 128, 1)
 				}
-				else while (qsection % b == 0) {
-					b = b*2;
-				}
-				if (qsection % 8 == 0) {
-					lineColor2 = rgba(255, 255, 255, 1.0);
-				}
-				else if (qsection % 4 == 0) {
-					lineColor2 = rgba(192, 192, 192, 1.0);
-				}
-				else if (qsection % 2 == 0) {
-					lineColor2 = rgba(128, 128, 128, 1.0);
-				}
-				ctx.fillStyle =  lineColor2;
-				if (hiSpeed*spq >= 200/b) {
-					ctx.strokeText(qsection/32, lineDis + lr, windowHeight - ud);
-					ctx.fillText(qsection/32, lineDis + lr, windowHeight - ud);
+				ctx.fillStyle = r;
+				if(hiSpeed * spq >= 200 / n) {
+					ctx.strokeText(h / 32, d + lr, windowHeight - ud);
+					ctx.fillText(h / 32, d + lr, windowHeight - ud)
 				}
 			}
 			ctx.restore();
@@ -461,31 +461,29 @@ playView.prototype = {
 			ctx.save();
 			ctx.strokeStyle = "black";
 			ctx.lineWidth = 2;
-			for (var qsection = Math.ceil(thisTime/spq); hiSpeed*(qsection*spq - thisTime) <= windowWidth/2 - lr; ++qsection) {
-				var lineDis = hiSpeed*(qsection*spq - thisTime);
-				var lineColor2 = rgba(128, 128, 128, 1.0);
-				var b = 2;
-				if (qsection == 0) {
-					b = 1024;
+			for(var h = Math.ceil(thisTime / spq); hiSpeed * (h * spq - thisTime) <= windowWidth / 2 - lr; ++h) {
+				var d = hiSpeed * (h * spq - thisTime);
+				var r = rgba(128, 128, 128, 1);
+				var n = 2;
+				if(h == 0) {
+					n = 1024
+				} else
+					while(h % n == 0) {
+						n = n * 2
+					}
+				if(h % 8 == 0) {
+					r = rgba(255, 255, 255, 1);
+					l = 20
+				} else if(h % 4 == 0) {
+					r = rgba(192, 192, 192, 1);
+					l = 20
+				} else if(h % 2 == 0) {
+					r = rgba(128, 128, 128, 1);
+					l = 10
 				}
-				else while (qsection % b == 0) {
-					b = b*2;
-				}
-				if (qsection % 8 == 0) {
-					lineColor2 = rgba(255, 255, 255, 1.0);
-					lineWidth = 20;
-				}
-				else if (qsection % 4 == 0) {
-					lineColor2 = rgba(192, 192, 192, 1.0);
-					lineWidth = 20;
-				}
-				else if (qsection % 2 == 0) {
-					lineColor2 = rgba(128, 128, 128, 1.0);
-					lineWidth = 10;
-				}
-				ctx.fillStyle =  lineColor2;
-				if (hiSpeed*spq >= 200/b) {
-					ctx.fillText(qsection/32, windowWidth - lr - lineDis, windowHeight - ud);
+				ctx.fillStyle = r;
+				if(hiSpeed * spq >= 200 / n) {
+					ctx.fillText(h / 32, windowWidth - lr - d, windowHeight - ud)
 				}
 			}
 			ctx.restore();
@@ -1345,19 +1343,20 @@ playView.prototype = {
 		//for (var i = 0;)
 		
 		//rightClick
+		//TLC - Shifted music volume slider to display and function in the correct row. Also changed 4th menu to have 2nd and 3rd row greyed out
 		if (mainMouse.menu) {
 			switch (mainMouse.menu) {
 				case "basic" :
-					drawBox(ctx, rx, ry, 400, 570, 0.8, 8);
+					drawBox(ctx, rx, ry, 400, 610, 0.8, 8);
 					var preSide = editSide;
 					
 					basicMenu[1][3] = ((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER")) ? rgba(128, 128, 128, 0.8) : rgba(0, 255, 255, 0.8);
-					basicMenu[2][3] = ((editSide == 1 && CMap.m_leftRegion == "PAD") || (editSide == 2 && CMap.m_rightRegion == "PAD")) ? rgba(128, 128, 128, 0.8) : rgba(255, 128, 128, 0.8);
-					basicMenu[3][3] = ((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER")) ? rgba(128, 128, 128, 0.8) : rgba(255, 255, 0, 0.8);
+					basicMenu[2][3] = ((editSide == 1 && CMap.m_leftRegion == "PAD") || (editSide == 2 && CMap.m_rightRegion == "PAD")) || (editSide == 3) ? rgba(128, 128, 128, 0.8) : rgba(255, 128, 128, 0.8);
+					basicMenu[3][3] = ((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER")) || (editSide == 3) ? rgba(128, 128, 128, 0.8) : rgba(255, 255, 0, 0.8);
 					if(editSide==3)
 					{
 						basicMenu[1][0]="[1]  BPM change";
-						basicMenu[2][0]="[2]  Save for Dynamite";
+						basicMenu[2][0]="[2]  None";
 						basicMenu[3][0]="[3]  None";
 					}
 					else if(editSide==0||editSide==1||editSide==2)
@@ -1367,7 +1366,7 @@ playView.prototype = {
 						basicMenu[3][0]="[3]  Hold note";
 					}
 					
-					if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 526, ry + 564) && musicCtrl) {
+					if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 566, ry + 604) && musicCtrl) {
 						musicCtrl.volume = Math.round((mainMouse.coordinate.x - rx)/400*100)/100;
 					}
 					else if (between(mainMouse.coordinate.y, ry + 0, ry + 38)) {
@@ -1389,7 +1388,7 @@ playView.prototype = {
 						changeSide();
 					}
 					ctx.fillStyle = rgba(Math.round(jb((255 - musicCtrl.volume*255)), 0, 255), Math.round(jb(musicCtrl.volume*255, 0, 255)), Math.round(jb(musicCtrl.volume*255, 0, 255)), 0.8);
-					ctx.fillRect(rx, ry + 526, musicCtrl.volume*400, 38);
+					ctx.fillRect(rx, ry + 566, musicCtrl.volume*400, 38);
 					
 					ctx.fillStyle = rgba(128, 128, 128, 0.8);
 					switch (editSide){
@@ -1413,11 +1412,11 @@ playView.prototype = {
 							break;
 					}
 					
-					basicMenu[6][0] = "     Mark at " + (thisTime/spq/32).toFixed(3) + " bar";
-					basicMenu[7][0] = "[M]  Start at " + (Number(markSecion)).toFixed(3) + " bar";
-					basicMenu[11][0] = "     Hit sound " + (showHitSound ? "ON" : "OFF");
-					basicMenu[12][0] = "     Particles " + (showParticles ? "ON" : "OFF");
-					basicMenu[13][0] = "     Music volume " + Math.round(musicCtrl.volume*100)  + "%";
+					basicMenu[6][0] = "     Mark at " + (thisTime / spq / 32).toFixed(3);
+					basicMenu[7][0] = "[M]  Start from " + Number(markSecion).toFixed(3);
+					basicMenu[12][0] = "     Hit sound " + (showHitSound ? "ON" : "OFF");
+					basicMenu[13][0] = "     Particles " + (showParticles ? "ON" : "OFF");
+					basicMenu[14][0] = "     Music volume " + Math.round(musicCtrl.volume * 100) + "%";
 					if (musicCtrl) {
 						if (musicCtrl.paused) {
 							basicMenu[5][0] = "[_]  Play";
@@ -1439,13 +1438,14 @@ playView.prototype = {
 					drawBox(ctx, rx, ry, 400, 50, 0.8, 8);
 					var thisMenu = deleteMenu;
 					break;
+					//if with Copy & Paste, drawBox(ctx, rx, ry, 400, 130, 0.8, 8);
 					
 			}
 			ctx.textAlign = "left";
 			ctx.textBaseline = "alphabetic";
 			ctx.font = "bold 28px Dynamix";
 			for (var i = 0; i < thisMenu.length; ++i) {
-				if (!(i == 0 && thisMenu.length != 1) && i != 13 && between(mainMouse.coordinate.y, ry + thisMenu[i][1], ry + thisMenu[i][1] + thisMenu[i][2]) && between(mainMouse.coordinate.x, rx, rx + 400)) {
+				if (!(i == 0 && thisMenu.length != 1) && i != 14 && between(mainMouse.coordinate.y, ry + thisMenu[i][1], ry + thisMenu[i][1] + thisMenu[i][2]) && between(mainMouse.coordinate.x, rx, rx + 440)) {
 					ctx.fillStyle = thisMenu[i][3] ? thisMenu[i][3] : "rgba(0, 255, 255, 0.8)";
 					ctx.fillRect(rx, ry + thisMenu[i][1], 400, thisMenu[i][2]);
 					ctx.fillStyle = "rgba(0, 0, 0, 0.8)";

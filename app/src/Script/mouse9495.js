@@ -199,7 +199,7 @@ function mouse(canvas) {
 										}
 										case 2:
 										{
-											savefixbpm();
+											//savefixbpm(); //TLC rm functionality
 											break;
 										}
 									}
@@ -285,20 +285,24 @@ function mouse(canvas) {
 										save();
 										break;
 									}
-									case 10: {// Background
+									case 10: {// Save as .dy
+										saveAsDynaMaker();
+										break;
+									}
+									case 11: {// Background
 										backgroundFileElement.focus();
 										backgroundFileElement.click();
 										break;
 									}
-									case 11: {// Hit sound
+									case 12: {// Hit sound
 										showHitSound = !showHitSound;
 										break;
 									}
-									case 12: {// Particles
+									case 13: {// Particles
 										showParticles = !showParticles;
 										break;
 									}
-									case 13: {// Music volume
+									case 14: {// Music volume
 										break;
 									}
 								}

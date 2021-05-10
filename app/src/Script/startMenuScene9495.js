@@ -171,7 +171,7 @@ startMenuScene.prototype = {
 				//ctx.fillRect(windowWidth * 0.25, windowHeight * 0.510, windowWidth * 0.50, windowHeight * 0.04);
 				ctx.fillStyle = "#0F0";
 			}
-			ctx.fillText("Audio/Video Browse (.ogg/.wav/.mp3)", windowWidth * 0.25, windowHeight * 0.5);
+			ctx.fillText("Audio Browse (.ogg/.wav/.mp3)", windowWidth * 0.25, windowHeight * 0.5);
 			if (musicFileCtrl) {
 				ctx.textAlign = "right";
 				ctx.fillStyle = "#0FF";

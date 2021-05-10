@@ -18,7 +18,10 @@ var hardshipMap = {"C":["CASUAL", "#8F8"],
 					"N":["NORMAL", "#88F"],
 					"H":["HARD", "#F44"],
 					"M":["MEGA", "#F4F"],
-					"G":["GIGA", "#888"]}
+					"G":["GIGA", "#888"]
+					///,
+///					"U":["CUSTOM", "#FFF"]
+}
 
 //TLC .dy - added function to separate contents in .dy file
 function dataURLtoBlob(dataurl) {
