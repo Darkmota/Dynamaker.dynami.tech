@@ -24,3 +24,5 @@ Scroll to the bottom and find the corresponding [m_time] and change the BeatPerM
 
 //Characters that are not English does not use the font Orbitron
 Install the font "NotoSansCJKtc-Medium.otf" as provided, we could not install it automatically due to code issues which will break the BPM changer
+
+For a complete guide on DynaMaker, please visit TLC's guide: https://tlchicken.github.io/dynamaker-guide/
