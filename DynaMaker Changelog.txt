@@ -1,24 +1,32 @@
+DynaMaker Update Changelog 更新日誌
+Modified by Jmak, Jono997, Vertrak, TLC, keanucode 由上述修改
+Originally by omegaPi 由omegaPi創建
+
+Supported Platforms 支援平台
+Windows (64-bit), macOS (64-bit)
+
 1.21.2.2 (26/4/2021)
-- MacOS support
-- Added NotoSans support
-- Changed icon
-- Disabled F for fullscreen
-- Hid unneeded/unusable buttons in the menu
-- Fixed crash issue after setting playback speed lower than 0.1 / higher than 15.0
+- MacOS support 支援MacOS
+- Added NotoSans support (song title that isn't supported with Orbitron, user will require to install manually) 添加NotoSans字形支援（Orbitron不支援的歌曲名稱就會用NotoSans，要自行安裝）
+- Changed icon 更新圖標
+- Disabled F for fullscreen 已修復F全屏會導致視窗的問題
+- Hid unneeded/unusable buttons in the menu 已隱藏不需要的Menu按鈕
+- Fixed crash issue after setting playback speed lower than 0.1 / higher than 15.0 已修復播放速度調整至0.1/15.0會導致黑屏的問題
+
 
 1.21.2 (5/4/2021)
-- "Orbitron" font is now used only for song title
-- Added progression scrubber support
-- Hit Sound and Particles were turned off at start
-- Launch speed is now 1.4 by default
-- Fixed and revamped BPM change window
-- Fixed cursor issue
+- "Orbitron" font is now used only for song title 添加Orbitron字形支援（歌曲名稱）
+- Added progression scrubber support 添加音樂進度條
+- Hit Sound and Particles were turned off at the start 按鍵聲，note效果會默認關掉
+- Launch speed is now 1.4 by default 下落速度已默認成1.4
+- Fixed and revamped BPM change window 已修復以及重新設計修改BPM的視窗
+- Fixed cursor issue 已修復滑鼠問題
 
 1.21.1 (19/3/2021)
-- Changed the menu screen fron Dynamix Editor to DynaMaker
-- Removed Dynamix Zone Beta from the menu screen
-- Confirmed Windowed Mode Support
-- Changed some grammar in the descriptions
+- Changed the menu screen from Dynamix Editor to DynaMaker 更改主頁面的標題
+- Removed Dynamix Zone Beta from the menu screen 從主頁面刪除Dynamix Zone Beta
+- Confirmed Windowed Mode support 確認視窗模式
+- Changed some grammar in the descriptions 已更改英語的語法問題
 
 1.21.0 (19/3/2021)
-- Initial Release, created by Jmak and Jono99
+- Initial Release 初版推出
