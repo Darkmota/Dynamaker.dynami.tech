@@ -1,5 +1,5 @@
 var sX, sY, sW, sH, dX, dY, dW, dH;
-var showParticles = false;
+var showParticles = true;
 var showHitSound = false;
 var gradual = true;
 var gradualPx = 100;
@@ -34,8 +34,8 @@ var basicMenu = [
 	["     Mark here", 246, 38, rgba(128, 128, 255, 0.8)],
 	["[M]  Start from mark", 286, 38, rgba(128, 128, 255, 0.8)],
 	["[R]  Replay", 326, 38],
-	["     Save As .xml", 366, 38],
-	["     Save As .dy", 406, 38],
+	["     Save as .xml", 366, 38],
+	["     Save as .dy", 406, 38],
 	["     Background", 446, 38],
 	["     Hit sound", 486, 38],
 	["     Animation", 526, 38],
@@ -510,6 +510,10 @@ playView.prototype = {
 		}
 		
 		
+		//TLC
+		var leftTargetDetected = false;
+		var rightTargetDetected = false;
+
 		//note
 		lowList = [];
 		
@@ -601,6 +605,11 @@ playView.prototype = {
 
 				case "CHAIN":
 					if (dis >= 0 && dis <= windowWidth/2 - lr) {
+						if (dis < 500 && leftTargetDetected == false) {
+							barTargetL = x;
+							leftTargetDetected = true;
+						}
+
 						noteShow.push([1, 1, width, x, dis, ((editSide == 1 && equal(thisNote.m_position, magPos)) ? 2 : 0) + ((editSide == 1 && equal(thisNote.m_width, magWidth)) ? 1 : 0), thisNote.m_id]);
 					}
 //						drawSlideNote(ctx, 1, width, x, dis);
@@ -684,6 +693,11 @@ playView.prototype = {
 
 				case "CHAIN":
 					if (dis >= 0 && dis <= windowWidth/2 - lr) {
+						if (dis < 500 && rightTargetDetected == false) {
+							barTargetR = x;
+							rightTargetDetected = true;
+						}
+
 						noteShow.push([1, 2, width, x, dis, ((editSide == 2 && equal(thisNote.m_position, magPos)) ? 2 : 0) + ((editSide == 2 && equal(thisNote.m_width, magWidth)) ? 1 : 0), thisNote.m_id]);
 					}
 //						drawSlideNote(ctx, 2, width, x, dis);

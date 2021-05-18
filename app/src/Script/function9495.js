@@ -1623,7 +1623,7 @@ function drawLongBoxNote(c, place, swidth, slength, x, height) {
 function drawBpmchange(c,height,value) 
 {
 		c.fillStyle = "rgba(255,255,255,0.6)";
-		c.fillRect(lr, windowHeight - ud - (height + 5),windowWidth - lr,10);
+		c.fillRect(0, windowHeight - ud - (height + 5),windowWidth,10);
 		c.fillStyle = "rgba(255,255,255,1)";
 		c.fillText(value*4+"",windowWidth-lr-40,windowHeight - ud - (height + 35));
 		return;
