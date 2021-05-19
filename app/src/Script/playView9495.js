@@ -208,11 +208,11 @@ playView.prototype = {
 		{
 		ctx.textBaseline = "top";
 		//message
-		ctx.font = "bold 48px Orbitron,NotoSans";
+		ctx.font = "bold 48px Orbitron,Noto Sans CJK KR Black";
 		ctx.fillStyle = "#FFF";
 		ctx.textAlign = "left";
-		ctx.globalAlpha = 0.5;
-		ctx.fillText(CMap.m_path, windowWidth*0.021, windowHeight - ud + 20);
+		ctx.globalAlpha = 0.35;
+		ctx.fillText(CMap.m_path, windowWidth*0.021, windowHeight - ud + 24);
 
 //		ctx.font = "50px Dynamix";
 //		ctx.fillStyle = hardshipColor;
@@ -240,7 +240,7 @@ playView.prototype = {
 				break;
 			}
 		}
-		ctx.drawImage(hardshipCanvas, 0, 43*hardshipCut, 190, 43, windowWidth*0.022, windowHeight - ud + 73, 190, 43);
+		ctx.drawImage(hardshipCanvas, 0, 43*hardshipCut, 190, 43, windowWidth*0.022, windowHeight - ud + 77, 190, 43);
 		ctx.globalAlpha = 1;
 		
 		if (showCS) ctx.globalAlpha = 0;
@@ -510,7 +510,18 @@ playView.prototype = {
 		}
 		
 		
-		//TLC
+		//TLC Edits List for playView.js:
+		/**
+			Changed right click menu 4th side option 2 and 3 to be Grey color.
+			Changed position of display and activation of Volume Slider.
+			
+			Changed auto Mixer response time to behave more like in Dynamix.
+				Starts moving when chain notes are a distance away from the mixer at the start
+				of a trail of chain notes. Moves fast when there are a lot of chain notes coming
+				at once just like previously. 
+			Changed main side center line to be thinner to be more consistent with Dynamix.
+
+		*/
 		var leftTargetDetected = false;
 		var rightTargetDetected = false;
 
@@ -863,8 +874,8 @@ playView.prototype = {
 		ctx.globalAlpha = jb((1 - Math.abs(Math.round(SetBar(thisTime)/2) - GetBar(thisTime)/2)*2) * 0.2 + 0.8, 0, 1);
 		drawJBox(ctx, 0, windowHeight - ud - 550, windowWidth, 550, windowWidth/2, windowHeight - ud - 550, windowWidth/2, windowHeight - ud, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.2));
 		ctx.globalAlpha = 1;
-		drawJBox(ctx, 0, windowHeight - ud - 30, windowWidth, 30, windowWidth/2, windowHeight - ud - 30, windowWidth/2, windowHeight - ud, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.5));
-		drawJBox(ctx, 0, windowHeight - ud, windowWidth, 30, windowWidth/2, windowHeight - ud, windowWidth/2, windowHeight - ud + 30, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
+		drawJBox(ctx, 0, windowHeight - ud - 16, windowWidth, 16, windowWidth/2, windowHeight - ud - 16, windowWidth/2, windowHeight - ud, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.5));
+		drawJBox(ctx, 0, windowHeight - ud, windowWidth, 20, windowWidth/2, windowHeight - ud, windowWidth/2, windowHeight - ud + 20, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
 		
 		drawJBox(ctx, lr, 0, 25, windowHeight - ud, lr, (windowHeight - ud)/2, lr + 25, (windowHeight - ud)/2, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
 		drawJBox(ctx, lr - 25, 0, 25, windowHeight - ud, lr - 25, (windowHeight - ud)/2, lr, (windowHeight - ud)/2, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.5));
