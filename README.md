@@ -15,6 +15,10 @@ Windows (64-bit), macOS (64-bit)
 Jmak, TLC, Vertrak, keanucode, Jono997
 (Originally by omegaPi 由omegaPi創建) 
 
+# How to Download 下載方法
+To download, please do not download the source code listed above, you will need to install Electron to open it this way. Please navigate to the "Releases" tab and download the latest version.
+要下載，請不要下載上面列出的源代碼，因為您將需要安裝Electron才能打開。 請導航到“Releases”並下載最新版本。
+
 # Copyright Disclaimer 版權聲明
 All assets used in DynaMaker are borrowed from Dynamix, created by C4Cat Entertainment Limited, and are unchanged to the original version of the DynaRemix/DynaMaker created by omegaPi.
 
