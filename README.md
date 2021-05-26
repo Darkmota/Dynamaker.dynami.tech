@@ -14,3 +14,7 @@ Windows (64-bit), macOS (64-bit)
 # Creators 創作者
 Jmak, TLC, Vertrak, keanucode, Jono997
 (Originally by omegaPi 由omegaPi創建) 
+
+# Copyright Disclaimer 版權聲明
+All assets used in DynaMaker are borrowed from Dynamix, created by C4Cat Entertainment Limited, and are unchanged to the original version of the DynaRemix/DynaMaker created by omegaPi.
+DynaMaker使用的所有資源是由C4Cat Entertainment Limited創建的Dynamix（炫光動感）借用的，並且這個版本的DynaMaker與omegaPi原創的DynaRemix / DynaMaker相同。
