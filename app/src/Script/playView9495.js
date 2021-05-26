@@ -1,6 +1,6 @@
 var sX, sY, sW, sH, dX, dY, dW, dH;
-var showParticles = true;
-var showHitSound = false;
+var showParticles = false;
+var showHitSound = true;
 var gradual = true;
 var gradualPx = 100;
 var markSecion = 0;
@@ -29,7 +29,7 @@ var basicMenu = [
 	["[1]  NORMAL note", 46, 38, rgba(0, 255, 255, 0.8)],
 	["[2]  CHAIN note", 86, 38, rgba(255, 128, 128, 0.8)],
 	["[3]  HOLD note", 126, 38, rgba(255, 255, 0, 0.8)],
-	["[4]  Edit mode", 166, 38, rgba(255, 255, 255, 0.8)],
+	["[4]  EDITING mode", 166, 38, rgba(255, 255, 255, 0.8)],
 	["[_]  Pause/Play", 206, 38],
 	["     Mark here", 246, 38, rgba(128, 128, 255, 0.8)],
 	["[M]  Start from mark", 286, 38, rgba(128, 128, 255, 0.8)],
@@ -212,7 +212,7 @@ playView.prototype = {
 		ctx.fillStyle = "#FFF";
 		ctx.textAlign = "left";
 		ctx.globalAlpha = 0.35;
-		ctx.fillText(CMap.m_path, windowWidth*0.021, windowHeight - ud + 24);
+		ctx.fillText(CMap.m_path, windowWidth*0.021, windowHeight - ud + 28);
 
 //		ctx.font = "50px Dynamix";
 //		ctx.fillStyle = hardshipColor;
@@ -519,7 +519,7 @@ playView.prototype = {
 				Starts moving when chain notes are a distance away from the mixer at the start
 				of a trail of chain notes. Moves fast when there are a lot of chain notes coming
 				at once just like previously. 
-			Changed main side center line to be thinner to be more consistent with Dynamix.
+			Changed main side center line + side lines to be thinner to be more consistent with Dynamix.
 
 		*/
 		var leftTargetDetected = false;
@@ -877,11 +877,11 @@ playView.prototype = {
 		drawJBox(ctx, 0, windowHeight - ud - 16, windowWidth, 16, windowWidth/2, windowHeight - ud - 16, windowWidth/2, windowHeight - ud, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.5));
 		drawJBox(ctx, 0, windowHeight - ud, windowWidth, 20, windowWidth/2, windowHeight - ud, windowWidth/2, windowHeight - ud + 20, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
 		
-		drawJBox(ctx, lr, 0, 25, windowHeight - ud, lr, (windowHeight - ud)/2, lr + 25, (windowHeight - ud)/2, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
-		drawJBox(ctx, lr - 25, 0, 25, windowHeight - ud, lr - 25, (windowHeight - ud)/2, lr, (windowHeight - ud)/2, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.5));
+		drawJBox(ctx, lr, 0, 16, windowHeight - ud, lr, (windowHeight - ud)/2, lr + 16, (windowHeight - ud)/2, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
+		drawJBox(ctx, lr - 16, 0, 16, windowHeight - ud, lr - 16, (windowHeight - ud)/2, lr, (windowHeight - ud)/2, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.5));
 		
-		drawJBox(ctx, windowWidth - lr - 25, 0, 25, windowHeight - ud, windowWidth - lr - 25, (windowHeight - ud)/2, windowWidth - lr, (windowHeight - ud)/2, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.5));
-		drawJBox(ctx, windowWidth - lr, 0, 25, windowHeight - ud, windowWidth - lr , (windowHeight - ud)/2, windowWidth - lr + 25, (windowHeight - ud)/2, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
+		drawJBox(ctx, windowWidth - lr - 16, 0, 16, windowHeight - ud, windowWidth - lr - 16, (windowHeight - ud)/2, windowWidth - lr, (windowHeight - ud)/2, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.5));
+		drawJBox(ctx, windowWidth - lr, 0, 16, windowHeight - ud, windowWidth - lr , (windowHeight - ud)/2, windowWidth - lr + 16, (windowHeight - ud)/2, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
 		
 		//targetLine
 		ctx.fillStyle = "#FFF";
