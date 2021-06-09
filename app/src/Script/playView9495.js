@@ -1,6 +1,6 @@
 var sX, sY, sW, sH, dX, dY, dW, dH;
-var showParticles = false;
-var showHitSound = true;
+var showParticles = true;
+var showHitSound = false;
 var gradual = true;
 var gradualPx = 100;
 var markSecion = 0;
@@ -255,21 +255,21 @@ playView.prototype = {
 		ctx.fillText(offset + " Bar offset (O- P+)", windowWidth, windowHeight - 30);
 		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 55);
 		
-		ctx.fillText((hiSpeed/1000).toFixed(1) + " x Hispeed (Q- E+)", windowWidth*0.87, windowHeight - 30);
+		ctx.fillText((hiSpeed/1000).toFixed(1) + " x Hispeed (Q- E+)", windowWidth*0.82, windowHeight - 30);
 		if (audioRate < 0.5 || audioRate > 4.0) {
 			ctx.fillStyle = "#F88";
 		}
-		ctx.fillText(audioRate.toFixed(1) + " x Rate (S- W+)", windowWidth*0.87, windowHeight - 55);
+		ctx.fillText(audioRate.toFixed(1) + " x Rate (S- W+)", windowWidth*0.82, windowHeight - 55);
 		
 		if (keysDown[72]) {
 			ctx.textAlign = "right";
 			ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
-			ctx.fillText("[Shift](C- V+) ±divition", windowWidth*0.74, windowHeight - 55);
-			ctx.fillText("[Shift](A- D+) ±[0.01]1s", windowWidth*0.74, windowHeight - 30);
-			ctx.fillText("(←↓→) barlines", windowWidth*0.58, windowHeight - 30);
-			ctx.fillText("(F) fullscreen", windowWidth*0.58, windowHeight - 55);
-			ctx.fillText("(Z) unlock time", windowWidth*0.44, windowHeight - 55);
-			ctx.fillText("(X) unlock position", windowWidth*0.44, windowHeight - 30);
+			ctx.fillText("(C- V+) ±division", windowWidth*0.67, windowHeight - 55);
+			ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.67, windowHeight - 30);
+			ctx.fillText("(←↓→)  barlines", windowWidth*0.55, windowHeight - 30);
+			ctx.fillText("(F11) fullscreen", windowWidth*0.55, windowHeight - 55);
+			ctx.fillText("(Z)  lock/unlock bar", windowWidth*0.43, windowHeight - 55);
+			ctx.fillText("(X) lock/unlock X-axis", windowWidth*0.43, windowHeight - 30);
 		}
 //		ctx.fillText(offset + " s offset (O- P+)", windowWidth, windowHeight - 25);
 //		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 50);

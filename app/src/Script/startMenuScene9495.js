@@ -205,19 +205,19 @@ startMenuScene.prototype = {
 				var tx = "??";
 				switch  (browser) {
 					case "Chrome": 
-						tx = "[ F11 ] or [ Alt ] to toggle fullscreen";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
 						break;
 					
 					case "Firefox":
-						tx = "[ F11 ] or [ Alt ] to toggle fullscreen";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
 						break;
 						
 					case "Edge":
-						tx = "[ F11 ] or [ Alt ] to toggle fullscreen";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
 						break;
 					
 					case "IE":
-						tx = "[ F11 ] or [ Alt ] to toggle fullscreen";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
 						break;
 				}
 				
@@ -228,19 +228,19 @@ startMenuScene.prototype = {
 				var tx = "?"
 				switch  (browser) {
 					case "Chrome": 
-						tx = "[ F11 ] or [ Alt ] to toggle fullscreen";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
 						break;
 					
 					case "Firefox":
-						tx = "[ F11 ] or [ Alt ] to toggle fullscreen";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
 						break;
 						
 					case "Edge":
-						tx = "[ F11 ] or [ Alt ] to toggle fullscreen";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
 						break;
 					
 					case "IE":
-						tx = "[ F11 ] or [ Alt ] to toggle fullscreen";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
 						break;
 				}
 				ctx.fillText(tx, windowWidth * 0.5, windowHeight * 0.84);

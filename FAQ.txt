@@ -2,6 +2,9 @@
 Shortcut: [F11] OR [Alt > View > Toggle Full Screen]
 To make the window smaller, just Zoom In and Out through [Alt > View > Zoom In/Out]
 
+//Show Key Bindings
+Hold [H] to show the key bindings. It will show you the keys for showing the barlines, note division within the bar etc.
+
 //BPM Change
 *NOTE: It is HIGHLY RECOMMENDED to save the chart every single time you create a BPM change, or else there may be some issues based on the original code built by omegaPi
 *NOTE 2: Creating a Map in DynaMaker uses BarPerMinute, but BPM change requires BeatPerMinute instead.
