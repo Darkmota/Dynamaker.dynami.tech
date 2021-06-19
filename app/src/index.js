@@ -60,39 +60,11 @@ const template = [
      accelerator: process.platform === 'darwin' ? 'Cmd+Q' : 'Alt+F4'}
       ]
    },
-   
-//   {
-//      label: 'Edit',
-//      submenu: [
-//         {
-//            role: 'undo'
-//         },
-//         {
-//            role: 'redo'
-//         },
-//         {
-//            type: 'separator'
-//         },
-//         {
-//            role: 'cut'
-//         },
-//         {
-//            role: 'copy'
-//         },
-//         {
-//            role: 'paste'
-//         }
-//      ]
-//   },
-   
    {
       label: 'View',
       submenu: [
          {
             role: 'reload'
-         },
-         {
-            role: 'forceReload'
          },
          {
             role: 'toggledevtools'

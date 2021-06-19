@@ -1,7 +1,7 @@
 var totalState = 0;
 var onloadRun = false;
-//var bdReader = [];	//TLC .dy removed variables because not needed anymore
-//var bdReaderOnloaded = 0;
+var bdReader = [];
+var bdReaderOnloaded = 0;
 var notes = [];
 var loadOffset = 0;
 var addOffset = 0;
@@ -12,37 +12,14 @@ var saveType;
 var savePos = 0;
 var saveWidth = 0;
 var saveInt;
-var dy;
-var remix;
 var hardshipMap = {"C":["CASUAL", "#8F8"],
 					"N":["NORMAL", "#88F"],
 					"H":["HARD", "#F44"],
 					"M":["MEGA", "#F4F"],
-					"G":["GIGA", "#888"]
-					///,
-///					"U":["CUSTOM", "#FFF"]
-}
-
-//TLC .dy - added function to separate contents in .dy file
-function dataURLtoBlob(dataurl) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new Blob([u8arr], { type: mime });
-}
-
-//TLC .dy - Added Function to load img from the dy file
-function extraImgLoad(img, callback) {
-	var timer = setInterval(function() {
-		if (img && img.complete) {
-			clearInterval(timer);
-			callback(img);
-		}
-	}, 50);
-}
-
+					"G":["GIGA", "#888"],
+					"T":["TERA", "#333"],
+					"B":["BASIC", "#8F8"],
+					"U":["CUSTOM", "#FFF"]}
 
 function ana(s) {
 	var t = s.split(/,|\//g);
@@ -63,48 +40,37 @@ function ana(s) {
 }
 
 function loadingScene() {
-	//TLC .dy - removed function, shifted below
-	// for (var i = 0; i < 4; ++i) {
-	// 	bdReader[i] = new FileReader();
-	// }
-	// audioLoad(musicUrl, function(audio){
-	// 	musicCtrl = audio;
-	// 	musicCtrl.goplay = function() {
-	// 		if (musicCtrl.ended) {
-	// 			resetCS();
-	// 			noteDownHit = [];
-	// 			noteLeftHit = [];
-	// 			noteRightHit = [];
-	// 		}
-	// 		if (showCS) {
-	// 			musicPlayButton.focus();
-	// 			musicPlayButton.click();
-	// 			return;
-	// 		}
-	// 		if (editMode) {
-	// 			clearHit();
-	// 		}
-	// 		if (musicCtrl) { 
-	// 			musicPlayButton.focus();
-	// 			musicPlayButton.click();
-	// 		}
-	// 	}
-	//     //$('#music').attr("src", audioUrl);
-	// 	loaded++;
-	// });
+	for (var i = 0; i < 4; ++i) {
+		bdReader[i] = new FileReader();
+	}
+	audioLoad(musicUrl, function(audio){
+		musicCtrl = audio;
+		musicCtrl.goplay = function() {
+			if (musicCtrl.ended) {
+				resetCS();
+				noteDownHit = [];
+				noteLeftHit = [];
+				noteRightHit = [];
+			}
+			if (showCS) {
+				musicPlayButton.focus();
+				musicPlayButton.click();
+				return;
+			}
+			if (editMode) {
+				clearHit();
+			}
+			if (musicCtrl) { 
+				musicPlayButton.focus();
+				musicPlayButton.click();
+			}
+		}
+	    //$('#music').attr("src", audioUrl);
+		loaded++;
+	});
 }
 
 loadingScene.prototype = {
-	init:function(initLoadType) {
-		onloadRun = false;
-		this.loadType = initLoadType;
-		this.status = 0;
-		this.bdReader = [];
-		for (var i = 0; i < 4; ++i) {
-			this.bdReader[i] = new FileReader();
-		}
-		this.status = 0;
-	},
 	up:function() {
 	},
 	down:function() {
@@ -116,70 +82,28 @@ loadingScene.prototype = {
 		ctx.fillStyle = "#0FF";
 		//ctx.fillText(bdReader.result, windowHeight * 0.5, windowWidth * 0.5);
 		totalState = 0;
-		for (var i = 0; i < (this.loadType != "X3T" ? 1 : 4); ++i) {
-			totalState += this.bdReader[i].readyState;
-			if (this.bdReader[i] && this.bdReader[i].readyState == 0) {
-				this.bdReader[i].readAsText(mapFileCtrl[i], "utf-8");
+		for (var i = 0; i < (xmlJson ? 1 : 4); ++i) {
+			totalState += bdReader[i].readyState;
+			if (bdReader[i] && bdReader[i].readyState == 0) {
+				bdReader[i].readAsText(mapFileCtrl[i], "utf-8");
 			}
 		}
 		if (! onloadRun){
-			if (this.loadType != "X3T" && totalState == 2) {
+			if (xmlJson && totalState == 2) {
 				switch (mapFileCtrl[0].name.substr(-4, 4).toUpperCase()) {
 					case ".XML":
 						var xotree = new XML.ObjTree();
 					    var dumper = new JKL.Dumper();
-					    var xmlText = this.bdReader[0].result;
+					    var xmlText = bdReader[0].result;
 						var tree = xotree.parseXML(xmlText);
 						CMap = eval('(' + dumper.dump(tree) + ')').CMap;
 						break;
 					
 					case "JSON":
-						CMap = eval('(' + this.bdReader[0].result + ')').CMap;
+						CMap = eval('(' + bdReader[0].result + ')').CMap;
 						break;
-					default:
-						dy = eval('(' + this.bdReader[0].result + ')');
-						CMap = dy.CMap;
-						remix = dy.remix;
-						if (remix.bg) {
-							bg = true;
-							bgSrc.src = URL.createObjectURL(dataURLtoBlob(remix.bg));
-							extraImgLoad(bgSrc, function() {
-								bgContext.drawImage(bgSrc, 0, 0, bgSrc.width, bgSrc.height, 0, 0, windowWidth, windowHeight);
-							});
-						}
-						musicUrl = URL.createObjectURL(dataURLtoBlob(remix.music));
-						break;
+						
 				}
-				//TLC .dy Shifted audioLoad function here
-				audioLoad(musicUrl, function(audio){
-					musicCtrl = audio;
-					musicCtrl.goplay = function() {
-						if (musicCtrl.ended) {
-							resetCS();
-							noteDownHit = [];
-							noteLeftHit = [];
-							noteRightHit = [];
-						}
-						if (showCS) {
-							musicPlayButton.focus();
-							musicPlayButton.click();
-							return;
-						}
-						if (editMode) {
-							clearHit();
-						}
-						if (musicCtrl) { 
-							musicPlayButton.focus();
-							musicPlayButton.click();
-						}
-					}
-					musicCtrl.id = "music";
-					musicCtrl.addEventListener('error', function(mediaError) {
-						debugSettings.log.push({name: mediaError.message});
-					});
-					loaded++;
-				});
-
 				hardship = hardshipMap[CMap.m_mapID.substr(-1, 1)][0];
 				hardshipColor = hardshipMap[CMap.m_mapID.substr(-1, 1)][1];
 				
@@ -283,7 +207,7 @@ loadingScene.prototype = {
 						CMap = {};
 						var xotree = new XML.ObjTree();
 					    var dumper = new JKL.Dumper();
-					    var xmlText = this.bdReader[index].result;
+					    var xmlText = bdReader[index].result;
 						var tree = xotree.parseXML(xmlText);
 						var Info = eval('(' + dumper.dump(tree) + ')').DnxSong;
 						CMap.m_path = Info.Name;
@@ -300,7 +224,7 @@ loadingScene.prototype = {
 							saveDiv = 1;
 							savePos = 0;
 							saveWidth = 0;
-							txt = this.bdReader[index].result;
+							txt = bdReader[index].result;
 							var arr = txt.replace(/\/\/.*/g, "").replace(/(\s*;\s*|\s+)/g, "`").split(/`/g);
 		//					console.log(arr);
 		//					step0 = txt.replace(/\/\/.*/g, "");

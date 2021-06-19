@@ -148,13 +148,13 @@ settingsForNewMapScene.prototype = {
 		err = "";
 		if (window) {
 			if (! musicName || musicName.value == "") {
-				err += "Music name shouldn't be empty; "
+				err += "Music name cannot be empty; "
 			}
 			if (! bpmName || isNaN(Number(bpmName.value)) || Number(bpmName.value) <= 0) {
-				err += "Illigal BPM; "
+				err += "Invalid BPM; "
 			}
 			if (! offsetName || isNaN(Number(offsetName.value))) {
-				err += "Illigal OFFSET; "
+				err += "Invalid Offset; "
 			}
 		}
 		
