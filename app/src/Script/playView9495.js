@@ -29,7 +29,7 @@ var basicMenu = [
 	["[1]  NORMAL note", 46, 38, rgba(0, 255, 255, 0.8)],
 	["[2]  CHAIN note", 86, 38, rgba(255, 128, 128, 0.8)],
 	["[3]  HOLD note", 126, 38, rgba(255, 255, 0, 0.8)],
-	["[4]  Edit mode", 166, 38, rgba(255, 255, 255, 0.8)],
+	["[4]  EDIT mode", 166, 38, rgba(255, 255, 255, 0.8)],
 	["[_]  Pause/Play", 206, 38],
 	["     Mark here", 246, 38, rgba(128, 128, 255, 0.8)],
 	["[M]  Start from mark", 286, 38, rgba(128, 128, 255, 0.8)],
@@ -243,8 +243,22 @@ playView.prototype = {
 				hardshipCut = 5;
 				break;
 			}
+			case "BASIC": {
+				hardshipCut = 6;
+				break;
+			}
+			case "TERA": {
+				hardshipCut = 7;
+				break;
+			}
 		}
-		ctx.drawImage(hardshipCanvas, 0, 43*hardshipCut, 190, 43, windowWidth*0.022, windowHeight - ud + 77, 190, 43);
+
+		if (hardshipCut <= 5) {
+			ctx.drawImage(hardshipCanvas, 0, 43*hardshipCut, 190, 43, windowWidth*0.022, windowHeight - ud + 77, 190, 43);
+		} else {
+			ctx.drawImage(hardshipCanvas, 190, 43*(hardshipCut - 6), 190, 43, windowWidth*0.022, windowHeight - ud + 77, 190, 43);
+		}
+
 		ctx.globalAlpha = 1;
 		
 		if (showCS) ctx.globalAlpha = 0;
@@ -259,21 +273,21 @@ playView.prototype = {
 		ctx.fillText(offset + " Bar offset (O- P+)", windowWidth, windowHeight - 30);
 		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 55);
 		
-		ctx.fillText((hiSpeed/1000).toFixed(1) + " x Hispeed (Q- E+)", windowWidth*0.87, windowHeight - 30);
+		ctx.fillText((hiSpeed/1000).toFixed(1) + " x Hispeed (Q- E+)", windowWidth*0.82, windowHeight - 30);
 		if (audioRate < 0.5 || audioRate > 4.0) {
 			ctx.fillStyle = "#F88";
 		}
-		ctx.fillText(audioRate.toFixed(1) + " x Rate (S- W+)", windowWidth*0.87, windowHeight - 55);
+		ctx.fillText(audioRate.toFixed(1) + " x Rate (S- W+)", windowWidth*0.82, windowHeight - 55);
 		
 		if (keysDown[72]) {
 			ctx.textAlign = "right";
 			ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
-			ctx.fillText("[Shift](C- V+) ±divition", windowWidth*0.74, windowHeight - 55);
-			ctx.fillText("[Shift](A- D+) ±[0.01]1s", windowWidth*0.74, windowHeight - 30);
-			ctx.fillText("(←↓→) barlines", windowWidth*0.58, windowHeight - 30);
-			ctx.fillText("(F) fullscreen", windowWidth*0.58, windowHeight - 55);
-			ctx.fillText("(Z) unlock time", windowWidth*0.44, windowHeight - 55);
-			ctx.fillText("(X) unlock position", windowWidth*0.44, windowHeight - 30);
+			ctx.fillText("(C- V+) ±division", windowWidth*0.67, windowHeight - 55);
+			ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.67, windowHeight - 30);
+			ctx.fillText("(←↓→)  barlines", windowWidth*0.55, windowHeight - 30);
+			ctx.fillText("(F11) fullscreen", windowWidth*0.55, windowHeight - 55);
+			ctx.fillText("(Z) lock/unlock bar", windowWidth*0.43, windowHeight - 55);
+			ctx.fillText("(X) lock/unlock X-axis", windowWidth*0.43, windowHeight - 30);
 		}
 //		ctx.fillText(offset + " s offset (O- P+)", windowWidth, windowHeight - 25);
 //		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 50);

@@ -56,7 +56,13 @@ settingsForNewMapScene.prototype = {
 			rightName.style.display = "none";
 			
 			CMap.m_path = musicName.value;
-			CMap.m_mapID = "_map_"+musicName.value+"_"+hardshipName.value[0];
+
+			var diffSubStr = hardshipName.value == "CUSTOM" 
+				? "U" 
+				: hardshipName.value[0];
+
+			CMap.m_mapID = "_map_"+musicName.value+"_"+diffSubStr;
+
 			CMap.m_leftRegion = leftName.value;
 			CMap.m_rightRegion = rightName.value;
 			CMap.m_barPerMin = bpmName.value;
@@ -112,11 +118,16 @@ settingsForNewMapScene.prototype = {
 					hardshipColor = "#888";
 					break;
 
-///				case "U":
-///						hardship = "CUSTOM";
-///						hardshipColor = "#FFF";
-///						break;
-				}
+				case "T":
+					hardship = "TERA";
+					hardshipColor = "#333";
+					break;
+
+				case "U":
+					hardship = "CUSTOM";
+					hardshipColor = "#FFF";
+					break;
+			}
 			typeL = CMap.m_leftRegion;
 			typeR = CMap.m_rightRegion;
 			bpm = CMap.m_barPerMin;
