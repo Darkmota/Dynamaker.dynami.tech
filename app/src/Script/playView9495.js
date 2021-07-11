@@ -72,6 +72,15 @@ playView.prototype = {
 		//file check
 		{
 		if (loaded < 5 + totalHitBuffer) return;
+
+		//TLC - mp4 Support Addition
+		if(isVideo) {
+			ctx.globalAlpha = 0.3;
+			ctx.drawImage(musicCtrl, 0, 0, windowWidth, windowHeight);
+			ctx.globalAlpha = 1
+		}
+
+
 		if (showStart >= -1) {
 			if (! musicCtrl.paused) {
 				musicCtrl.pause();
@@ -237,7 +246,9 @@ playView.prototype = {
 			}
 			case "GIGA": {
 				hardshipCut = 4;
+
 				break;
+
 			}
 			case "CUSTOM": {
 				hardshipCut = 5;

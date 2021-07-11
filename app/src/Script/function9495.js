@@ -1881,9 +1881,10 @@ function drawTextInBox(c, mes, x, y, w, h, alpha) {
 
 function audioLoad(src, callback) {
 	if (! src) return;
-	var audio = new Audio(src);
+	var audio = isVideo ? document.createElement("video") : document.createElement("audio");
 	audio.oncanplay = callback(audio);
 	audio.src = src;
+	audio.style.crossOrigin = "anonymous";
 }
 
 function comparer_old(x, y) {

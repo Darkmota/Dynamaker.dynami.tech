@@ -197,6 +197,9 @@ var whiteParticleContext = null;
 var canvas = null;
 var ctx = null;
 
+//TLC - mp4 Support
+var isVideo = false;
+
 
 document.oncontextmenu = function stop(){
 	return false;
@@ -396,7 +399,7 @@ mapFileElement.addEventListener("change", function () {
 
 musicFileElement = document.createElement("input");
 musicFileElement.type = "file";
-musicFileElement.accept = "audio/*";
+musicFileElement.accept = "audio/*,video/*";
 musicFileElement.style = "display:none";
 musicFileElement.addEventListener("change", function () {
 	musicFileCtrl = this.files[0]; 
