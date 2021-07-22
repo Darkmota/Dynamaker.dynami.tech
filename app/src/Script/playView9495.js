@@ -1,6 +1,6 @@
 var sX, sY, sW, sH, dX, dY, dW, dH;
-var showParticles = true;
-var showHitSound = false;
+var showParticles = false;
+var showHitSound = true;
 var gradual = true;
 var gradualPx = 100;
 var markSecion = 0;
@@ -74,10 +74,34 @@ playView.prototype = {
 		if (loaded < 5 + totalHitBuffer) return;
 
 		//TLC - mp4 Support Addition
-		if(isVideo) {
-			ctx.globalAlpha = 0.3;
-			ctx.drawImage(musicCtrl, 0, 0, windowWidth, windowHeight);
-			ctx.globalAlpha = 1
+		if(bg) {
+			ctx.drawImage(bgCanvas, 0, 0);
+			ctx.fillStyle = rgba(0, 0, 0, .7);
+			ctx.fillRect(0, windowHeight - ud, windowWidth, ud);
+			if(showStart >= 0) {
+				if(showStart < 40) {
+					ctx.fillStyle = rgba(0, 0, 0, .7)
+				} else {
+					ctx.fillStyle = rgba(0, 0, 0, showStart >= 40 && showStart <= 60 ? .7 - .035 * (showStart - 40) : .7)
+				}
+			} else {
+				ctx.fillStyle = rgba(0, 0, 0, .7)
+			}
+			ctx.fillRect(0, 0, windowWidth, windowHeight)
+		} else {
+			ctx.clearRect(0, 0, windowWidth, windowHeight);
+			if(!showCS) {
+				ctx.fillStyle = "rgba(25,25,25,0.2)"
+			} else {
+				ctx.fillStyle = "rgba(32,32,32,0.2)"
+			}
+			if(isVideo) {
+				ctx.globalAlpha = 0.3;
+				ctx.drawImage(musicCtrl, 0, 0, windowWidth, windowHeight);
+				ctx.globalAlpha = 1
+			}
+			ctx.fillStyle = "rgba(0,0,0,0.7)";
+			ctx.fillRect(0, windowHeight - ud, windowWidth, ud)
 		}
 
 
@@ -293,12 +317,23 @@ playView.prototype = {
 		if (keysDown[72]) {
 			ctx.textAlign = "right";
 			ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
-			ctx.fillText("(C- V+) ±division", windowWidth*0.67, windowHeight - 55);
-			ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.67, windowHeight - 30);
-			ctx.fillText("(←↓→)  barlines", windowWidth*0.55, windowHeight - 30);
-			ctx.fillText("(F11) fullscreen", windowWidth*0.55, windowHeight - 55);
-			ctx.fillText("(Z) lock/unlock bar", windowWidth*0.43, windowHeight - 55);
-			ctx.fillText("(X) lock/unlock X-axis", windowWidth*0.43, windowHeight - 30);
+			ctx.fillText("(F11) fullscreen", windowWidth*0.82, windowHeight - 80);
+		}
+
+		if (keysDown[72]) {
+			ctx.textAlign = "left";
+			ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
+			//Left Region
+			ctx.fillText("(B) invert scolling direction", windowWidth*0.25, windowHeight - 80);
+			ctx.fillText("(Z) lock/unlock bar", windowWidth*0.25, windowHeight - 55);
+			ctx.fillText("(X) lock/unlock X-axis", windowWidth*0.25, windowHeight - 30);
+			//Middle Region
+			ctx.fillText("(C- V+) ±division", windowWidth*0.41, windowHeight - 55);
+			ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.41, windowHeight - 30);
+			//Right Region
+			ctx.fillText("(←↓→)  barlines", windowWidth*0.53, windowHeight - 80);
+			ctx.fillText("(Shift← →) undo/redo", windowWidth*0.53, windowHeight - 55);
+			ctx.fillText("(L) reduce note lag", windowWidth*0.53, windowHeight - 30);
 		}
 //		ctx.fillText(offset + " s offset (O- P+)", windowWidth, windowHeight - 25);
 //		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 50);
