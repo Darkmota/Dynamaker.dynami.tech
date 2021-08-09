@@ -5,6 +5,9 @@ To make the window smaller, just Zoom In and Out through [Alt > View > Zoom In/O
 //Show Key Bindings
 Hold [H] to show the key bindings. It will show you the keys for showing the barlines, note division within the bar etc.
 
+//Note falls are not at 60fps
+You will be required to convert the audio format to 48000Hz, 16bit WAV in order for the notes to drop at 60fps. This is a bug that continues to persist in the website version that we have no idea how to fix.
+
 //BPM Change
 *NOTE: It is HIGHLY RECOMMENDED to save the chart every single time you create a BPM change, or else there may be some issues based on the original code built by omegaPi
 *NOTE 2: Creating a Map in DynaMaker uses BarPerMinute, but BPM change requires BeatPerMinute instead.
@@ -24,8 +27,5 @@ To return to editing mode:
 What should I do if I had the wrong BPM change set?
 *NOTE: BarPerMinute = BeatPerMinute/4
 Scroll to the bottom and find the corresponding [m_time] and change the BeatPerMinute at the corresponding [m_value].
-
-//Characters that are not English does not use the font Orbitron
-Install the font "NotoSansCJKtc-Medium.otf" as provided, we could not install it automatically due to code issues which will break the BPM changer
 
 For a complete guide on DynaMaker, please visit TLC's guide: https://tlchicken.github.io/dynamaker-guide/

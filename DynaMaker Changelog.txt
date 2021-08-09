@@ -1,5 +1,5 @@
 DynaMaker Update Changelog 更新日誌
-Modified by Jmak, Jono997, Vertrak, TLC, keanucode 由上述修改
+Modified by TLChicken, Jmak, Vertrak, keanucode and Jono997 由上述修改
 Originally by omegaPi 由omegaPi創建
 
 Supported Platforms 支援平台
@@ -12,7 +12,6 @@ Windows (64-bit), macOS (64-bit)
 - Disabled F for fullscreen 已修復F全屏會導致視窗的問題
 - Hid unneeded/unusable buttons in the menu 已隱藏不需要的Menu按鈕
 - Fixed crash issue after setting playback speed lower than 0.1 / higher than 15.0 已修復播放速度調整至0.1/15.0會導致黑屏的問題
-
 
 1.21.2 (5/4/2021)
 - "Orbitron" font is now used only for song title 添加Orbitron字形支援（歌曲名稱）
