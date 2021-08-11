@@ -1,6 +1,6 @@
 var sX, sY, sW, sH, dX, dY, dW, dH;
-var showParticles = false;
-var showHitSound = true;
+var showParticles = true;
+var showHitSound = false;
 var gradual = true;
 var gradualPx = 100;
 var markSecion = 0;
@@ -74,34 +74,10 @@ playView.prototype = {
 		if (loaded < 5 + totalHitBuffer) return;
 
 		//TLC - mp4 Support Addition
-		if(bg) {
-			ctx.drawImage(bgCanvas, 0, 0);
-			ctx.fillStyle = rgba(0, 0, 0, .7);
-			ctx.fillRect(0, windowHeight - ud, windowWidth, ud);
-			if(showStart >= 0) {
-				if(showStart < 40) {
-					ctx.fillStyle = rgba(0, 0, 0, .7)
-				} else {
-					ctx.fillStyle = rgba(0, 0, 0, showStart >= 40 && showStart <= 60 ? .7 - .035 * (showStart - 40) : .7)
-				}
-			} else {
-				ctx.fillStyle = rgba(0, 0, 0, .7)
-			}
-			ctx.fillRect(0, 0, windowWidth, windowHeight)
-		} else {
-			ctx.clearRect(0, 0, windowWidth, windowHeight);
-			if(!showCS) {
-				ctx.fillStyle = "rgba(25,25,25,0.2)"
-			} else {
-				ctx.fillStyle = "rgba(32,32,32,0.2)"
-			}
-			if(isVideo) {
-				ctx.globalAlpha = 0.3;
-				ctx.drawImage(musicCtrl, 0, 0, windowWidth, windowHeight);
-				ctx.globalAlpha = 1
-			}
-			ctx.fillStyle = "rgba(0,0,0,0.7)";
-			ctx.fillRect(0, windowHeight - ud, windowWidth, ud)
+		if(isVideo) {
+			ctx.globalAlpha = 0.3;
+			ctx.drawImage(musicCtrl, 0, 0, windowWidth, windowHeight);
+			ctx.globalAlpha = 1
 		}
 
 

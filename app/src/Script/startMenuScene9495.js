@@ -198,7 +198,7 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "20px Dynamix";
-			ctx.fillText("Modified by Jmak, TLC, Vertrak, keanucode and Jono997", windowWidth * 0.5, windowHeight * 0.79);
+			ctx.fillText("Modified by TLChicken, Jmak, Vertrak, keanucode and Jono997", windowWidth * 0.5, windowHeight * 0.79);
 			
 			ctx.font = "25px Dynamix";
 			if (isFullScreen) {
@@ -270,7 +270,7 @@ startMenuScene.prototype = {
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix";
 		ctx.textAlign = "center";
-		ctx.fillText("Version 1.21.3", windowWidth * 0.5, windowHeight - 35);
+		ctx.fillText("Version 1.21.4", windowWidth * 0.5, windowHeight - 35);
 		
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";

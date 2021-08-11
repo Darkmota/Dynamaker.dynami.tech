@@ -512,34 +512,34 @@ var main = function () {
 	if (scene) {
 		ctx.fillRect(0, 0, windowWidth, windowHeight);
 	}
-	// else if (bg){
-	// 	ctx.drawImage(bgCanvas, 0, 0);
-	// 	ctx.fillStyle = rgba(0, 0, 0, 0.7);
-	// 	ctx.fillRect(0, windowHeight - ud, windowWidth, ud);
-	// 	if (showStart >= 0) {
-	// 		if (showStart < 40) {
-	// 			ctx.fillStyle = rgba(0, 0, 0, 0.7);
-	// 		}
-	// 		else {
-	// 			ctx.fillStyle = rgba(0, 0, 0, (showStart >= 40 && showStart <= 60) ? 0.7 - 0.035*(showStart - 40) : 0.7);
-	// 		}
-	// 	}
-	// 	else {
-	// 		ctx.fillStyle = rgba(0, 0, 0, 0.7);
-	// 	}
-	// 	ctx.fillRect(0, 0, windowWidth, windowHeight);
-	// }
-	// else {
-	// 	if (! showCS) {
-	// 		ctx.fillStyle = "#111";	
-	// 	}
-	// 	else {
-	// 		ctx.fillStyle = "rgba(32,32,32,1)";	
-	// 	}
-	// 	ctx.fillRect(0, 0, windowWidth, windowHeight);
-	// 	ctx.fillStyle = "rgba(0,0,0,1)";
-	// 	ctx.fillRect(0, windowHeight - ud, windowWidth, ud);
-	// }
+	else if (bg){
+		ctx.drawImage(bgCanvas, 0, 0);
+		ctx.fillStyle = rgba(0, 0, 0, 0.7);
+		ctx.fillRect(0, windowHeight - ud, windowWidth, ud);
+		if (showStart >= 0) {
+			if (showStart < 40) {
+				ctx.fillStyle = rgba(0, 0, 0, 0.7);
+			}
+			else {
+				ctx.fillStyle = rgba(0, 0, 0, (showStart >= 40 && showStart <= 60) ? 0.7 - 0.035*(showStart - 40) : 0.7);
+			}
+		}
+		else {
+			ctx.fillStyle = rgba(0, 0, 0, 0.7);
+		}
+		ctx.fillRect(0, 0, windowWidth, windowHeight);
+	}
+	else {
+		if (! showCS) {
+			ctx.fillStyle = "#111";	
+		}
+		else {
+			ctx.fillStyle = "rgba(32,32,32,1)";	
+		}
+		ctx.fillRect(0, 0, windowWidth, windowHeight);
+		ctx.fillStyle = "rgba(0,0,0,1)";
+		ctx.fillRect(0, windowHeight - ud, windowWidth, ud);
+	}
 	mainKeybord.refresh();
 	mainPlayView.refresh();
 	mainFpsWatcher.refresh();

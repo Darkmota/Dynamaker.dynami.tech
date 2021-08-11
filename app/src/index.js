@@ -1,4 +1,5 @@
 const { app, BrowserWindow, Menu } = require('electron');
+const shell = require('electron').shell;
 const path = require('path');
 const fs = require('fs')
 
@@ -45,7 +46,7 @@ app.on('activate', () => {
   }
 });
 
-// Overriding Menu
+// Jmak:Overriding Menu
 const template = [
    {
      label: 'File',
@@ -60,6 +61,80 @@ const template = [
      accelerator: process.platform === 'darwin' ? 'Cmd+Q' : 'Alt+F4'}
       ]
    },
+   {
+      label: 'Edit',
+      submenu: [
+         {
+            role: 'Undo',
+            accelerator: 'Shift+Left'
+         },
+         {
+            role: 'Redo',
+            accelerator: 'Shift+Right'
+         },
+         {
+            type: 'separator'
+         },
+         {
+             label: 'Invert Scrolling',
+            accelerator: 'B'
+         },
+         {
+            label: 'Reduce Note Lag',
+            accelerator: 'L'
+         },
+         {
+             type: 'separator'
+         },
+         {
+            label: 'Lock/Unlock Bar',
+            accelerator: 'Z'
+         },
+         {
+            label: 'Lock/Unlock X-Axis',
+            accelerator: 'X'
+         },
+         {
+             type: 'separator'
+         },
+         {
+            label: 'Increase Division',
+            accelerator: 'C'
+         },
+         {
+            label: 'Decrease Division',
+            accelerator: 'V'
+         },
+         {
+             type: 'separator'
+         },
+         {
+            label: 'Back 0.01s',
+             accelerator: 'A'
+         },
+         {
+            label: 'Forward 0.01s',
+            accelerator: 'D'
+         },
+         {
+             type: 'separator'
+         },
+         {
+            label: 'Show Left Barline',
+            accelerator: 'Left'
+         },
+         {
+            label: 'Show Middle Barline',
+            accelerator: 'Down'
+         },
+         {
+            label: 'Show Right Barline',
+            accelerator: 'Right'
+         }
+
+      ]
+   },
+
    {
       label: 'View',
       submenu: [
@@ -99,6 +174,19 @@ const template = [
          {
             role: 'close'
          }
+      ]
+   },
+
+   {
+      role: 'Help',
+      submenu: [
+         {
+            label:'About',
+            click() { 
+                shell.openExternal('https://github.com/jmakxd/dynamaker-modified')
+            },
+            accelerator: 'CmdOrCtrl+Shift+C'
+        }
       ]
    }
 ]
