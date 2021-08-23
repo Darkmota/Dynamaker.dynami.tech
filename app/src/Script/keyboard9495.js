@@ -24,13 +24,13 @@ keyboard.prototype = {
 		addEventListener("keydown", function (e) {
 			if (scene && scene.banKeyboard) return;
 			keysDown[e.keyCode] = true;
-	    	// if (kble(70)) { // F
-	    	// 	if (isFullScreen) {
-	    	// 		unFullScreen();
-	    	// 	}
-	       	// 	else {
-	       	// 		fullScreen();
-	       	// 	}
+	  //   	if (kble(70)) { // F
+	  //   		if (isFullScreen) {
+	  //   			unFullScreen();
+	  //   		}
+	  //      		else {
+	  //      			fullScreen();
+	  //      		}
 			// }
 		}, false);
 
@@ -201,6 +201,11 @@ keyboard.prototype = {
 			if (audioRate >= 15) {
 				audioRate = 15;
 			}
+		}
+
+		//TLC
+		if (kble(72)) {
+			hOn = !hOn;
 		}
 		
 		if (musicCtrl && CMap) {	    	

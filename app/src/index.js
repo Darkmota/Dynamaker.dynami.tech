@@ -65,6 +65,13 @@ const template = [
       label: 'Edit',
       submenu: [
          {
+            label: 'Button Menu',
+            accelerator: 'H'
+         },
+         {
+            type: 'separator'
+         },
+         {
             role: 'Undo',
             accelerator: 'Shift+Left'
          },
