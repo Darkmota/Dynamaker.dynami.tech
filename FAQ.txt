@@ -24,8 +24,8 @@ To return to editing mode:
 3. If notes still cannot be placed, hit [Enter]
 4. If it still doesn't work, save the chart and reload the chart through DynaMaker
 
-What should I do if I had the wrong BPM change set?
+//What should I do if I had the wrong BPM change set?
 *NOTE: BarPerMinute = BeatPerMinute/4
 Scroll to the bottom and find the corresponding [m_time] and change the BeatPerMinute at the corresponding [m_value].
 
-For a complete guide on DynaMaker, please visit TLC's guide: https://tlchicken.github.io/dynamaker-guide/
+//For a complete guide on DynaMaker, please visit TLC's guide: https://tlchicken.github.io/dynamaker-guide/
