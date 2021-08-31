@@ -21,6 +21,7 @@ Windows (64-bit), macOS (64-bit)
 	- Changed the opacity and font size for the song title and difficulty 更改透明度和字形大小
 	- Reduced the width of the blur for the lines on all 3 side lanes and the progression scrubber 減少三邊線和音樂進度條模糊的寬度
 	- Updated assets to a higher resolution 提高圖片資源畫質
+	- Changed Mixer reaction time 更新Mixer反應時間
 - Credited whitelava3203 for original BPM changer
 
 
