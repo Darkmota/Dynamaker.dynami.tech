@@ -16,7 +16,7 @@ Jmak, TLC, Vertrak, keanucode, Jono997
 (Originally by omegaPi 由omegaPi創建, BPM change function created by whitelava3203 BPM修改工具由whitelava3203創建) 
 
 # How to Download 下載方法
-To download,nplease navigate to the "Releases" tab and download the latest version.
+To download, please navigate to the "Releases" tab and download the latest version.
 如要下載，請導航到“Releases”並下載最新版本。
 
 # Copyright Disclaimer 版權聲明
