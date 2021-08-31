@@ -198,7 +198,7 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "20px Dynamix";
-			ctx.fillText("Modified by TLChicken, Jmak, Vertrak, Jono997, keanucode, Protoz and whitelava3203", windowWidth * 0.5, windowHeight * 0.79);
+			ctx.fillText("Modified by TLChicken, Jmak, Vertrak, keanucode, Jono997, Syncable and whitelava3203", windowWidth * 0.5, windowHeight * 0.79);
 			
 			ctx.font = "25px Dynamix";
 			if (isFullScreen) {
