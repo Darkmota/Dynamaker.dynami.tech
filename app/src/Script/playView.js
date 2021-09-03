@@ -1,6 +1,6 @@
 var sX, sY, sW, sH, dX, dY, dW, dH;
-var showParticles = true;
-var showHitSound = false;
+var showParticles = false;
+var showHitSound = true;
 var gradual = true;
 var gradualPx = 100;
 var markSecion = 0;

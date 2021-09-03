@@ -95,7 +95,7 @@ startMenuScene.prototype = {
 			}
 			
 			//map browse
-			ctx.fillText("Map Browse (.dy/.xml/.json/XTTT)", windowWidth * 0.25, windowHeight * 0.4);
+			ctx.fillText("Map Browse (.dy/.xml)", windowWidth * 0.25, windowHeight * 0.4);
 			if (mapFileCtrl) {
 				ctx.textAlign = "right";
 				ctx.fillStyle = "#0FF";
