@@ -263,7 +263,7 @@ startMenuScene.prototype = {
 						ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "40px Dynamix";
-			ctx.fillText("We recommend using .ogg/.wav to minimise offset error.", windowWidth * 0.5, windowHeight * 0.90)
+			ctx.fillText("We recommend using 48000Hz .wav to minimise offset and framerate issues.", windowWidth * 0.5, windowHeight * 0.90)
 		}
 		
 			

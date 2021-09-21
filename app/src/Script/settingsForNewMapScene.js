@@ -173,7 +173,7 @@ settingsForNewMapScene.prototype = {
 		ctx.textAlign = "center";
 		ctx.textBaseline = "alphabetic";
 		ctx.fillStyle = "red";
-		ctx.fillText(err, windowWidth/2, windowHeight*0.9);
+		ctx.fillText(err, windowWidth/2, windowHeight*0.05);
 		ctx.fillStyle = "#0FF";
 		ctx.textAlign = "left";
 		
@@ -196,17 +196,18 @@ settingsForNewMapScene.prototype = {
 		ctx.fillText("OFFSET (sec)", windowWidth * 0.88, windowHeight * 0.45);
 		ctx.fillText("RIGHT SIDE", windowWidth * 0.88, windowHeight * 0.635);
 		
+		ctx.fillStyle = "#0FF";
+		ctx.font = "25px Dynamix";
+		ctx.textAlign = "center";
+		ctx.fillText("BarPerMinute is equivalent to BeatPerMinute ÷ 4", windowWidth * 0.5, windowHeight - 85);
 
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix";
 		ctx.textAlign = "center";
-		ctx.fillText("Version 1.21.4", windowWidth * 0.5, windowHeight - 35);
+		ctx.fillText("Version 1.12.4", windowWidth * 0.5, windowHeight - 35);
 		
 		this.breath = Math.abs(frameCount - 54) / 54;
 		ctx.fillStyle = rgba(0, 255, 255, this.breath * 0.1 + 0.2);
-		
-//		ctx.font = "50px Dynamix";
-//		ctx.fillText("presented by omegaPiGame.com", windowWidth * 0.3, windowHeight * 0.4);
 		
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";

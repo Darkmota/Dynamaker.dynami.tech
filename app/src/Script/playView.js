@@ -1,6 +1,6 @@
 var sX, sY, sW, sH, dX, dY, dW, dH;
-var showParticles = true;
-var showHitSound = false;
+var showParticles = false;
+var showHitSound = true;
 var gradual = true;
 var gradualPx = 100;
 var markSecion = 0;
@@ -48,20 +48,15 @@ var deleteMenu = [
 //	["     Paste", 86, 38]
 ];
 
-//Jmak - Glow attempt fix
-function shootParticle(t, e, i, o, a, h, d, s, r) {
-	if(!showParticles) return;
-	if(e == 1) {
-		yellowAnimeList.push([t, t, i, o, a, h, d, s, e, r])
-	} else {
-		shadowAnimeList.push([t, t, i, o, a, h, d, s, e, r])
-	}
+function shootParticle(frames, type, x1, y1, d1, x2, y2, d2) {
+	if (! showParticles || (musicCtrl && musicCtrl.paused)) return;
+	shadowAnimeList.push([frames, frames, x1, y1, d1, x2, y2, d2, type]);
 }
 
-function shootRVParticle(t, e, i, o, a) {
-	if(!showParticles || musicCtrl && musicCtrl.paused) return;
-	var h = jb(Math.random() * 2 * Math.PI, 0, Math.PI * 2);
-	shadowAnimeList.push([t, t, i, o, Math.random() * 360, i + Math.cos(h) * a, o + Math.sin(h) * a, Math.random() * 180 - 90, e])
+function shootRVParticle(frames, type, x, y, r) {
+	if (! showParticles || (musicCtrl && musicCtrl.paused)) return;
+	var sv = jb(Math.random()*2*Math.PI, 0, Math.PI*2);
+	shadowAnimeList.push([frames, frames, x, y, Math.random()*360, x + Math.cos(sv) * r, y + Math.sin(sv) * r, Math.random()*180 - 90, type]);
 }
 
 function playView() {
