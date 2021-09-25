@@ -1,6 +1,6 @@
 var sX, sY, sW, sH, dX, dY, dW, dH;
-var showParticles = false;
-var showHitSound = true;
+var showParticles = true;
+var showHitSound = false;
 var gradual = true;
 var gradualPx = 100;
 var markSecion = 0;
@@ -47,7 +47,6 @@ var deleteMenu = [
 //	["     Copy", 46, 38],
 //	["     Paste", 86, 38]
 ];
-
 function shootParticle(frames, type, x1, y1, d1, x2, y2, d2) {
 	if (! showParticles || (musicCtrl && musicCtrl.paused)) return;
 	shadowAnimeList.push([frames, frames, x1, y1, d1, x2, y2, d2, type]);
@@ -238,6 +237,11 @@ playView.prototype = {
 			
 		}
 		 
+
+		ctx.globalAlpha = jb((1 - Math.abs(Math.round(thisTime / spu) - thisTime / spu) * 2) * .6 + .4, 0, 1);
+		drawJBox(ctx, 0, windowHeight - ud - 450, windowWidth, 450, windowWidth / 2, windowHeight - ud - 450, windowWidth / 2, windowHeight - ud, rgba(0, 255, 255, 0), rgba(0, 255, 255, .32));
+
+
 		//bottomMessage	
 		{
 		ctx.textBaseline = "top";
