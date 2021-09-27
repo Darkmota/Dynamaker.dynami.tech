@@ -4,7 +4,7 @@ function settingsForNewMapScene() {
 	this.banKeyboard = true;
 	var breath = 0;
 	musicName.value = musicFileCtrl.name.substr(0, musicFileCtrl.name.length - 4);
-	bpmName.value = 120;
+	bpmName.value = 0;
 	offsetName.value = 0;
 	musicName.style.display = "inline";
 	bpmName.style.display = "inline";
@@ -57,6 +57,7 @@ settingsForNewMapScene.prototype = {
 			
 			CMap.m_path = musicName.value;
 
+			//TLC - Custom
 			var diffSubStr = hardshipName.value == "CUSTOM" 
 				? "U" 
 				: hardshipName.value[0];
@@ -92,6 +93,7 @@ settingsForNewMapScene.prototype = {
 				}
 				loaded++;
 			});
+			//TLC - Custom and Tera
 			switch (CMap.m_mapID.substr(-1, 1)) {
 				case "C":
 					hardship = "CASUAL";
@@ -162,7 +164,7 @@ settingsForNewMapScene.prototype = {
 				err += "Music name cannot be empty; "
 			}
 			if (! bpmName || isNaN(Number(bpmName.value)) || Number(bpmName.value) <= 0) {
-				err += "Invalid BPM; "
+				err += "Invalid BarPerMinute; "
 			}
 			if (! offsetName || isNaN(Number(offsetName.value))) {
 				err += "Invalid Offset; "
@@ -187,15 +189,18 @@ settingsForNewMapScene.prototype = {
 		else {
 			ctx.fillText("START", windowWidth * 0.23, windowHeight * 0.34);
 		}
+		//Jmak - BPM and BPM Text
 		ctx.fillStyle = "#0FF";
 		ctx.fillText("MUSIC NAME", windowWidth * 0.11, windowHeight * 0.24);
 		ctx.fillText("DIFFICULTY", windowWidth * 0.11, windowHeight * 0.45);
 		ctx.fillText("LEFT SIDE", windowWidth * 0.11, windowHeight * 0.635);
 		ctx.textAlign = "right";
+		ctx.fillText("BeatPerMinute", windowWidth * 0.71, windowHeight * 0.263);
 		ctx.fillText("BarPerMinute", windowWidth * 0.88, windowHeight * 0.263);
 		ctx.fillText("OFFSET (sec)", windowWidth * 0.88, windowHeight * 0.45);
 		ctx.fillText("RIGHT SIDE", windowWidth * 0.88, windowHeight * 0.635);
 		
+		//Jmak - BPM Help and Version
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix";
 		ctx.textAlign = "center";
@@ -209,6 +214,7 @@ settingsForNewMapScene.prototype = {
 		this.breath = Math.abs(frameCount - 54) / 54;
 		ctx.fillStyle = rgba(0, 255, 255, this.breath * 0.1 + 0.2);
 		
+		//Jmak - Animated Text
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";
 		ctx.fillRect(windowWidth * 0.09, windowHeight * 0.2, windowWidth*0.7, 7);
