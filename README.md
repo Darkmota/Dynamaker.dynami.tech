@@ -19,6 +19,8 @@ Jmak, TLC, Vertrak, keanucode, Jono997
 To download, please navigate to the "Releases" tab and download the latest version.
 如要下載，請導航到“Releases”並下載最新版本。
 
+Downloading in China 中國下載鏈接: https://share.weiyun.com/yHDBo6GD
+
 # Copyright Disclaimer 版權聲明
 All assets used in DynaMaker are borrowed from Dynamix, created by C4Cat Entertainment Limited.
 

@@ -205,19 +205,19 @@ startMenuScene.prototype = {
 				var tx = "??";
 				switch  (browser) {
 					case "Chrome": 
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
 					
 					case "Firefox":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
 						
 					case "Edge":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
 					
 					case "IE":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
 				}
 				
@@ -228,19 +228,19 @@ startMenuScene.prototype = {
 				var tx = "?"
 				switch  (browser) {
 					case "Chrome": 
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
 					
 					case "Firefox":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
 						
 					case "Edge":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
 					
 					case "IE":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls";
+						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
 				}
 				ctx.fillText(tx, windowWidth * 0.5, windowHeight * 0.84);
@@ -262,7 +262,7 @@ startMenuScene.prototype = {
 			
 						ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
-			ctx.font = "40px Dynamix";
+			ctx.font = "35px Dynamix";
 			ctx.fillText("We recommend using 48000Hz .wav to minimise offset and framerate issues.", windowWidth * 0.5, windowHeight * 0.90)
 		}
 		
