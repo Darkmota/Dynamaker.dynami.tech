@@ -32,4 +32,4 @@ Testers:
 1. TLChicken
 2. 錫爾/Sylvex
 3. Aploplex
-4. 天堂EDHD
+4. 天堂EGHD
