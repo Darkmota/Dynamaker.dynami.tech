@@ -1,16 +1,16 @@
 @font-face {
   font-family: "Dynamix";
-  src: url("./DynamixFeatureStandard.ttf");
+  src: url("./fonts/DynamixFeatureStandard.ttf");
 }
 
 @font-face {
   font-family: "Orbitron";
-  src: url("./Orbitron.otf");
+  src: url("./fonts/Orbitron.otf");
 }
 
 @font-face {
   font-family: "NotoSans";
-  src: url("./NotoSansCJKkr-Black.otf");
+  src: url("./fonts/NotoSansCJKkr-Black.otf");
 }
 
 body {

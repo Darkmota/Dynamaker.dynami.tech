@@ -944,8 +944,8 @@ playView.prototype = {
 		
 		//bone
 		//function drawJBox(c, x, y, w, h, x1, y1, x2, y2, r1, g1, b1, a1, r2, g2, b2, a2)
-		ctx.globalAlpha = jb((1 - Math.abs(Math.round(SetBar(thisTime)/2) - GetBar(thisTime)/2)*2) * 0.2 + 0.8, 0, 1);
-		drawJBox(ctx, 0, windowHeight - ud - 550, windowWidth, 550, windowWidth/2, windowHeight - ud - 550, windowWidth/2, windowHeight - ud, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.2));
+		// ctx.globalAlpha = jb((1 - Math.abs(Math.round(SetBar(thisTime)/2) - GetBar(thisTime)/2)*2) * 0.2 + 0.8, 0, 1);
+		// drawJBox(ctx, 0, windowHeight - ud - 550, windowWidth, 550, windowWidth/2, windowHeight - ud - 550, windowWidth/2, windowHeight - ud, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.2));
 		ctx.globalAlpha = 1;
 		drawJBox(ctx, 0, windowHeight - ud - 16, windowWidth, 16, windowWidth/2, windowHeight - ud - 16, windowWidth/2, windowHeight - ud, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.5));
 		drawJBox(ctx, 0, windowHeight - ud, windowWidth, 20, windowWidth/2, windowHeight - ud, windowWidth/2, windowHeight - ud + 20, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
