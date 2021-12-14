@@ -12,7 +12,9 @@ Windows (64-bit), macOS (64-bit), Linux (Run Source Code with Command Prompt)
 
 # Creators 創作者
 Jmak, TLC, Vertrak, keanucode, Jono997
+
 BPM change function created by whitelava3203
+
 Program originally created by omegaPi
 
 # How to Download 下載方法
