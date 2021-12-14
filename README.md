@@ -8,12 +8,12 @@ This version is packaged with Electron and JavaScript
 該版本與Electron以及其他JavaScript編碼打包
 
 # Supported Platforms 支援平台
-Windows (64-bit), macOS (64-bit)
+Windows (64-bit), macOS (64-bit), Linux (Run Source Code with Command Prompt)
 
 # Creators 創作者
 Jmak, TLC, Vertrak, keanucode, Jono997
-(BPM change function created by whitelava3203 BPM修改工具由whitelava3203創建)
-(Originally by omegaPi 由omegaPi創建) 
+BPM change function created by whitelava3203
+Program originally created by omegaPi
 
 # How to Download 下載方法
 To download, please navigate to the "Releases" tab and download the latest version.
