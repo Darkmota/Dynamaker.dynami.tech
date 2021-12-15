@@ -54,13 +54,14 @@ settingsForNewMapScene.prototype = {
 			hardshipName.style.display = "none";
 			leftName.style.display = "none";
 			rightName.style.display = "none";
-			
+
 			CMap.m_path = musicName.value;
 
-			//TLC - Custom
-			var diffSubStr = hardshipName.value == "CUSTOM" 
-				? "U" 
-				: hardshipName.value[0];
+			var diffSubStr = hardshipName.value == "CUSTOM"
+				? "U"
+				: hardshipName.value == "HORNEEE"
+					? "D"
+					: hardshipName.value[0];
 
 			CMap.m_mapID = "_map_"+musicName.value+"_"+diffSubStr;
 
@@ -68,7 +69,7 @@ settingsForNewMapScene.prototype = {
 			CMap.m_rightRegion = rightName.value;
 			CMap.m_barPerMin = bpmName.value;
 			CMap.m_timeOffset = offsetName.value;
-			
+
 			audioLoad(musicUrl, function(audio){
 				musicCtrl = audio;
 				musicCtrl.goplay = function() {
@@ -86,7 +87,7 @@ settingsForNewMapScene.prototype = {
 					if (editMode) {
 						clearHit();
 					}
-					if (musicCtrl) { 
+					if (musicCtrl) {
 						musicPlayButton.focus();
 						musicPlayButton.click();
 					}
@@ -99,22 +100,22 @@ settingsForNewMapScene.prototype = {
 					hardship = "CASUAL";
 					hardshipColor = "#8F8";
 					break;
-					
+
 				case "N":
 					hardship = "NORMAL";
 					hardshipColor = "#88F";
 					break;
-					
+
 				case "H":
 					hardship = "HARD";
 					hardshipColor = "#F44";
 					break;
-					
+
 				case "M":
 					hardship = "MEGA";
 					hardshipColor = "#F4F";
 					break;
-		
+
 				case "G":
 					hardship = "GIGA";
 					hardshipColor = "#888";
@@ -123,6 +124,11 @@ settingsForNewMapScene.prototype = {
 				case "T":
 					hardship = "TERA";
 					hardshipColor = "#333";
+					break;
+
+				case "D":
+					hardship = "HORNEEE";
+					hardshipColor = "#FF4";
 					break;
 
 				case "U":

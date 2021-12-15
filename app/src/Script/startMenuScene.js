@@ -7,30 +7,30 @@ function startMenuScene() {
 startMenuScene.prototype = {
 	down: function (coordinate) {
 		switch (this.choice) {
-			case 1: 
+			case 1:
 				if (mapFileOk && (mapFileType == "DY" || musicFileOk)) {
 					scene = new loadingScene();
 					scene.init(mapFileType);
-				
+
 				}
 				else if (musicFileOk){
 					scene = new settingsForNewMapScene();
 				}
 				break;
-			
-			case 2: 
+
+			case 2:
 				mapFileElement.focus();
 				mapFileElement.click();
 				break;
-				
-			case 3: 
+
+			case 3:
 				musicFileElement.focus();
 				musicFileElement.click();
 				break;
 		}
 	},
 	up: function(coordinate) {
-		
+
 	},
 	move: function(coordinate) {
 		var onOne = false;
@@ -38,44 +38,44 @@ startMenuScene.prototype = {
 			this.choice = 1;
 			onOne = true;
 		}
-		
+
 		if (inArea(mainMouse.coordinate, windowWidth * 0.25, windowHeight * 0.415, windowWidth * 0.50, windowHeight * 0.04)) {
 			this.choice = 2;
 			onOne = true;
 		}
-		
+
 		if (inArea(mainMouse.coordinate, windowWidth * 0.25, windowHeight * 0.510, windowWidth * 0.50, windowHeight * 0.04)) {
 			this.choice = 3;
 			onOne = true;
 		}
-		
+
 		if (! onOne) {
 			this.choice = 0;
 		}
 	},
 	refresh: function() {
-		
-		
+
+
 		this.breath = Math.abs(frameCount - 54) / 54;
 		drawBox(ctx, windowWidth * 0.2, windowHeight * 0.3146, windowWidth * 0.6, windowHeight * 0.3708, 1, 18);
-		
+
 		// drawBox(ctx, windowWidth * 0.45, windowHeight * 0.5, windowWidth * 0.1, windowHeight * 0.0618, 1, 10);
-		
-		
+
+
 		//pointJudge
 		switch (this.choice) {
 			case 1:
 				ctx.fillStyle = rgba(0, 255, 255, 0.3 + this.breath * 0.1);
 				break;
 		}
-		
+
 		//
 		ctx.font = "32px Dynamix";
 		ctx.textAlign = "left";
 		ctx.textBaseline = "alphabetic";
 		ctx.fillStyle = "#0FF";
-		
-		
+
+
 		if(typeof FileReader == 'undefined'){
 			ctx.textAlign = "center";
 			ctx.fillText("ERROR", windowWidth * 0.50, windowHeight * 0.42);
@@ -86,14 +86,14 @@ startMenuScene.prototype = {
 			drawJBox(ctx, windowWidth * 0.25, windowHeight * 0.445, windowWidth * 0.50, windowHeight * 0.01, 0, windowHeight * 0.445, 0, windowHeight * 0.445 + 10, rgba(0, 255, 255, 0.0), "#0FF");
 			drawJBox(ctx, windowWidth * 0.25, windowHeight * 0.540, windowWidth * 0.50, windowHeight * 0.01, 0, windowHeight * 0.54, 0, windowHeight * 0.54 + 10, rgba(0, 255, 255, 0.0), "#0FF");
 			ctx.fillStyle = "#0FF";
-			
-			
-			
+
+
+
 			if (this.choice == 2) {
 				//ctx.fillRect(windowWidth * 0.25, windowHeight * 0.415, windowWidth * 0.50, windowHeight * 0.04);
 				ctx.fillStyle = "#0F0";
 			}
-			
+
 			//map browse
 			ctx.fillText("Map Browse (.dy/.xml)", windowWidth * 0.25, windowHeight * 0.4);
 			if (mapFileCtrl) {
@@ -123,7 +123,7 @@ startMenuScene.prototype = {
 					}
 				}
 				else if (mapFileCtrl.length == 1) {
-					xmlJson = true;				
+					xmlJson = true;
 					// if (mapFileCtrl[0].name.substr(-4, 4).toUpperCase() != ".XML" && mapFileCtrl[0].name.substr(-5, 5).toUpperCase() != ".JSON") {
 					// 	mapFileOk = false;
 					// 	ctx.fillStyle = "#F00";
@@ -163,8 +163,8 @@ startMenuScene.prototype = {
 
 				ctx.textAlign = "left";
 			}
-			
-			
+
+
 			//music browse
 			ctx.fillStyle = "#0FF";
 			if (this.choice == 3) {
@@ -189,89 +189,89 @@ startMenuScene.prototype = {
 				}
 				ctx.textAlign = "left";
 			}
-			
+
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "40px Dynamix";
 			ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5, windowHeight * 0.75);
-			
+
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "20px Dynamix";
 			ctx.fillText("Modified by TLChicken, Jmak, Vertrak, keanucode, Jono997, Protoz, Syncable and whitelava3203", windowWidth * 0.5, windowHeight * 0.79);
-			
+
 			ctx.font = "25px Dynamix";
 			if (isFullScreen) {
 				var tx = "??";
 				switch  (browser) {
-					case "Chrome": 
+					case "Chrome":
 						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
-					
+
 					case "Firefox":
 						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
-						
+
 					case "Edge":
 						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
-					
+
 					case "IE":
 						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
 				}
-				
+
 				ctx.fillText(tx, windowWidth * 0.5, windowHeight * 0.83);
 				ctx.fillText("if your pointer can't be always above the green point, keep adjusting", windowWidth * 0.5, windowHeight * 0.86);
 			}
 			else {
 				var tx = "?"
 				switch  (browser) {
-					case "Chrome": 
+					case "Chrome":
 						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
-					
+
 					case "Firefox":
 						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
-						
+
 					case "Edge":
 						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
-					
+
 					case "IE":
 						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
 						break;
 				}
 				ctx.fillText(tx, windowWidth * 0.5, windowHeight * 0.84);
 			}
-			
+
 			if (this.choice == 1 && musicFileOk) {
 				ctx.fillStyle = "#0F0";
 			}
 			ctx.textAlign = "center";
 			if (mapFileOk && (mapFileType == "DY" || musicFileOk)) {
-				ctx.fillText("[ Edit map ]", windowWidth * 0.5, windowHeight * 0.62);	
+				ctx.fillText("[ Edit map ]", windowWidth * 0.5, windowHeight * 0.62);
 			}
 			else if (musicFileOk){
-				ctx.fillText("[ New map ]", windowWidth * 0.5, windowHeight * 0.62);	
+				ctx.fillText("[ New map ]", windowWidth * 0.5, windowHeight * 0.62);
 			}
 			else {
-				ctx.fillText("Browse and select a music file to create a new map", windowWidth * 0.5, windowHeight * 0.62);	
+				ctx.fillText("Browse and select a music file to create a new map", windowWidth * 0.5, windowHeight * 0.62);
 			};
-			
-						ctx.textAlign = "center";
+
+			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "35px Dynamix";
 			ctx.fillText("We recommend using 48000Hz .wav to minimise offset and framerate issues.", windowWidth * 0.5, windowHeight * 0.90)
 		}
-		
-			
+
+
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix";
 		ctx.textAlign = "center";
 		ctx.fillText("Version 1.21.4", windowWidth * 0.5, windowHeight - 35);
-		
+
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";
 		ctx.fillStyle = rgba(0, 255, 255, this.breath * 0.1 + 0.2);
@@ -279,12 +279,12 @@ startMenuScene.prototype = {
 		ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5 + windowWidth*(-1 + 2*((absFrameCount + 25)%50/50)), windowHeight*0.03);
 		ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5 + windowWidth*(1 - 2*(absFrameCount%50/50)), windowHeight*1.05);
 		ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5 + windowWidth*(1 - 2*((absFrameCount + 25)%50/50)), windowHeight*1.05);
-		
 
-		
 
-	
-		
+
+
+
+
 		ctx.fillStyle = rgba(0, 255, 0, 1);
 		if (mainMouse.coordinate && isFullScreen) {
 			ctx.fillRect(mainMouse.coordinate.x - 7, mainMouse.coordinate.y - 7, 15,15);

@@ -37,9 +37,10 @@ var basicMenu = [
 	["     Save as .xml", 366, 38],
 	["     Save as .dy", 406, 38],
 	["     Background", 446, 38],
-	["     Hit sound", 486, 38],
+	["     -----------------", 486, 38],
 	["     Animation", 526, 38],
-	["     Music volume", 566, 38]
+	["     Hitsound Vol", 566, 38],
+	["     Music Volume", 606, 38]
 ];
 var deleteMenu = [
 	["     Delete", 6, 38]
@@ -63,7 +64,7 @@ function playView() {
 
 playView.prototype = {
 	set:function() {
-		
+
 	},
 	refresh:function() {
 		//test
@@ -71,90 +72,90 @@ playView.prototype = {
 //		drawMiddleImage(redCanvasU, 0, 0, 160, 93, windowWidth/2, windowHeight/2, 1);
 		//file check
 		{
-		if (loaded < 5 + totalHitBuffer) return;
+			if (loaded < 5 + totalHitBuffer) return;
 
-		//TLC - mp4 Support Addition
-		if(bg) {
-			ctx.drawImage(bgCanvas, 0, 0);
-			ctx.fillStyle = rgba(0, 0, 0, .7);
-			ctx.fillRect(0, windowHeight - ud, windowWidth, ud);
-			if(showStart >= 0) {
-				if(showStart < 40) {
-					ctx.fillStyle = rgba(0, 0, 0, .7)
+			//TLC - mp4 Support Addition
+			if(bg) {
+				ctx.drawImage(bgCanvas, 0, 0);
+				ctx.fillStyle = rgba(0, 0, 0, .7);
+				ctx.fillRect(0, windowHeight - ud, windowWidth, ud);
+				if(showStart >= 0) {
+					if(showStart < 40) {
+						ctx.fillStyle = rgba(0, 0, 0, .7)
+					} else {
+						ctx.fillStyle = rgba(0, 0, 0, showStart >= 40 && showStart <= 60 ? .7 - .035 * (showStart - 40) : .7)
+					}
 				} else {
-					ctx.fillStyle = rgba(0, 0, 0, showStart >= 40 && showStart <= 60 ? .7 - .035 * (showStart - 40) : .7)
+					ctx.fillStyle = rgba(0, 0, 0, .7)
 				}
+				ctx.fillRect(0, 0, windowWidth, windowHeight)
 			} else {
-				ctx.fillStyle = rgba(0, 0, 0, .7)
+				ctx.clearRect(0, 0, windowWidth, windowHeight);
+				if(!showCS) {
+					ctx.fillStyle = "rgba(25,25,25,0.2)"
+				} else {
+					ctx.fillStyle = "rgba(32,32,32,0.2)"
+				}
+				if(isVideo) {
+					ctx.globalAlpha = 0.3;
+					ctx.drawImage(musicCtrl, 0, 0, windowWidth, windowHeight);
+					ctx.globalAlpha = 1
+				}
+				ctx.fillStyle = "rgba(0,0,0,0.7)";
+				ctx.fillRect(0, windowHeight - ud, windowWidth, ud)
 			}
-			ctx.fillRect(0, 0, windowWidth, windowHeight)
-		} else {
-			ctx.clearRect(0, 0, windowWidth, windowHeight);
-			if(!showCS) {
-				ctx.fillStyle = "rgba(25,25,25,0.2)"
-			} else {
-				ctx.fillStyle = "rgba(32,32,32,0.2)"
-			}
-			if(isVideo) {
-				ctx.globalAlpha = 0.3;
-				ctx.drawImage(musicCtrl, 0, 0, windowWidth, windowHeight);
-				ctx.globalAlpha = 1
-			}
-			ctx.fillStyle = "rgba(0,0,0,0.7)";
-			ctx.fillRect(0, windowHeight - ud, windowWidth, ud)
-		}
 
 
-		if (showStart >= -1) {
-			if (! musicCtrl.paused) {
-				musicCtrl.pause();
-			}
-			if (between(showStart, 48, 60)) {
-				ud = (tud + 20 +   ud*3)/4;
-			}
-			if (between(showStart, 43, 47)) {
-				ud = (tud*2 + ud*3)/5;
-			}
-			if (between(showStart, 5, 35)) {
-				ud = tud;
-				if (Math.abs(lr - tlr) <= 0.5) {
+			if (showStart >= -1) {
+				if (! musicCtrl.paused) {
+					musicCtrl.pause();
+				}
+				if (between(showStart, 48, 60)) {
+					ud = (tud + 20 +   ud*3)/4;
+				}
+				if (between(showStart, 43, 47)) {
+					ud = (tud*2 + ud*3)/5;
+				}
+				if (between(showStart, 5, 35)) {
+					ud = tud;
+					if (Math.abs(lr - tlr) <= 0.5) {
+						lr = tlr;
+					}
+					else {
+						lr = (tlr + lr*5)/6;
+					}
+				}
+				if (between(showStart, 10, 30)) {
+					pauseShadowH = (120 + pauseShadowH*4)/5;
+				}
+				if (showStart == -1) {
+					pauseShadowH = 120;
 					lr = tlr;
+					ud = tud;
+					setTime(0);
+					resetCS();
+					musicCtrl.goplay();
 				}
-				else {
-					lr = (tlr + lr*5)/6;
-				}
+				showStart--;
 			}
-			if (between(showStart, 10, 30)) {
-				pauseShadowH = (120 + pauseShadowH*4)/5;
-			}
-			if (showStart == -1) {
-				pauseShadowH = 120;
-				lr = tlr;
-				ud = tud;
-				setTime(0);
-				resetCS();
+
+			if (! timerReady) {
+				timerReady = true;
+				audioRate = 1;//Math.random()/10;
+				audioRateCache = 1;
+				musicCtrl.playbackRate = 1;
+				musicCtrl.volume = 1;
 				musicCtrl.goplay();
+				var realTime = 0;
+				timer = new Date();
+				baseTime = timer.getTime();
+				score = 0;
+				preScore = 0;
+				combo = 0;
+				hitThisFrame = 0;
 			}
-			showStart--;
 		}
-		
-		if (! timerReady) {
-			timerReady = true;
-			audioRate = 1;//Math.random()/10;
-			audioRateCache = 1;
-			musicCtrl.playbackRate = 1;
-			musicCtrl.volume = 1;
-			musicCtrl.goplay();
-			var realTime = 0;
-			timer = new Date();
-			baseTime = timer.getTime();
-			score = 0;
-			preScore = 0;
-			combo = 0;
-			hitThisFrame = 0;
-		}
-		}
-		
+
 		//musicMessageUpdate
 		if (audioRate != audioRateCache) {
 			audioRateCache = audioRate;
@@ -164,30 +165,30 @@ playView.prototype = {
 		//updateTime
 		{
 //		currentPerfectJudge = perfectJudge*audioRate;
-		doration = musicCtrl.duration;
-		timer = new Date();
-		var realTime = timer.getTime();// - CMap.m_timeOffset;
+			doration = musicCtrl.duration;
+			timer = new Date();
+			var realTime = timer.getTime();// - CMap.m_timeOffset;
 //		thisTime = timer.getTime()/1000 - baseTime;
-		thisTime = musicCtrl.currentTime + offset*spu;
-		score = Math.floor((combo*0.08 + combo*0.92)*1000000/totalNote);
-		preScore = (score + preScore)/2; 
-		preScoreStr = "" + Math.round(preScore);
-		while (preScoreStr.length < 7) {
-			preScoreStr = "0" + preScoreStr;
+			thisTime = musicCtrl.currentTime + offset*spu;
+			score = Math.floor((combo*0.08 + combo*0.92)*1000000/totalNote);
+			preScore = (score + preScore)/2;
+			preScoreStr = "" + Math.round(preScore);
+			while (preScoreStr.length < 7) {
+				preScoreStr = "0" + preScoreStr;
+			}
+			hitNote = 0;
 		}
-		hitNote = 0;
-		}
-		
-		
+
+
 		drawMiddleImage(blueCanvasU, 0, 0, 160, 100, windowWidth*0.95, windowHeight-ud+87, 1);
 		for (var i = 1; i <= 3; ++i) {
-			drawMiddleImage(blankCanvasU, 0, 0, 160, 100, windowWidth*(0.95 - i*0.1) , windowHeight-ud+87, 1);	
+			drawMiddleImage(blankCanvasU, 0, 0, 160, 100, windowWidth*(0.95 - i*0.1) , windowHeight-ud+87, 1);
 		}
 		for (var i = 1; i <= 4; ++i) {
-			drawMiddleImage(blankCanvasD, 0, 0, 160, 100, windowWidth*(1 - i*0.1) , windowHeight-ud+51, 1);	
+			drawMiddleImage(blankCanvasD, 0, 0, 160, 100, windowWidth*(1 - i*0.1) , windowHeight-ud+51, 1);
 		}
-		
-		
+
+
 		//comboScore
 		if (showCS) {
 			drawJBox(ctx, 0, pauseShadowH - 60, windowWidth, 50, 0, pauseShadowH - 60, 0, pauseShadowH - 10, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
@@ -234,116 +235,116 @@ playView.prototype = {
 				drawMiddleImage(perfectJudgeCanvas, 0, 0, 438, 153, windowWidth*0.737, windowHeight*0.65, 1.03);
 				ctx.globalAlpha = 1;
 			}
-			
+
 		}
-		 
+
 
 		ctx.globalAlpha = jb((1 - Math.abs(Math.round(thisTime / spu) - thisTime / spu) * 2) * .6 + .4, 0, 1);
 		drawJBox(ctx, 0, windowHeight - ud - 450, windowWidth, 450, windowWidth / 2, windowHeight - ud - 450, windowWidth / 2, windowHeight - ud, rgba(0, 255, 255, 0), rgba(0, 255, 255, .32));
 
 
-		//bottomMessage	
+		//bottomMessage
 		{
-		ctx.textBaseline = "top";
-		//message
-		ctx.font = "bold 48px Orbitron,Noto Sans CJK KR Black";
-		ctx.fillStyle = "#FFF";
-		ctx.textAlign = "left";
-		ctx.globalAlpha = 0.35;
-		ctx.fillText(CMap.m_path, windowWidth*0.021, windowHeight - ud + 28);
+			ctx.textBaseline = "top";
+			//message
+			ctx.font = "bold 48px Orbitron,Noto Sans CJK KR Black";
+			ctx.fillStyle = "#FFF";
+			ctx.textAlign = "left";
+			ctx.globalAlpha = 0.35;
+			ctx.fillText(CMap.m_path, windowWidth*0.021, windowHeight - ud + 28);
 
 //		ctx.font = "50px Dynamix";
 //		ctx.fillStyle = hardshipColor;
 //		ctx.fillText(hardship, 10, windowHeight - ud + 77);
-		var hardshipCut = 0;
-		switch (hardship) {
-			case "CASUAL": {
-				hardshipCut = 0;
-				break;
-			}
-			case "NORMAL": {
-				hardshipCut = 1;
-				break;
-			}
-			case "HARD": {
-				hardshipCut = 2;
-				break;
-			}
-			case "MEGA": {
-				hardshipCut = 3;
-				break;
-			}
-			case "GIGA": {
-				hardshipCut = 4;
+			var hardshipCut = 0;
+			switch (hardship) {
+				case "CASUAL": {
+					hardshipCut = 0;
+					break;
+				}
+				case "NORMAL": {
+					hardshipCut = 1;
+					break;
+				}
+				case "HARD": {
+					hardshipCut = 2;
+					break;
+				}
+				case "MEGA": {
+					hardshipCut = 3;
+					break;
+				}
+				case "GIGA": {
+					hardshipCut = 4;
 
-				break;
+					break;
 
+				}
+				case "CUSTOM": {
+					hardshipCut = 5;
+					break;
+				}
+				case "BASIC": {
+					hardshipCut = 6;
+					break;
+				}
+				case "TERA": {
+					hardshipCut = 7;
+					break;
+				}
+				case "HORNEEE": {
+					hardshipCut = 8;
+					break;
+				}
 			}
-			case "CUSTOM": {
-				hardshipCut = 5;
-				break;
-			}
-			case "BASIC": {
-				hardshipCut = 6;
-				break;
-			}
-			case "TERA": {
-				hardshipCut = 7;
-				break;
-			}
-			case "HORNEEE": {
-				hardshipCut = 8;
-				break;
-			}
-		}
 
-		if (hardshipCut <= 5) {
-			ctx.drawImage(hardshipCanvas, 0, 43*hardshipCut, 190, 43, windowWidth*0.022, windowHeight - ud + 77, 190, 43);
-		} else {
-			ctx.drawImage(hardshipCanvas, 190, 43*(hardshipCut - 6), 190, 43, windowWidth*0.022, windowHeight - ud + 77, 190, 43);
-		}
+			if (hardshipCut <= 5) {
+				ctx.drawImage(hardshipCanvas, 0, 43*hardshipCut, 190, 43, windowWidth*0.022, windowHeight - ud + 77, 190, 43);
+			} else {
+				ctx.drawImage(hardshipCanvas, 190, 43*(hardshipCut - 6), 190, 43, windowWidth*0.022, windowHeight - ud + 77, 190, 43);
+			}
 
-		ctx.globalAlpha = 1;
-		
-		if (showCS) ctx.globalAlpha = 0;
-		ctx.font = "22px Dynamix";
-		ctx.fillStyle = "#FFF";
-		ctx.textAlign = "right";
-		//ctx.fillText(((realTime - baseTime)/1000).toFixed(3) + " s (REAL)", 0, 50);
-		ctx.fillText(fps + " Fps", windowWidth, windowHeight - 80);
-		if (musicCtrl.paused) {
-			ctx.fillStyle = "#0F0";
-		}
-		ctx.fillText(offset + " Bar offset (O- P+)", windowWidth, windowHeight - 30);
-		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 55);
-		
-		ctx.fillText((hiSpeed/1000).toFixed(1) + " x Hispeed (Q- E+)", windowWidth*0.82, windowHeight - 30);
-		if (audioRate < 0.5 || audioRate > 4.0) {
-			ctx.fillStyle = "#F88";
-		}
-		ctx.fillText(audioRate.toFixed(1) + " x Rate (S- W+)", windowWidth*0.82, windowHeight - 55);
-		
-		if (hOn) {
+			ctx.globalAlpha = 1;
+
+			if (showCS) ctx.globalAlpha = 0;
+			ctx.font = "22px Dynamix";
+			ctx.fillStyle = "#FFF";
 			ctx.textAlign = "right";
-			ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
-			ctx.fillText("(F11) fullscreen", windowWidth*0.82, windowHeight - 80);
-		}
+			//ctx.fillText(((realTime - baseTime)/1000).toFixed(3) + " s (REAL)", 0, 50);
+			ctx.fillText(fps + " Fps", windowWidth, windowHeight - 80);
+			if (musicCtrl.paused) {
+				ctx.fillStyle = "#0F0";
+			}
+			ctx.fillText(offset + " Bar offset (O- P+)", windowWidth, windowHeight - 30);
+			ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 55);
 
-		if (hOn) {
-			ctx.textAlign = "left";
-			ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
-			//Left Region
-			ctx.fillText("(B) invert scolling direction", windowWidth*0.25, windowHeight - 80);
-			ctx.fillText("(Z) lock/unlock bar", windowWidth*0.25, windowHeight - 55);
-			ctx.fillText("(X) lock/unlock X-axis", windowWidth*0.25, windowHeight - 30);
-			//Middle Region
-			ctx.fillText("(C- V+) ±division", windowWidth*0.41, windowHeight - 55);
-			ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.41, windowHeight - 30);
-			//Right Region
-			ctx.fillText("(←↓→)  barlines", windowWidth*0.53, windowHeight - 80);
-			ctx.fillText("(Shift← →) undo/redo", windowWidth*0.53, windowHeight - 55);
-			ctx.fillText("(L) reduce note lag", windowWidth*0.53, windowHeight - 30);
-		}
+			ctx.fillText((hiSpeed/1000).toFixed(1) + " x Hispeed (Q- E+)", windowWidth*0.82, windowHeight - 30);
+			if (audioRate < 0.5 || audioRate > 4.0) {
+				ctx.fillStyle = "#F88";
+			}
+			ctx.fillText(audioRate.toFixed(1) + " x Rate (S- W+)", windowWidth*0.82, windowHeight - 55);
+
+			if (hOn) {
+				ctx.textAlign = "right";
+				ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
+				ctx.fillText("(F11) fullscreen", windowWidth*0.82, windowHeight - 80);
+			}
+
+			if (hOn) {
+				ctx.textAlign = "left";
+				ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
+				//Left Region
+				ctx.fillText("(B) invert scolling direction", windowWidth*0.25, windowHeight - 80);
+				ctx.fillText("(Z) lock/unlock bar", windowWidth*0.25, windowHeight - 55);
+				ctx.fillText("(X) lock/unlock X-axis", windowWidth*0.25, windowHeight - 30);
+				//Middle Region
+				ctx.fillText("(C- V+) ±division", windowWidth*0.41, windowHeight - 55);
+				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.41, windowHeight - 30);
+				//Right Region
+				ctx.fillText("(←↓→)  barlines", windowWidth*0.53, windowHeight - 80);
+				ctx.fillText("(Shift← →) undo/redo", windowWidth*0.53, windowHeight - 55);
+				ctx.fillText("(L) reduce note lag", windowWidth*0.53, windowHeight - 30);
+			}
 //		ctx.fillText(offset + " s offset (O- P+)", windowWidth, windowHeight - 25);
 //		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 50);
 //		ctx.fillText((hiSpeed/1000).toFixed(1) + " x Hispeed (Q- E+)", windowWidth, windowHeight - 100);
@@ -351,218 +352,218 @@ playView.prototype = {
 //			ctx.fillStyle = "#F88";
 //		}
 //		ctx.fillText(audioRate.toFixed(1) + " x Rate (S- W+)", windowWidth, windowHeight - 75);
-		ctx.textAlign = "left";
-		ctx.fillStyle = "#FFF";
-		ctx.globalAlpha = 1;
-		
-		/*
-				ctx.fillStyle =  "white";
-				ctx.shadowColor = "white";
-				ctx.shadowOffsetX = 0;
-				ctx.shadowOffsetY = 0;
-				ctx.shadowBlur = 3;
-		*/
-		//editLine
-		if (showD >= 1) {
-			ctx.globalAlpha = showD == 1 ? 0.5 : 1;
-			for (var qsection = Math.ceil(thisTime/spq); hiSpeed*(qsection*spq - thisTime) <= windowHeight - ud; ++qsection) {
-				var lineDis = hiSpeed*(qsection*spq - thisTime);
-				var lineColor1 = rgba(128, 128, 128, 0.0);
-				var lineColor2 = rgba(128, 128, 128, 1.0);
-				var lineWidth = 3;
-				var b = 2;
-				if (qsection == 0) {
-					b = 1024;
-				}
-				else while (qsection % b == 0) {
-					b = b*2;
-				}
-				if (qsection % 8 == 0) {
-					lineColor1 = rgba(255, 255, 255, 0.0);
-					lineColor2 = rgba(255, 255, 255, 1.0);
-					lineWidth = 12;
-				}
-				else if (qsection % 4 == 0) {
-					lineColor1 = rgba(192, 192, 192, 0.0);
-					lineColor2 = rgba(192, 192, 192, 1.0);
-					lineWidth = 9;
-				}
-				else if (qsection % 2 == 0) {
-					lineColor1 = rgba(128, 128, 128, 0.0);
-					lineColor2 = rgba(128, 128, 128, 1.0);
-					lineWidth = 3;
-				}
-				if ((!low)) {
-					drawJBox(ctx, lr, windowHeight - ud - lineDis - lineWidth, windowWidth - 2*lr, lineWidth, windowWidth/2, windowHeight - ud - lineDis - lineWidth, windowWidth/2, windowHeight - ud - lineDis, lineColor1, lineColor2);
-				}
-				else {
-					ctx.fillRect(lr, windowHeight - ud - lineDis - lineWidth/2, windowWidth - 2*lr, lineWidth);
-				}
-			}
+			ctx.textAlign = "left";
+			ctx.fillStyle = "#FFF";
 			ctx.globalAlpha = 1;
-			ctx.save();
-			ctx.strokeStyle = "black";
-			ctx.lineWidth = 2;
-			for(var h = Math.ceil(thisTime / spq); hiSpeed * (h * spq - thisTime) <= windowHeight - ud; ++h) {
-				var d = hiSpeed * (h * spq - thisTime);
-				var r = rgba(128, 128, 128, 1);
-				var n = 2;
-				if(h == 0) {
-					n = 1024
-				} else
-					while(h % n == 0) {
-						n = n * 2
+
+			/*
+                    ctx.fillStyle =  "white";
+                    ctx.shadowColor = "white";
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 0;
+                    ctx.shadowBlur = 3;
+            */
+			//editLine
+			if (showD >= 1) {
+				ctx.globalAlpha = showD == 1 ? 0.5 : 1;
+				for (var qsection = Math.ceil(thisTime/spq); hiSpeed*(qsection*spq - thisTime) <= windowHeight - ud; ++qsection) {
+					var lineDis = hiSpeed*(qsection*spq - thisTime);
+					var lineColor1 = rgba(128, 128, 128, 0.0);
+					var lineColor2 = rgba(128, 128, 128, 1.0);
+					var lineWidth = 3;
+					var b = 2;
+					if (qsection == 0) {
+						b = 1024;
 					}
-				if(h % 8 == 0) {
-					r = rgba(255, 255, 255, 1)
-				} else if(h % 4 == 0) {
-					r = rgba(192, 192, 192, 1)
-				} else if(h % 2 == 0) {
-					r = rgba(128, 128, 128, 1)
-				}
-				ctx.fillStyle = r;
-				if(hiSpeed * spq >= 50 / n) {
-					ctx.strokeText(h / 32, windowWidth - lr + 5, windowHeight - ud - d - 20);
-					ctx.fillText(h / 32, windowWidth - lr + 5, windowHeight - ud - d - 20)
-				}
-			}
-			ctx.restore();
-		}
-		ctx.textAlign = "center";
-		if (showL >= 1) {
-			ctx.globalAlpha = showL == 1 ? 0.5 : 1;
-			for (var qsection = Math.ceil(thisTime/spq); hiSpeed*(qsection*spq - thisTime) <= windowWidth/2 - lr; ++qsection) {
-				var lineDis = hiSpeed*(qsection*spq - thisTime);
-				var lineColor1 = rgba(128, 128, 128, 0.0);
-				var lineColor2 = rgba(128, 128, 128, 1.0);
-				var lineWidth = 5;
-				var b = 2;
-				if (qsection == 0) {
-					b = 1024;
-				}
-				else while (qsection % b == 0) {
-					b = b*2;
-				}
-				if (qsection % 8 == 0) {
-					lineColor1 = rgba(255, 255, 255, 0.0);
-					lineColor2 = rgba(255, 255, 255, 1.0);
-					lineWidth = 12;
-				}
-				else if (qsection % 4 == 0) {
-					lineColor1 = rgba(192, 192, 192, 0.0);
-					lineColor2 = rgba(192, 192, 192, 1.0);
-					lineWidth = 9;
-				}
-				else if (qsection % 2 == 0) {
-					lineColor1 = rgba(128, 128, 128, 0.0);
-					lineColor2 = rgba(128, 128, 128, 1.0);
-					lineWidth = 3;
-				}
-				if ((!low)) {
-					drawJBox(ctx, lr + lineDis, 0, lineWidth, windowHeight - ud, lr + lineDis, 0, lr + lineDis + lineWidth, 0,lineColor2, lineColor1);
-				}
-				else {
-					ctx.fillRect(lr + lineDis - lineWidth/2, 0, lineWidth, windowHeight - ud);
-				}
-			}
-			ctx.globalAlpha = 1;
-			ctx.save();
-			ctx.strokeStyle = "black";
-			ctx.lineWidth = 2;
-			for(var h = Math.ceil(thisTime / spq); hiSpeed * (h * spq - thisTime) <= windowWidth / 2 - lr; ++h) {
-				var d = hiSpeed * (h * spq - thisTime);
-				var r = rgba(128, 128, 128, 1);
-				var n = 2;
-				if(h == 0) {
-					n = 1024
-				} else
-					while(h % n == 0) {
-						n = n * 2
+					else while (qsection % b == 0) {
+						b = b*2;
 					}
-				if(h % 8 == 0) {
-					r = rgba(255, 255, 255, 1)
-				} else if(h % 4 == 0) {
-					r = rgba(192, 192, 192, 1)
-				} else if(h % 2 == 0) {
-					r = rgba(128, 128, 128, 1)
-				}
-				ctx.fillStyle = r;
-				if(hiSpeed * spq >= 200 / n) {
-					ctx.strokeText(h / 32, d + lr, windowHeight - ud);
-					ctx.fillText(h / 32, d + lr, windowHeight - ud)
-				}
-			}
-			ctx.restore();
-		}
-		if (showR >= 1) {
-			ctx.globalAlpha = showR == 1 ? 0.5 : 1;
-			for (var qsection = Math.ceil(thisTime/spq); hiSpeed*(qsection*spq - thisTime) <= windowWidth/2 - lr; ++qsection) {
-				var lineDis = hiSpeed*(qsection*spq - thisTime);
-				var lineColor1 = rgba(128, 128, 128, 0.0);
-				var lineColor2 = rgba(128, 128, 128, 1.0);
-				var lineWidth = 5;
-				var b = 2;
-				if (qsection == 0) {
-					b = 1024;
-				}
-				else while (qsection % b == 0) {
-					b = b*2;
-				}
-				if (qsection % 8 == 0) {
-					lineColor1 = rgba(255, 255, 255, 0.0);
-					lineColor2 = rgba(255, 255, 255, 1.0);
-					lineWidth = 12;
-				}
-				else if (qsection % 4 == 0) {
-					lineColor1 = rgba(192, 192, 192, 0.0);
-					lineColor2 = rgba(192, 192, 192, 1.0);
-					lineWidth = 9;
-				}
-				else if (qsection % 2 == 0) {
-					lineColor1 = rgba(128, 128, 128, 0.0);
-					lineColor2 = rgba(128, 128, 128, 1.0);
-					lineWidth = 3;
-				}
-				if ((!low)) {
-					drawJBox(ctx, windowWidth - lr - lineDis - lineWidth, 0, lineWidth, windowHeight - ud, windowWidth - lr - lineDis - lineWidth, 0, windowWidth - lr - lineDis, 0,lineColor1, lineColor2);
-				}	
-				else {
-					ctx.fillRect(windowWidth - lr - lineDis - lineWidth/2, 0, lineWidth, windowHeight - ud);
-				}
-			}
-			ctx.globalAlpha = 1;
-			ctx.save();
-			ctx.strokeStyle = "black";
-			ctx.lineWidth = 2;
-			for(var h = Math.ceil(thisTime / spq); hiSpeed * (h * spq - thisTime) <= windowWidth / 2 - lr; ++h) {
-				var d = hiSpeed * (h * spq - thisTime);
-				var r = rgba(128, 128, 128, 1);
-				var n = 2;
-				if(h == 0) {
-					n = 1024
-				} else
-					while(h % n == 0) {
-						n = n * 2
+					if (qsection % 8 == 0) {
+						lineColor1 = rgba(255, 255, 255, 0.0);
+						lineColor2 = rgba(255, 255, 255, 1.0);
+						lineWidth = 12;
 					}
-				if(h % 8 == 0) {
-					r = rgba(255, 255, 255, 1);
-					l = 20
-				} else if(h % 4 == 0) {
-					r = rgba(192, 192, 192, 1);
-					l = 20
-				} else if(h % 2 == 0) {
-					r = rgba(128, 128, 128, 1);
-					l = 10
+					else if (qsection % 4 == 0) {
+						lineColor1 = rgba(192, 192, 192, 0.0);
+						lineColor2 = rgba(192, 192, 192, 1.0);
+						lineWidth = 9;
+					}
+					else if (qsection % 2 == 0) {
+						lineColor1 = rgba(128, 128, 128, 0.0);
+						lineColor2 = rgba(128, 128, 128, 1.0);
+						lineWidth = 3;
+					}
+					if ((!low)) {
+						drawJBox(ctx, lr, windowHeight - ud - lineDis - lineWidth, windowWidth - 2*lr, lineWidth, windowWidth/2, windowHeight - ud - lineDis - lineWidth, windowWidth/2, windowHeight - ud - lineDis, lineColor1, lineColor2);
+					}
+					else {
+						ctx.fillRect(lr, windowHeight - ud - lineDis - lineWidth/2, windowWidth - 2*lr, lineWidth);
+					}
 				}
-				ctx.fillStyle = r;
-				if(hiSpeed * spq >= 200 / n) {
-					ctx.fillText(h / 32, windowWidth - lr - d, windowHeight - ud)
+				ctx.globalAlpha = 1;
+				ctx.save();
+				ctx.strokeStyle = "black";
+				ctx.lineWidth = 2;
+				for(var h = Math.ceil(thisTime / spq); hiSpeed * (h * spq - thisTime) <= windowHeight - ud; ++h) {
+					var d = hiSpeed * (h * spq - thisTime);
+					var r = rgba(128, 128, 128, 1);
+					var n = 2;
+					if(h == 0) {
+						n = 1024
+					} else
+						while(h % n == 0) {
+							n = n * 2
+						}
+					if(h % 8 == 0) {
+						r = rgba(255, 255, 255, 1)
+					} else if(h % 4 == 0) {
+						r = rgba(192, 192, 192, 1)
+					} else if(h % 2 == 0) {
+						r = rgba(128, 128, 128, 1)
+					}
+					ctx.fillStyle = r;
+					if(hiSpeed * spq >= 50 / n) {
+						ctx.strokeText(h / 32, windowWidth - lr + 5, windowHeight - ud - d - 20);
+						ctx.fillText(h / 32, windowWidth - lr + 5, windowHeight - ud - d - 20)
+					}
 				}
+				ctx.restore();
 			}
-			ctx.restore();
+			ctx.textAlign = "center";
+			if (showL >= 1) {
+				ctx.globalAlpha = showL == 1 ? 0.5 : 1;
+				for (var qsection = Math.ceil(thisTime/spq); hiSpeed*(qsection*spq - thisTime) <= windowWidth/2 - lr; ++qsection) {
+					var lineDis = hiSpeed*(qsection*spq - thisTime);
+					var lineColor1 = rgba(128, 128, 128, 0.0);
+					var lineColor2 = rgba(128, 128, 128, 1.0);
+					var lineWidth = 5;
+					var b = 2;
+					if (qsection == 0) {
+						b = 1024;
+					}
+					else while (qsection % b == 0) {
+						b = b*2;
+					}
+					if (qsection % 8 == 0) {
+						lineColor1 = rgba(255, 255, 255, 0.0);
+						lineColor2 = rgba(255, 255, 255, 1.0);
+						lineWidth = 12;
+					}
+					else if (qsection % 4 == 0) {
+						lineColor1 = rgba(192, 192, 192, 0.0);
+						lineColor2 = rgba(192, 192, 192, 1.0);
+						lineWidth = 9;
+					}
+					else if (qsection % 2 == 0) {
+						lineColor1 = rgba(128, 128, 128, 0.0);
+						lineColor2 = rgba(128, 128, 128, 1.0);
+						lineWidth = 3;
+					}
+					if ((!low)) {
+						drawJBox(ctx, lr + lineDis, 0, lineWidth, windowHeight - ud, lr + lineDis, 0, lr + lineDis + lineWidth, 0,lineColor2, lineColor1);
+					}
+					else {
+						ctx.fillRect(lr + lineDis - lineWidth/2, 0, lineWidth, windowHeight - ud);
+					}
+				}
+				ctx.globalAlpha = 1;
+				ctx.save();
+				ctx.strokeStyle = "black";
+				ctx.lineWidth = 2;
+				for(var h = Math.ceil(thisTime / spq); hiSpeed * (h * spq - thisTime) <= windowWidth / 2 - lr; ++h) {
+					var d = hiSpeed * (h * spq - thisTime);
+					var r = rgba(128, 128, 128, 1);
+					var n = 2;
+					if(h == 0) {
+						n = 1024
+					} else
+						while(h % n == 0) {
+							n = n * 2
+						}
+					if(h % 8 == 0) {
+						r = rgba(255, 255, 255, 1)
+					} else if(h % 4 == 0) {
+						r = rgba(192, 192, 192, 1)
+					} else if(h % 2 == 0) {
+						r = rgba(128, 128, 128, 1)
+					}
+					ctx.fillStyle = r;
+					if(hiSpeed * spq >= 200 / n) {
+						ctx.strokeText(h / 32, d + lr, windowHeight - ud);
+						ctx.fillText(h / 32, d + lr, windowHeight - ud)
+					}
+				}
+				ctx.restore();
+			}
+			if (showR >= 1) {
+				ctx.globalAlpha = showR == 1 ? 0.5 : 1;
+				for (var qsection = Math.ceil(thisTime/spq); hiSpeed*(qsection*spq - thisTime) <= windowWidth/2 - lr; ++qsection) {
+					var lineDis = hiSpeed*(qsection*spq - thisTime);
+					var lineColor1 = rgba(128, 128, 128, 0.0);
+					var lineColor2 = rgba(128, 128, 128, 1.0);
+					var lineWidth = 5;
+					var b = 2;
+					if (qsection == 0) {
+						b = 1024;
+					}
+					else while (qsection % b == 0) {
+						b = b*2;
+					}
+					if (qsection % 8 == 0) {
+						lineColor1 = rgba(255, 255, 255, 0.0);
+						lineColor2 = rgba(255, 255, 255, 1.0);
+						lineWidth = 12;
+					}
+					else if (qsection % 4 == 0) {
+						lineColor1 = rgba(192, 192, 192, 0.0);
+						lineColor2 = rgba(192, 192, 192, 1.0);
+						lineWidth = 9;
+					}
+					else if (qsection % 2 == 0) {
+						lineColor1 = rgba(128, 128, 128, 0.0);
+						lineColor2 = rgba(128, 128, 128, 1.0);
+						lineWidth = 3;
+					}
+					if ((!low)) {
+						drawJBox(ctx, windowWidth - lr - lineDis - lineWidth, 0, lineWidth, windowHeight - ud, windowWidth - lr - lineDis - lineWidth, 0, windowWidth - lr - lineDis, 0,lineColor1, lineColor2);
+					}
+					else {
+						ctx.fillRect(windowWidth - lr - lineDis - lineWidth/2, 0, lineWidth, windowHeight - ud);
+					}
+				}
+				ctx.globalAlpha = 1;
+				ctx.save();
+				ctx.strokeStyle = "black";
+				ctx.lineWidth = 2;
+				for(var h = Math.ceil(thisTime / spq); hiSpeed * (h * spq - thisTime) <= windowWidth / 2 - lr; ++h) {
+					var d = hiSpeed * (h * spq - thisTime);
+					var r = rgba(128, 128, 128, 1);
+					var n = 2;
+					if(h == 0) {
+						n = 1024
+					} else
+						while(h % n == 0) {
+							n = n * 2
+						}
+					if(h % 8 == 0) {
+						r = rgba(255, 255, 255, 1);
+						l = 20
+					} else if(h % 4 == 0) {
+						r = rgba(192, 192, 192, 1);
+						l = 20
+					} else if(h % 2 == 0) {
+						r = rgba(128, 128, 128, 1);
+						l = 10
+					}
+					ctx.fillStyle = r;
+					if(hiSpeed * spq >= 200 / n) {
+						ctx.fillText(h / 32, windowWidth - lr - d, windowHeight - ud)
+					}
+				}
+				ctx.restore();
+			}
 		}
-}
-		
+
 		//ctx.fillText(spq + " s/demisemiquaver", 0, 250);
 		/*
 		for (var i = 0; i < hitUrl.length; ++i) {
@@ -581,26 +582,26 @@ playView.prototype = {
 			drawNumber(ctx, 1, combo, 1, (hitThisFrame == 10 ? 3 : 4), 0.8*windowWidth, (0.5 - 0.001*hitThisFrame)*windowHeight);
 			drawNumber(ctx, 1, preScoreStr, 1, (hitThisFrame == 10 ? 3 : 4), 0.4*windowWidth, (0.5 - 0.001*hitThisFrame)*windowHeight);
 		}
-		
-		
+
+
 		//TLC Edits List for playView.js:
 		/**
-			Changed right click menu 4th side option 2 and 3 to be Grey color.
-			Changed position of display and activation of Volume Slider.
-			
-			Changed auto Mixer response time to behave more like in Dynamix.
-				Starts moving when chain notes are a distance away from the mixer at the start
-				of a trail of chain notes. Moves fast when there are a lot of chain notes coming
-				at once just like previously. 
-			Changed main side center line + side lines to be thinner to be more consistent with Dynamix.
+		 Changed right click menu 4th side option 2 and 3 to be Grey color.
+		 Changed position of display and activation of Volume Slider.
 
-		*/
+		 Changed auto Mixer response time to behave more like in Dynamix.
+		 Starts moving when chain notes are a distance away from the mixer at the start
+		 of a trail of chain notes. Moves fast when there are a lot of chain notes coming
+		 at once just like previously.
+		 Changed main side center line + side lines to be thinner to be more consistent with Dynamix.
+
+		 */
 		var leftTargetDetected = false;
 		var rightTargetDetected = false;
 
 		//note
 		lowList = [];
-		
+
 		noteShow = [];
 		noteHoldShow = [];
 		var magPos = (mainMouse.condition == "writeHold" && mainMouse.condition == 2) ? coverPos2 : coverPos1;
@@ -634,12 +635,12 @@ playView.prototype = {
 						hitAnime(0, 1, width, x, Math.floor(10.0/audioRate));
 					}
 					break;
-					
+
 				case "HOLD":
 					var subTime = GetBar(noteDown[noteDown[i].m_subId].m_time);
 					var dis2 = hiSpeed*(subTime - thisTime);
 					var extra = 0;
-					if (! noteDownHit[i] && ((autoMode && touchTime < thisTime) || Math.abs(touchTime - thisTime) <= currentPerfectJudge)) {							
+					if (! noteDownHit[i] && ((autoMode && touchTime < thisTime) || Math.abs(touchTime - thisTime) <= currentPerfectJudge)) {
 						noteDownHit[i] = true;
 						hitAnime(0, 2, width, x, Math.floor((subTime - thisTime)*60/audioRate));
 					}
@@ -658,7 +659,7 @@ playView.prototype = {
 //					drawLongNote(ctx, 0, width, dis2 - dis, x, dis, extra);
 //					drawLongBoxNote(ctx, 0, width, dis2 - dis, x, dis, extra);
 					break;
-					
+
 				case "SUB":
 					if ((autoMode && touchTime < thisTime && ! noteDownHit[i]) || Math.abs(touchTime - thisTime) <= currentPerfectJudge && ! noteDownHit[i]) {
 						noteDownHit[i] = true;
@@ -702,12 +703,12 @@ playView.prototype = {
 						hitAnime(1, 1, width, x, Math.floor(10.0/audioRate));
 					}
 					break;
-					
+
 				case "HOLD":
 					var subTime = GetBar(noteLeft[noteLeft[i].m_subId].m_time);
 					var dis2 = hiSpeed*(subTime - thisTime);
 					var extra = 0;
-					if (! noteLeftHit[i] && ((autoMode && touchTime < thisTime) || Math.abs(touchTime - thisTime) <= currentPerfectJudge)) {						
+					if (! noteLeftHit[i] && ((autoMode && touchTime < thisTime) || Math.abs(touchTime - thisTime) <= currentPerfectJudge)) {
 						noteLeftHit[i] = true;
 						hitAnime(1, 2, width, x, Math.floor((subTime - thisTime)*60/audioRate));
 					}
@@ -746,7 +747,7 @@ playView.prototype = {
 //						}
 //					}
 //					break;
-					
+
 				case "SUB":
 					if (! noteLeftHit[i] && ((autoMode && touchTime < thisTime) || Math.abs(touchTime - thisTime) <= currentPerfectJudge)) {
 						noteLeftHit[i] = true;
@@ -755,7 +756,7 @@ playView.prototype = {
 					break;
 			}
 		}
-		
+
 		for (var i = 0; i < noteRight.length; ++i) {
 			if (! noteRight[i]) continue;
 			var thisNote = noteRight[i];
@@ -790,12 +791,12 @@ playView.prototype = {
 						hitAnime(2, 1, width, x, Math.floor(10.0/audioRate));
 					}
 					break;
-					
+
 				case "HOLD":
 					var subTime = GetBar(noteRight[noteRight[i].m_subId].m_time);
 					var dis2 = hiSpeed*(subTime - thisTime);
 					var extra = 0;
-					if (! noteRightHit[i] && ((autoMode && touchTime < thisTime) || Math.abs(touchTime - thisTime) <= currentPerfectJudge)) {						
+					if (! noteRightHit[i] && ((autoMode && touchTime < thisTime) || Math.abs(touchTime - thisTime) <= currentPerfectJudge)) {
 						noteRightHit[i] = true;
 						hitAnime(2, 2, width, x, Math.floor((subTime - thisTime)*60/audioRate));
 					}
@@ -834,7 +835,7 @@ playView.prototype = {
 //						}
 //					}
 //					break;
-					
+
 				case "SUB":
 					if (! noteRightHit[i] && ((autoMode && touchTime < thisTime) || Math.abs(touchTime - thisTime) <= currentPerfectJudge)) {
 						noteRightHit[i] = true;
@@ -856,7 +857,7 @@ playView.prototype = {
 		for (var v of noteHoldShow) {
 			drawLongBoxNote(ctx, v[0], v[1], v[2], v[3], v[4], v[5]);
 			if (showCS) continue;
-			if (v[7] === movingId || (v[4] > 0 && v[6] > 0)) { 
+			if (v[7] === movingId || (v[4] > 0 && v[6] > 0)) {
 				switch (v[6]) {
 					case 1:
 						ctx.fillStyle = "rgba(64, 64, 255, 1)";
@@ -889,7 +890,7 @@ playView.prototype = {
 				}
 			}
 		}
-		
+
 		for (var v of noteShow) {
 			if (v[0] == 0) {
 				drawSingleNote(ctx, v[1], v[2], v[3], v[4]);
@@ -909,7 +910,7 @@ playView.prototype = {
 					case 3:
 						ctx.fillStyle = "rgba(255, 64, 255, 1)";
 						break;
-					
+
 				}
 				if (mainMouse.movement == "choose" && v[6] === movingId) {
 					if (editSide == movingSide) {
@@ -940,8 +941,8 @@ playView.prototype = {
 				drawBpmchange(ctx,dis,v.m_value);
 			}
 		}
-		
-		
+
+
 		//bone
 		//function drawJBox(c, x, y, w, h, x1, y1, x2, y2, r1, g1, b1, a1, r2, g2, b2, a2)
 		// ctx.globalAlpha = jb((1 - Math.abs(Math.round(SetBar(thisTime)/2) - GetBar(thisTime)/2)*2) * 0.2 + 0.8, 0, 1);
@@ -949,46 +950,46 @@ playView.prototype = {
 		ctx.globalAlpha = 1;
 		drawJBox(ctx, 0, windowHeight - ud - 16, windowWidth, 16, windowWidth/2, windowHeight - ud - 16, windowWidth/2, windowHeight - ud, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.5));
 		drawJBox(ctx, 0, windowHeight - ud, windowWidth, 20, windowWidth/2, windowHeight - ud, windowWidth/2, windowHeight - ud + 20, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
-		
+
 		drawJBox(ctx, lr, 0, 16, windowHeight - ud, lr, (windowHeight - ud)/2, lr + 16, (windowHeight - ud)/2, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
 		drawJBox(ctx, lr - 16, 0, 16, windowHeight - ud, lr - 16, (windowHeight - ud)/2, lr, (windowHeight - ud)/2, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.5));
-		
+
 		drawJBox(ctx, windowWidth - lr - 16, 0, 16, windowHeight - ud, windowWidth - lr - 16, (windowHeight - ud)/2, windowWidth - lr, (windowHeight - ud)/2, rgba(0, 255, 255, 0.0), rgba(0, 255, 255, 0.5));
 		drawJBox(ctx, windowWidth - lr, 0, 16, windowHeight - ud, windowWidth - lr , (windowHeight - ud)/2, windowWidth - lr + 16, (windowHeight - ud)/2, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
-		
+
 		//targetLine
 		ctx.fillStyle = "#FFF";
 		drawRect(ctx, "#FFF", 0, windowHeight - ud - 3, windowWidth, 7);
 		drawRect(ctx, "#FFF", lr - 2, 0, 5, windowHeight - ud - 3);
 		drawRect(ctx, "#FFF", windowWidth - lr - 2, 0, 5, windowHeight - ud - 3);
-		
-		
+
+
 		{
-		var t = mixerLT;
-		if (t > 0) {
-			ctx.globalAlpha = jb(t/24, 0, 1);
-			ctx.drawImage(mixerShadowCanvasL, 0, 0, 437, 381, lr - 95, barL - 190, 437, 381);
-			ctx.globalAlpha = 1;
-		}
-		var t = mixerRT;
-		if (t > 0) {
-			ctx.globalAlpha = jb(t/24, 0, 1);
-			ctx.drawImage(mixerShadowCanvasR, 0, 0, 437, 381, windowWidth - lr - 342, barR - 190, 437, 381);
-			ctx.globalAlpha = 1;
-			t = 0;
-		}
-		if (mixerLT > 0) mixerLT--;
-		if (mixerRT > 0) mixerRT--;
-		
-		for (var i = 0; i < hitAnimeList.length; ++i) {
-			var thisAnime = hitAnimeList[i];
-			var width = thisAnime[2];
-			var x = thisAnime[3];
-			var maxFrames = thisAnime[4];
-			var type = thisAnime[5];
-			var per = 1 - (1 - thisAnime[0]/maxFrames)*(1 - thisAnime[0]/maxFrames);
+			var t = mixerLT;
+			if (t > 0) {
+				ctx.globalAlpha = jb(t/24, 0, 1);
+				ctx.drawImage(mixerShadowCanvasL, 0, 0, 437, 381, lr - 95, barL - 190, 437, 381);
+				ctx.globalAlpha = 1;
+			}
+			var t = mixerRT;
+			if (t > 0) {
+				ctx.globalAlpha = jb(t/24, 0, 1);
+				ctx.drawImage(mixerShadowCanvasR, 0, 0, 437, 381, windowWidth - lr - 342, barR - 190, 437, 381);
+				ctx.globalAlpha = 1;
+				t = 0;
+			}
+			if (mixerLT > 0) mixerLT--;
+			if (mixerRT > 0) mixerRT--;
+
+			for (var i = 0; i < hitAnimeList.length; ++i) {
+				var thisAnime = hitAnimeList[i];
+				var width = thisAnime[2];
+				var x = thisAnime[3];
+				var maxFrames = thisAnime[4];
+				var type = thisAnime[5];
+				var per = 1 - (1 - thisAnime[0]/maxFrames)*(1 - thisAnime[0]/maxFrames);
 //			switch (type) {
-//			case 0:			 
+//			case 0:
 ////				ctx.fillStyle = rgba(0, Math.floor(thisAnime[0]/maxFrames*255), Math.floor(thisAnime[0]/maxFrames*255), (0.3 + 0.7*thisAnime[0]/maxFrames));
 //				break;
 //			case 1:
@@ -998,167 +999,167 @@ playView.prototype = {
 ////				ctx.fillStyle = rgba(Math.floor(thisAnime[0]/maxFrames*255)s, Math.floor(thisAnime[0]/maxFrames*255), 0, (0.3 + 0.7*thisAnime[0]/maxFrames));
 //				break;
 //			}
-			
-			ctx.globalAlpha = 1 - (1 - thisAnime[0]/maxFrames)*(1 - thisAnime[0]/maxFrames);
-			var swid = (width)*Math.min(1, 0.70 + 0.30*per)*(545/305)+5;
-			if (low) {
-				switch (thisAnime[1]) {
-				case 0:
-					ctx.fillRect(x - width/2, windowHeight - ud - (0), width, 0 + 1.1*ud*thisAnime[0]/maxFrames);
-					break;
-				case 1:
-					ctx.fillRect(lr + (- 1.1*lr*thisAnime[0]/maxFrames), x - width/2, 1.1*lr*thisAnime[0]/maxFrames, width);
-					break;
-				case 2:
-					ctx.fillRect(windowWidth - lr - (0), x - width/2, 0 + 1.1*lr*thisAnime[0]/maxFrames, width);
-					break;
-				}
-				
-			}
-			else {
-				switch (thisAnime[1]) {
-				case 0:
-					ctx.drawImage(perfectShadowCanvasD, 0, 0, 545, 905, x - swid/2, windowHeight - ud - (1202 - 398), swid, 905);
-					break;
-				case 1:
-					ctx.drawImage(perfectShadowCanvasL, 0, 0, 905, 545, lr - 101, x - swid/2, 905, swid);
-					break;
-				case 2:
-					ctx.drawImage(perfectShadowCanvasR, 0, 0, 905, 545, windowWidth - (1202 - 398) - lr, x - swid/2, 905, swid);
-					break;
-				}
-			}
-			ctx.globalAlpha = 1;
-			thisAnime[0]--;
-			if (thisAnime[0] == 0) {
-				hitAnimeList[i] = false;
-			}
-		}
-		
-		if (! low) {
-			shadowAnimeList.sort(function(x, y) {
-				return x[8] - y[8];
-			})
-			for (var i = 0; i < shadowAnimeList.length; ++i) {
-				var thisAnime = shadowAnimeList[i];
-				var frames = thisAnime[0];
-				var maxFrames = thisAnime[1];
-				if (i < 800 && frames <= maxFrames) {
-					var shadowRate = jb((1 - frames/maxFrames), 0, 1);
-					var x1 = thisAnime[2];
-					var y1 = thisAnime[3];
-					var d1 = thisAnime[4];
-					var x2 = thisAnime[5];
-					var y2 = thisAnime[6];
-					var d2 = thisAnime[7];
-					var type = thisAnime[8];
-					if (!between(x1 + (x2 - x1)*shadowRate, 0, windowWidth) || !between(y1 + (y2 - y1)*shadowRate, 0, windowHeight)) {					
-						shadowAnimeList[i] = false;
-						continue;
-					}
-					
-					ctx.save();
-		//			var whiteAlpha = shadowRate < 1 ? 1 - Math.sqrt(Math.max(1 - (1*shadowRate - 1)*(1*shadowRate - 1), 0)) : 0;
-		//			var colorAlpha = Math.max(1 - shadowRate - whiteAlpha, 0);
-					ctx.translate(x1 + (x2 - x1)*shadowRate, y1 + (y2 - y1)*shadowRate);
-					ctx.rotate((d1 + d2*shadowRate) * Math.PI/180);
-					ctx.scale(1 - Math.pow(shadowRate, 3), 1 - Math.pow(shadowRate, 3));
-					switch (type) {
-						case 0: // purple
-							ctx.globalAlpha = 0.7 - 0.7*Math.pow(shadowRate, 2);
-							ctx.drawImage(purpleParticleCanvas, -58, -73);
-		//					ctx.globalAlpha = whiteAlpha;
-		//					ctx.drawImage(whiteParticleCanvas, -64, -73);
+
+				ctx.globalAlpha = 1 - (1 - thisAnime[0]/maxFrames)*(1 - thisAnime[0]/maxFrames);
+				var swid = (width)*Math.min(1, 0.70 + 0.30*per)*(545/305)+5;
+				if (low) {
+					switch (thisAnime[1]) {
+						case 0:
+							ctx.fillRect(x - width/2, windowHeight - ud - (0), width, 0 + 1.1*ud*thisAnime[0]/maxFrames);
 							break;
-						case 1: // yellow
-							ctx.globalAlpha = 0.9 - 0.9*Math.pow(shadowRate, 3);
-							ctx.drawImage(yellowParticleCanvas, -58, -73);
-		//					ctx.globalAlpha = 1 - shadowRate;
-		//					ctx.drawImage(whiteParticleCanvas, -64, -73);
+						case 1:
+							ctx.fillRect(lr + (- 1.1*lr*thisAnime[0]/maxFrames), x - width/2, 1.1*lr*thisAnime[0]/maxFrames, width);
 							break;
-						case 2: // white
-							ctx.globalAlpha = 0.95 - 0.95*Math.pow(shadowRate, 2);
-							ctx.drawImage(whiteParticleCanvas, -58, -73);
-						default:
+						case 2:
+							ctx.fillRect(windowWidth - lr - (0), x - width/2, 0 + 1.1*lr*thisAnime[0]/maxFrames, width);
 							break;
 					}
-					ctx.globalAlpha = 1;
-					ctx.restore();
-			
-		//			switch (type) {
-		//			case 0:			 
-		////				ctx.fillStyle = rgba(0, Math.floor(thisAnime[0]/maxFrames*255), Math.floor(thisAnime[0]/maxFrames*255), (0.3 + 0.7*thisAnime[0]/maxFrames));
-		//				break;
-		//			case 1:
-		////				ctx.fillStyle = rgba(Math.floor(thisAnime[0]/maxFrames*255), 0, 0, (0.3 + 0.7*thisAnime[0]/maxFrames));
-		//				break;
-		//			case 2:
-		////				ctx.fillStyle = rgba(Math.floor(thisAnime[0]/maxFrames*255), Math.floor(thisAnime[0]/maxFrames*255), 0, (0.3 + 0.7*thisAnime[0]/maxFrames));
-		//				break;
-		//			}
+
 				}
+				else {
+					switch (thisAnime[1]) {
+						case 0:
+							ctx.drawImage(perfectShadowCanvasD, 0, 0, 545, 905, x - swid/2, windowHeight - ud - (1202 - 398), swid, 905);
+							break;
+						case 1:
+							ctx.drawImage(perfectShadowCanvasL, 0, 0, 905, 545, lr - 101, x - swid/2, 905, swid);
+							break;
+						case 2:
+							ctx.drawImage(perfectShadowCanvasR, 0, 0, 905, 545, windowWidth - (1202 - 398) - lr, x - swid/2, 905, swid);
+							break;
+					}
+				}
+				ctx.globalAlpha = 1;
 				thisAnime[0]--;
 				if (thisAnime[0] == 0) {
-					shadowAnimeList[i] = false;
+					hitAnimeList[i] = false;
 				}
 			}
-			
-			var newShadowAnimeList = [];
+
+			if (! low) {
+				shadowAnimeList.sort(function(x, y) {
+					return x[8] - y[8];
+				})
+				for (var i = 0; i < shadowAnimeList.length; ++i) {
+					var thisAnime = shadowAnimeList[i];
+					var frames = thisAnime[0];
+					var maxFrames = thisAnime[1];
+					if (i < 800 && frames <= maxFrames) {
+						var shadowRate = jb((1 - frames/maxFrames), 0, 1);
+						var x1 = thisAnime[2];
+						var y1 = thisAnime[3];
+						var d1 = thisAnime[4];
+						var x2 = thisAnime[5];
+						var y2 = thisAnime[6];
+						var d2 = thisAnime[7];
+						var type = thisAnime[8];
+						if (!between(x1 + (x2 - x1)*shadowRate, 0, windowWidth) || !between(y1 + (y2 - y1)*shadowRate, 0, windowHeight)) {
+							shadowAnimeList[i] = false;
+							continue;
+						}
+
+						ctx.save();
+						//			var whiteAlpha = shadowRate < 1 ? 1 - Math.sqrt(Math.max(1 - (1*shadowRate - 1)*(1*shadowRate - 1), 0)) : 0;
+						//			var colorAlpha = Math.max(1 - shadowRate - whiteAlpha, 0);
+						ctx.translate(x1 + (x2 - x1)*shadowRate, y1 + (y2 - y1)*shadowRate);
+						ctx.rotate((d1 + d2*shadowRate) * Math.PI/180);
+						ctx.scale(1 - Math.pow(shadowRate, 3), 1 - Math.pow(shadowRate, 3));
+						switch (type) {
+							case 0: // purple
+								ctx.globalAlpha = 0.7 - 0.7*Math.pow(shadowRate, 2);
+								ctx.drawImage(purpleParticleCanvas, -58, -73);
+								//					ctx.globalAlpha = whiteAlpha;
+								//					ctx.drawImage(whiteParticleCanvas, -64, -73);
+								break;
+							case 1: // yellow
+								ctx.globalAlpha = 0.9 - 0.9*Math.pow(shadowRate, 3);
+								ctx.drawImage(yellowParticleCanvas, -58, -73);
+								//					ctx.globalAlpha = 1 - shadowRate;
+								//					ctx.drawImage(whiteParticleCanvas, -64, -73);
+								break;
+							case 2: // white
+								ctx.globalAlpha = 0.95 - 0.95*Math.pow(shadowRate, 2);
+								ctx.drawImage(whiteParticleCanvas, -58, -73);
+							default:
+								break;
+						}
+						ctx.globalAlpha = 1;
+						ctx.restore();
+
+						//			switch (type) {
+						//			case 0:
+						////				ctx.fillStyle = rgba(0, Math.floor(thisAnime[0]/maxFrames*255), Math.floor(thisAnime[0]/maxFrames*255), (0.3 + 0.7*thisAnime[0]/maxFrames));
+						//				break;
+						//			case 1:
+						////				ctx.fillStyle = rgba(Math.floor(thisAnime[0]/maxFrames*255), 0, 0, (0.3 + 0.7*thisAnime[0]/maxFrames));
+						//				break;
+						//			case 2:
+						////				ctx.fillStyle = rgba(Math.floor(thisAnime[0]/maxFrames*255), Math.floor(thisAnime[0]/maxFrames*255), 0, (0.3 + 0.7*thisAnime[0]/maxFrames));
+						//				break;
+						//			}
+					}
+					thisAnime[0]--;
+					if (thisAnime[0] == 0) {
+						shadowAnimeList[i] = false;
+					}
+				}
+
+				var newShadowAnimeList = [];
+				var j = 0;
+				for (i = 0; i < shadowAnimeList.length; ++i) {
+					if (shadowAnimeList[i]) {
+						newShadowAnimeList[j] = $.extend(true, [], shadowAnimeList[i]);
+						++j;
+					}
+				}
+				shadowAnimeList = $.extend(true, [], newShadowAnimeList);
+			}
+
+			//bar
+			barL = Math.round((barL + barTargetL)/2);
+			if (barL < 198) {
+				barL = 198;
+			}
+			if (barL > 908) {
+				barL = 908;
+			}
+			barR = Math.round((barR + barTargetR)/2);
+			if (barR < 198) {
+				barR = 198;
+			}
+			if (barR > 908) {
+				barR = 908;
+			}
+			if (CMap.m_leftRegion == "MIXER") { //198~808
+				ctx.drawImage(barCanvas, 0, 0, 79, 234, lr - 40, barL - 117, 79, 234);
+			}
+			if (CMap.m_rightRegion == "MIXER") {
+				ctx.drawImage(barCanvas, 0, 0, 79, 234, windowWidth - lr - 40, barR - 117, 79, 234);
+			}
+
+			//animation
+			var newHitAnimeList = [];
 			var j = 0;
-			for (i = 0; i < shadowAnimeList.length; ++i) {
-				if (shadowAnimeList[i]) {
-					newShadowAnimeList[j] = $.extend(true, [], shadowAnimeList[i]);
+			for (i = 0; i < hitAnimeList.length; ++i) {
+				if (hitAnimeList[i]) {
+					newHitAnimeList[j] = $.extend(true, [], hitAnimeList[i]);
 					++j;
 				}
 			}
-			shadowAnimeList = $.extend(true, [], newShadowAnimeList);
+			hitAnimeList = $.extend(true, [], newHitAnimeList);
+
+			//shadowAnime 0frame 1maxframe 234567 x1y1d1x2y2d2 type
+
+
 		}
 
-		//bar
-		barL = Math.round((barL + barTargetL)/2);
-		if (barL < 198) {
-			barL = 198;
-		}
-		if (barL > 908) {
-			barL = 908;
-		}
-		barR = Math.round((barR + barTargetR)/2);
-		if (barR < 198) {
-			barR = 198;
-		}
-		if (barR > 908) {
-			barR = 908;
-		}
-		if (CMap.m_leftRegion == "MIXER") { //198~808
-			ctx.drawImage(barCanvas, 0, 0, 79, 234, lr - 40, barL - 117, 79, 234);
-		}
-		if (CMap.m_rightRegion == "MIXER") {
-			ctx.drawImage(barCanvas, 0, 0, 79, 234, windowWidth - lr - 40, barR - 117, 79, 234);
-		}
-		
-		//animation
-		var newHitAnimeList = [];
-		var j = 0;
-		for (i = 0; i < hitAnimeList.length; ++i) {
-			if (hitAnimeList[i]) {
-				newHitAnimeList[j] = $.extend(true, [], hitAnimeList[i]);
-				++j;
-			}
-		}
-		hitAnimeList = $.extend(true, [], newHitAnimeList);
-		
-		//shadowAnime 0frame 1maxframe 234567 x1y1d1x2y2d2 type
-		
-		
-		}
-		
 		//pre anime
 		drawJBox(ctx, 0, 0, (thisTime - offset*spu)/doration*windowWidth, 30, windowWidth/2, 0, windowWidth/2, 30, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.0));
 		ctx.fillStyle = "#000";
 		ctx.fillRect(0, 0, windowWidth, 7);
 		ctx.fillStyle = "#FFF";
 		ctx.fillRect(0, 0, (thisTime - offset*spu)/doration*windowWidth, 7);
-		
+
 		if (hitThisFrame > 0) {
 			hitThisFrame--;
 		}
@@ -1193,7 +1194,7 @@ playView.prototype = {
 						ctx.fillStyle = rgba(255, 255, 255, 0.3);
 						ctx.fillRect(x1 + 3, y1 + 3, x2 - x1 - 6, y2 - y1 - 6);
 						break;
-					
+
 					case 1:
 						var x1 = Math.min(lr + (hiSpeed*(GetBar(coverTime1) - thisTime)), lr + (hiSpeed*(GetBar(coverTime2) - thisTime)));
 						var x2 = Math.max(lr + (hiSpeed*(GetBar(coverTime1) - thisTime)), lr + (hiSpeed*(GetBar(coverTime2) - thisTime)));
@@ -1213,7 +1214,7 @@ playView.prototype = {
 						ctx.fillStyle = rgba(255, 255, 255, 0.3);
 						ctx.fillRect(x1 + 3, y1 + 3, x2 - x1 - 6, y2 - y1 - 6);
 						break;
-						
+
 					case 2:
 						var x1 = Math.min(windowWidth - lr - (hiSpeed*(GetBar(coverTime1) - thisTime)), windowWidth - lr - (hiSpeed*(GetBar(coverTime2) - thisTime)));
 						var x2 = Math.max(windowWidth - lr - (hiSpeed*(GetBar(coverTime1) - thisTime)), windowWidth - lr - (hiSpeed*(GetBar(coverTime2) - thisTime)));
@@ -1233,7 +1234,7 @@ playView.prototype = {
 						ctx.fillStyle = rgba(255, 255, 255, 0.3);
 						ctx.fillRect(x1 + 3, y1 + 3, x2 - x1 - 6, y2 - y1 - 6);
 						break;
-						
+
 					default:
 						break;
 				}
@@ -1253,17 +1254,17 @@ playView.prototype = {
 						var lineColor1 = rgba(0, 255, 255, 0.0);
 						var lineColor2 = rgba(0, 255, 255, 1.0);
 						break;
-						
+
 					case "CHAIN":
 						var lineColor1 = rgba(255, 0, 0, 0.0);
 						var lineColor2 = rgba(255, 0, 0, 1.0);
 						break;
-						
+
 					case "HOLD":
 						var lineColor1 = rgba(255, 255, 0, 0.0);
 						var lineColor2 = rgba(255, 255, 0, 1.0);
 						break;
-	
+
 					case "SUB":
 						var lineColor1 = rgba(255, 128, 0, 0.0);
 						var lineColor2 = rgba(255, 128, 0, 1.0);
@@ -1330,7 +1331,7 @@ playView.prototype = {
 							ctx.restore();
 						}
 						break;
-						
+
 					case 2:
 						if (dis >= 0 && dis <= windowWidth/2 - lr) {
 							drawJBox(ctx, 0, windowHeight - ud - lineDis - lineWidth, windowWidth, lineWidth, 0, windowHeight - ud - lineDis - lineWidth, 0, windowHeight - ud - lineDis, "rgba(255, 0, 255, 0.0)", "rgba(255, 0, 255, 1.0)");
@@ -1360,15 +1361,15 @@ playView.prototype = {
 							ctx.restore();
 						}
 						break;
-						
+
 					default:
 						break;
 				}
-				
+
 			}
 		}
 
-				
+
 		//noteTemp
 		for (var i = 0; i < Math.min(1, noteTemp.length); ++i) {
 			var thisNote = noteTemp[i];
@@ -1402,7 +1403,7 @@ playView.prototype = {
 //						}
 					}
 					break;
-					
+
 				case "HOLD":
 					var subTime = GetBar(coverTime2); //special
 					var dis2 = hiSpeed*(subTime - thisTime);
@@ -1422,7 +1423,7 @@ playView.prototype = {
 					drawLongBoxNote(ctx, editSide, width, dis2 - dis, x, dis, extra);
 					ctx.globalAlpha = 1;
 					break;
-					
+
 				case "SUB":
 					if (dis >= 0 && dis <= disLimit2) {
 						var x = windowWidth/2 + (-2.5 + Number(thisNote.m_position))*300;
@@ -1435,19 +1436,19 @@ playView.prototype = {
 					break;
 			}
 		}
-		
-		
+
+
 		//bottomButtons
 		//for (var i = 0;)
-		
+
 		//rightClick
 		//TLC - Shifted music volume slider to display and function in the correct row. Also changed 4th menu to have 2nd and 3rd row greyed out
 		if (mainMouse.menu) {
 			switch (mainMouse.menu) {
 				case "basic" :
-					drawBox(ctx, rx, ry, 400, 610, 0.8, 8);
+					drawBox(ctx, rx, ry, 400, 650, 0.8, 8);
 					var preSide = editSide;
-					
+
 					basicMenu[1][3] = ((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER")) ? rgba(128, 128, 128, 0.8) : rgba(0, 255, 255, 0.8);
 					basicMenu[2][3] = ((editSide == 1 && CMap.m_leftRegion == "PAD") || (editSide == 2 && CMap.m_rightRegion == "PAD")) || (editSide == 3) ? rgba(128, 128, 128, 0.8) : rgba(255, 128, 128, 0.8);
 					basicMenu[3][3] = ((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER")) || (editSide == 3) ? rgba(128, 128, 128, 0.8) : rgba(255, 255, 0, 0.8);
@@ -1463,8 +1464,10 @@ playView.prototype = {
 						basicMenu[2][0]="[2]  CHAIN note";
 						basicMenu[3][0]="[3]  Hold note";
 					}
-					
+
 					if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 566, ry + 604) && musicCtrl) {
+						hitSoundGainNode.gain.value = Math.round((mainMouse.coordinate.x - rx)/400*100)/100;
+					} else if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 606, ry + 644) && musicCtrl) {
 						musicCtrl.volume = Math.round((mainMouse.coordinate.x - rx)/400*100)/100;
 					}
 					else if (between(mainMouse.coordinate.y, ry + 0, ry + 38)) {
@@ -1485,9 +1488,15 @@ playView.prototype = {
 					if (editSide != preSide) {
 						changeSide();
 					}
+
+					if (showHitSound) {
+						ctx.fillStyle = rgba(Math.round(jb((255 - hitSoundGainNode.gain.value * 255)), 0, 255), Math.round(jb(hitSoundGainNode.gain.value * 255, 0, 255)), Math.round(jb(hitSoundGainNode.gain.value * 255, 0, 255)), 0.8);
+						ctx.fillRect(rx, ry + 566, hitSoundGainNode.gain.value * 400, 38);
+					}
+
 					ctx.fillStyle = rgba(Math.round(jb((255 - musicCtrl.volume*255)), 0, 255), Math.round(jb(musicCtrl.volume*255, 0, 255)), Math.round(jb(musicCtrl.volume*255, 0, 255)), 0.8);
-					ctx.fillRect(rx, ry + 566, musicCtrl.volume*400, 38);
-					
+					ctx.fillRect(rx, ry + 606, musicCtrl.volume*400, 38);
+
 					ctx.fillStyle = rgba(128, 128, 128, 0.8);
 					switch (editSide){
 						case 0:
@@ -1509,12 +1518,13 @@ playView.prototype = {
 						default:
 							break;
 					}
-					
+
 					basicMenu[6][0] = "     Mark at " + (thisTime / spq / 32).toFixed(3);
 					basicMenu[7][0] = "[M]  Start from " + Number(markSecion).toFixed(3);
-					basicMenu[12][0] = "     Hit sound " + (showHitSound ? "ON" : "OFF");
+					basicMenu[12][0] = "     -----------------";
 					basicMenu[13][0] = "     Particles " + (showParticles ? "ON" : "OFF");
-					basicMenu[14][0] = "     Music volume " + Math.round(musicCtrl.volume * 100) + "%";
+					basicMenu[14][0] = "     Hitsound " + (showHitSound ? "Vol " + Math.round(hitSoundGainNode.gain.value * 100) + "%" : "OFF");
+					basicMenu[15][0] = "     Music Volume " + Math.round(musicCtrl.volume * 100) + "%";
 					if (musicCtrl) {
 						if (musicCtrl.paused) {
 							basicMenu[5][0] = "[_]  Play";
@@ -1531,19 +1541,19 @@ playView.prototype = {
 					}
 					var thisMenu = basicMenu;
 					break;
-					
+
 				case "delete" :
 					drawBox(ctx, rx, ry, 400, 50, 0.8, 8);
 					var thisMenu = deleteMenu;
 					break;
-					//if with Copy & Paste, drawBox(ctx, rx, ry, 400, 130, 0.8, 8);
-					
+				//if with Copy & Paste, drawBox(ctx, rx, ry, 400, 130, 0.8, 8);
+
 			}
 			ctx.textAlign = "left";
 			ctx.textBaseline = "alphabetic";
 			ctx.font = "bold 28px Dynamix";
-			for (var i = 0; i < thisMenu.length; ++i) {
-				if (!(i == 0 && thisMenu.length != 1) && i != 14 && between(mainMouse.coordinate.y, ry + thisMenu[i][1], ry + thisMenu[i][1] + thisMenu[i][2]) && between(mainMouse.coordinate.x, rx, rx + 440)) {
+			for (var i = 0; i < thisMenu.length; ++i) { // Menu Color
+				if (!(i == 0 && thisMenu.length != 1) && (!showHitSound || i != 14) && i != 15 && between(mainMouse.coordinate.y, ry + thisMenu[i][1], ry + thisMenu[i][1] + thisMenu[i][2]) && between(mainMouse.coordinate.x, rx, rx + 440)) {
 					ctx.fillStyle = thisMenu[i][3] ? thisMenu[i][3] : "rgba(0, 255, 255, 0.8)";
 					ctx.fillRect(rx, ry + thisMenu[i][1], 400, thisMenu[i][2]);
 					ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
