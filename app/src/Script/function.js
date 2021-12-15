@@ -14,7 +14,7 @@ function countNote() {
 
 function GetBar(bar)
 {
-	
+
 	var count = bpmlist.length;
 
 	if(count <= 1)
@@ -32,7 +32,7 @@ function GetBar(bar)
 		num += (bpmlist[i].m_time - bpmlist[i - 1].m_time) * 60 / bpmlist[i - 1].m_value ;
 	}
 	num += (bar - bpmlist[count - 1].m_time) * 60 / bpmlist[count - 1].m_value ;
-	
+
 	return num;
 }
 function SetBar(time)
@@ -67,7 +67,7 @@ function AddBPMChange(bar, BPM)
 		}
 	}
 	var bpmnum={};
-	
+
 	bpmnum.m_time=bar;
 	bpmnum.m_value=BPM/4;
 	bpmlist.splice(id,0,bpmnum);
@@ -199,7 +199,7 @@ function undo() {
 				}
 				addNoteById(id, thing[1], thing[2], 1);
 				break;
-			
+
 			case "add":
 				delNoteById(thing[2].m_id, thing[1], 1);
 				break;
@@ -230,7 +230,7 @@ function redo() {
 				}
 				addNoteById(id, thing[1], thing[2], 1);
 				break;
-			
+
 			case "del":
 				delNoteById(thing[2].m_id, thing[1], 1);
 				break;
@@ -294,7 +294,7 @@ function changeSide() {
 				}
 			}
 			break;
-		
+
 		default:
 			break;
 	}
@@ -304,7 +304,7 @@ function isEmptyObject(obj){
 	for(var key in obj){
 		return false;
 	};
- 	return true;
+	return true;
 };
 
 function timeSorter(x, y) {
@@ -313,7 +313,7 @@ function timeSorter(x, y) {
 
 function save() {
 	var index, s, ss;
-	
+
 	index = 1;
 	s = [];
 	ss = $.extend(true, [], noteDown);
@@ -351,9 +351,9 @@ function save() {
 	}
 	CMap.m_notes = {};
 	CMap.m_notes.m_notes = {};
-	CMap.m_notes.m_notes.CMapNoteAsset = $.extend(true, [], s);	
-	
-	
+	CMap.m_notes.m_notes.CMapNoteAsset = $.extend(true, [], s);
+
+
 	index = 1;
 	s = [];
 	ss = $.extend(true, [], noteLeft);
@@ -392,8 +392,8 @@ function save() {
 	CMap.m_notesLeft = {};
 	CMap.m_notesLeft.m_notes = {};
 	CMap.m_notesLeft.m_notes.CMapNoteAsset = $.extend(true, [], s);
-		
-		
+
+
 	index = 1;
 	s = [];
 	ss = $.extend(true, [], noteRight);
@@ -436,9 +436,9 @@ function save() {
 	CMap.m_argument={};
 	CMap.m_argument.m_bpmchange={};
 	CMap.m_argument.m_bpmchange.CBpmchange=bpmlist;
-	CMap.m_timeOffset = offset; 
+	CMap.m_timeOffset = offset;
 	CMap.m_barPerMin = bpm;
-	
+
 	var xotree = new XML.ObjTree();
 	var CCMap = {CMap};
 	var jsonText = JSON.stringify(CCMap);
@@ -452,7 +452,7 @@ function save() {
 
 function savefixbpm() {
 	var index, s, ss;
-	
+
 	index = 1;
 	s = [];
 	ss = $.extend(true, [], noteDown);
@@ -490,9 +490,9 @@ function savefixbpm() {
 	}
 	CMap.m_notes = {};
 	CMap.m_notes.m_notes = {};
-	CMap.m_notes.m_notes.CMapNoteAsset = $.extend(true, [], s);	
-	
-	
+	CMap.m_notes.m_notes.CMapNoteAsset = $.extend(true, [], s);
+
+
 	index = 1;
 	s = [];
 	ss = $.extend(true, [], noteLeft);
@@ -531,8 +531,8 @@ function savefixbpm() {
 	CMap.m_notesLeft = {};
 	CMap.m_notesLeft.m_notes = {};
 	CMap.m_notesLeft.m_notes.CMapNoteAsset = $.extend(true, [], s);
-		
-		
+
+
 	index = 1;
 	s = [];
 	ss = $.extend(true, [], noteRight);
@@ -573,18 +573,18 @@ function savefixbpm() {
 	CMap.m_notesRight.m_notes.CMapNoteAsset = $.extend(true, [], s);
 	CMap.m_timeOffset = offset;
 	CMap.m_barPerMin = bpm;
-	
+
 	delete CMap.m_argument;
 	var xotree = new XML.ObjTree();
 	var CCMap = {CMap};
-	
+
 	var jsonText = JSON.stringify(CCMap);
 	console.log(jsonText);
 	var xmlText = xotree.writeXML(CCMap);
 	var BB = new Blob([xmlText], {type:"application/xml"});
 	//upload(jsonText);
-	
-	
+
+
 	saveAs(BB, CMap.m_mapID + " " + getNowFormatDate() + ".xml");
 
 }
@@ -645,18 +645,18 @@ function Timefixbpm(bar)
 	return num/spu;
 }
 
-var encodeFormData = function(data) {  
-    var pairs = [];  
-    var regexp = /%20/g;  
-  
-    for (var name in data) {  
-	    var value = data[name].toString();  
-	    var pair = encodeURIComponent(name).replace(regexp, "+") + "=" +  
-	        encodeURIComponent(value).replace(regexp, "+");  
-	    pairs.push(pair);  
-    }  
-    return pairs.join("&");
-};  
+var encodeFormData = function(data) {
+	var pairs = [];
+	var regexp = /%20/g;
+
+	for (var name in data) {
+		var value = data[name].toString();
+		var pair = encodeURIComponent(name).replace(regexp, "+") + "=" +
+			encodeURIComponent(value).replace(regexp, "+");
+		pairs.push(pair);
+	}
+	return pairs.join("&");
+};
 
 function upload(mapdata) {
 	var xhr = new XMLHttpRequest();
@@ -669,7 +669,7 @@ function upload(mapdata) {
 		mapdata : mapdata
 	});
 	xhr.open("POST","http://dye.omegapigame.com:3000/",true);
-	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');  
+	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 	xhr.onreadystatechange=function() {
 		if (xhr.readyState==4 && xhr.status==200 || xhr.status==304) {
 			alert("Map Key: " + xhr.responseText);
@@ -690,12 +690,12 @@ function saveAs(xblob, filename) {
 	var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
 	save_link.href = xurl;
 	save_link.download = filename;
-	
+
 	var xevent = document.createEvent("MouseEvents");
 	xevent.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
 	save_link.dispatchEvent(xevent);
 	URL.revokeObjectURL(xurl);
-/**/
+	/**/
 }
 
 function getNowFormatDate() {
@@ -711,8 +711,8 @@ function getNowFormatDate() {
 		strDate = "0" + strDate;
 	}
 	var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-			+ " " + date.getHours() + seperator2 + date.getMinutes()
-			+ seperator2 + date.getSeconds();
+		+ " " + date.getHours() + seperator2 + date.getMinutes()
+		+ seperator2 + date.getSeconds();
 	return currentdate;
 }
 
@@ -785,12 +785,12 @@ function delNoteById(id, side, noRecord) {
 			if (! noRecord) didList[didListPlace][2] = $.extend(true, {}, noteDown[id]);
 			noteDown[id] = undefined;
 			break;
-		
+
 		case 1:
 			if (! noRecord) didList[didListPlace][2] = $.extend(true, {}, noteLeft[id]);
 			noteLeft[id] = undefined;
 			break;
-			
+
 		case 2:
 			if (! noRecord) didList[didListPlace][2] = $.extend(true, {}, noteRight[id]);
 			noteRight[id] = undefined;
@@ -814,13 +814,13 @@ function addNoteById(id, side, note, noRecord) {
 			noteDown[id].m_id = id;
 			if (! noRecord) didList[didListPlace][2] = $.extend(true, {}, noteDown[id]);
 			break;
-	
-		case 1:  
+
+		case 1:
 			noteLeft[id] = $.extend(true, {}, note);
 			noteLeft[id].m_id = id;
 			if (! noRecord) didList[didListPlace][2] = $.extend(true, {}, noteLeft[id]);
 			break;
-		
+
 		case 2:
 			noteRight[id] = $.extend(true, {}, note);
 			noteRight[id].m_id = id;
@@ -829,7 +829,7 @@ function addNoteById(id, side, note, noRecord) {
 	}
 	if (! noRecord)
 		didList.length = didListPlace + 1;
-	showCS = false;	
+	showCS = false;
 }
 
 function imgLoad(img, callback) {
@@ -844,51 +844,51 @@ function imgLoad(img, callback) {
 
 
 function addEvent(obj,xEvent,fn) {
-    if (obj.attachEvent) {
-      obj.attachEvent('on' + xEvent,fn);
-    }
-    else {
-      obj.addEventListener(xEvent, fn, false);
-    }
+	if (obj.attachEvent) {
+		obj.attachEvent('on' + xEvent,fn);
+	}
+	else {
+		obj.addEventListener(xEvent, fn, false);
+	}
 }
 
 function fullScreen() {
 	var docElm = document.documentElement;
-	if (docElm.requestFullscreen) { 
-	  docElm.requestFullscreen(); 
+	if (docElm.requestFullscreen) {
+		docElm.requestFullscreen();
 	}
 
-	//FireFox 
-	else if (docElm.mozRequestFullScreen) { 
-	  docElm.mozRequestFullScreen(); 
+	//FireFox
+	else if (docElm.mozRequestFullScreen) {
+		docElm.mozRequestFullScreen();
 	}
-	
+
 	//Chrome
-	else if (docElm.webkitRequestFullScreen) { 
-	  docElm.webkitRequestFullScreen(); 
+	else if (docElm.webkitRequestFullScreen) {
+		docElm.webkitRequestFullScreen();
 	}
-	
+
 	//IE11
 	else if (elem.msRequestFullscreen) {
-	 elem.msRequestFullscreen();
+		elem.msRequestFullscreen();
 	}
 	isFullScreen = true;
 	canvas.style = " height: 100%;width: 100%;margin: 0;padding: 0;display: block;";
 }
 
 function unFullScreen() {
-	if (document.exitFullscreen) { 
-		document.exitFullscreen(); 
-	} 
-	else if (document.mozCancelFullScreen) { 
-		document.mozCancelFullScreen(); 
-	} 
-	else if (document.webkitCancelFullScreen) { 
-		document.webkitCancelFullScreen(); 
-	} 
+	if (document.exitFullscreen) {
+		document.exitFullscreen();
+	}
+	else if (document.mozCancelFullScreen) {
+		document.mozCancelFullScreen();
+	}
+	else if (document.webkitCancelFullScreen) {
+		document.webkitCancelFullScreen();
+	}
 	else if (document.msExitFullscreen) {
-		document.msExitFullscreen(); 
-	} 
+		document.msExitFullscreen();
+	}
 	isFullScreen = false;
 	canvas.style = defaultCanvasStyle;
 }
@@ -904,7 +904,7 @@ function getBrowser() {
 	}
 	if (userAgent.indexOf("Edge") > -1) {
 		return "Edge";
-	} 
+	}
 	if (userAgent.indexOf("Chrome") > -1){
 		return "Chrome";
 	}
@@ -913,16 +913,16 @@ function getBrowser() {
 	}
 	if (userAgent.indexOf("compatible") > -1 || userAgent.indexOf("MSIE") > -1) {
 		return "IE";
-    }
+	}
 	return "IE";
 }
 
 function getPointOnCanvas(c, x, y) {
-    var box = c.getBoundingClientRect();
-    return {
-    			x: x - box.left*(c.width/box.width),
-    			y: y - box.top *(c.height/box.height)
-			};
+	var box = c.getBoundingClientRect();
+	return {
+		x: x - box.left*(c.width/box.width),
+		y: y - box.top *(c.height/box.height)
+	};
 }
 
 function inArea(coordinate, x, y, w, h) {
@@ -1023,7 +1023,7 @@ function drawSingleNote(c, place, swidth, x, height, shadow) {
 				c.drawImage(normalNoteCanvasD, cy, 0, 1, srcH, x + core/2, startX, width/2 - core/2 - l, srcH); // r
 				c.drawImage(normalNoteCanvasD, bldL, 0, l, srcH, x - width/2, startX, l, srcH);// l
 				c.drawImage(normalNoteCanvasD, srcW - bldR - l, 0, l, srcH, x + width/2 - l, startX, l, srcH);// r
-				
+
 			}
 			else if (width > core) {
 				width -= 12;
@@ -1040,7 +1040,7 @@ function drawSingleNote(c, place, swidth, x, height, shadow) {
 				c.fillRect(x - width*shadow/2, windowHeight - ud - (height + 10), width*shadow, 20);
 			}
 			break;
-			
+
 		case 1:
 			if (gradual) {
 				if (height + lr + gradualPx >= windowHeight/2) {
@@ -1052,7 +1052,7 @@ function drawSingleNote(c, place, swidth, x, height, shadow) {
 				c.drawImage(normalNoteCanvasL, 0, srcW/2 - core/2, srcH, core, startX, x - core/2, srcH, core); //mid=srcW/2
 				c.drawImage(normalNoteCanvasL, 0, cy, srcH, 1, startX, x - width/2 + l, srcH, width/2 - core/2 - l); // l
 				c.drawImage(normalNoteCanvasL, 0, cy, srcH, 1, startX, x + core/2, srcH, width/2 - core/2 - l); // r
-				c.drawImage(normalNoteCanvasL, 0, bldL, srcH, l, startX, x - width/2, srcH, l);// l			
+				c.drawImage(normalNoteCanvasL, 0, bldL, srcH, l, startX, x - width/2, srcH, l);// l
 				c.drawImage(normalNoteCanvasL, 0, srcW - bldR - l, srcH, l, startX, x + width/2 - l, srcH, l);// r
 			}
 			else if (width > core) {
@@ -1067,7 +1067,7 @@ function drawSingleNote(c, place, swidth, x, height, shadow) {
 			}
 			c.globalAlpha = 1;
 			break;
-			
+
 		case 2:
 			if (gradual) {
 				if (height + lr + gradualPx >= windowHeight/2) {
@@ -1079,7 +1079,7 @@ function drawSingleNote(c, place, swidth, x, height, shadow) {
 				c.drawImage(normalNoteCanvasR, 0, srcW/2 - core/2, srcH, core, startX, x - core/2, srcH, core); //mid=srcW/2
 				c.drawImage(normalNoteCanvasR, 0, cy, srcH, 1, startX, x - width/2 + l, srcH, width/2 - core/2 - l); // l
 				c.drawImage(normalNoteCanvasR, 0, cy, srcH, 1, startX, x + core/2, srcH, width/2 - core/2 - l); // r
-				c.drawImage(normalNoteCanvasR, 0, bldL, srcH, l, startX, x - width/2, srcH, l);// l			
+				c.drawImage(normalNoteCanvasR, 0, bldL, srcH, l, startX, x - width/2, srcH, l);// l
 				c.drawImage(normalNoteCanvasR, 0, srcW - bldR - l, srcH, l, startX, x + width/2 - l, srcH, l);// r
 			}
 			else if (width > core) {
@@ -1143,7 +1143,7 @@ function drawSlideNote(c, place, swidth, x, height, shadow) {
 				c.drawImage(chainNoteCanvasD, cy, 0, 1, srcH, x + core/2, startX, width/2 - core/2 - l, srcH); // r
 				c.drawImage(chainNoteCanvasD, bldL, 0, l, srcH, x - width/2, startX, l, srcH);// l
 				c.drawImage(chainNoteCanvasD, srcW - bldR - l, 0, l, srcH, x + width/2 - l, startX, l, srcH);// r
-				
+
 			}
 			else if (width > core) {
 				width -= 14;
@@ -1156,7 +1156,7 @@ function drawSlideNote(c, place, swidth, x, height, shadow) {
 				c.drawImage(chainNoteCanvasD, srcW/2 - width/2, 0, width, srcH, x - width/2, startX, width, srcH); // corepix srcW/2
 			}
 			break;
-			
+
 		case 1:
 			if (gradual) {
 				if (height + lr + gradualPx >= windowHeight/2) {
@@ -1169,7 +1169,7 @@ function drawSlideNote(c, place, swidth, x, height, shadow) {
 				c.drawImage(chainNoteCanvasL, 0, srcW/2 - core/2, srcH, core, startX, x - core/2, srcH, core); //mid=srcW/2
 				c.drawImage(chainNoteCanvasL, 0, cy, srcH, 1, startX, x - width/2 + l, srcH, width/2 - core/2 - l); // l
 				c.drawImage(chainNoteCanvasL, 0, cy, srcH, 1, startX, x + core/2, srcH, width/2 - core/2 - l); // r
-				c.drawImage(chainNoteCanvasL, 0, bldL, srcH, l, startX, x - width/2, srcH, l);// l			
+				c.drawImage(chainNoteCanvasL, 0, bldL, srcH, l, startX, x - width/2, srcH, l);// l
 				c.drawImage(chainNoteCanvasL, 0, srcW - bldR - l, srcH, l, startX, x + width/2 - l, srcH, l);// r
 			}
 			else if (width > core) {
@@ -1184,7 +1184,7 @@ function drawSlideNote(c, place, swidth, x, height, shadow) {
 			}
 			c.globalAlpha = 1;
 			break;
-			
+
 		case 2:
 			if (gradual) {
 				if (height + lr + gradualPx >= windowHeight/2) {
@@ -1197,7 +1197,7 @@ function drawSlideNote(c, place, swidth, x, height, shadow) {
 				c.drawImage(chainNoteCanvasR, 0, srcW/2 - core/2, srcH, core, startX, x - core/2, srcH, core); //mid=srcW/2
 				c.drawImage(chainNoteCanvasR, 0, cy, srcH, 1, startX, x - width/2 + l, srcH, width/2 - core/2 - l); // l
 				c.drawImage(chainNoteCanvasR, 0, cy, srcH, 1, startX, x + core/2, srcH, width/2 - core/2 - l); // r
-				c.drawImage(chainNoteCanvasR, 0, bldL, srcH, l, startX, x - width/2, srcH, l);// l			
+				c.drawImage(chainNoteCanvasR, 0, bldL, srcH, l, startX, x - width/2, srcH, l);// l
 				c.drawImage(chainNoteCanvasR, 0, srcW - bldR - l, srcH, l, startX, x + width/2 - l, srcH, l);// r
 			}
 			else if (width > core) {
@@ -1223,7 +1223,7 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 			}
 		}
 		switch (place) {
-			case 0: 
+			case 0:
 				if (hitting) {
 					var t = c.globalAlpha;
 					c.globalAlpha *= 0.7;
@@ -1236,8 +1236,8 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 				c.fillStyle = rgba(128, 128, 0, 0.8);
 				c.fillRect(x - swidth/2, windowHeight - ud - (height) - 7, swidth, 15);
 				break;
-				
-			case 1: 
+
+			case 1:
 				if (hitting) {
 					var t = c.globalAlpha;
 					c.globalAlpha *= 0.6;
@@ -1250,8 +1250,8 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 				c.fillStyle = rgba(128, 128, 0, 0.8);
 				c.fillRect(lr + height - 7, x - swidth/2, 15, swidth);
 				break;
-				
-			case 2: 
+
+			case 2:
 				if (hitting) {
 					var t = c.globalAlpha;
 					c.globalAlpha *= 0.6;
@@ -1348,7 +1348,7 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 				c.drawImage(holdNoteCanvasD, sX, sY, sW, sH, dX, dY, dW, dH);
 			}
 			break;
-			
+
 		case 1:
 			if (gradual) {
 				if (height + lr + gradualPx >= windowHeight/2) {
@@ -1429,7 +1429,7 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 			}
 			c.globalAlpha = 1;
 			break;
-			
+
 		case 2:
 			if (gradual) {
 				if (height + lr + gradualPx >= windowHeight/2) {
@@ -1551,7 +1551,7 @@ function drawLongBoxNote(c, place, swidth, slength, x, height) {
 			c.drawImage(holdBoxCanvasD, 0, 55, 32, 1, x - width/2 - 18, windowHeight - ud - (height + length) - ub + 55, 32, length - 66); //L
 			c.drawImage(holdBoxCanvasD, 35, 55, 34, 1, x + width/2 - 16, windowHeight - ud - (height + length) - ub + 55, 34, length - 66); //R
 			break;
-			
+
 		case 1:
 			if (gradual) {
 				if (height + lr + gradualPx >= windowHeight/2) {
@@ -1568,7 +1568,7 @@ function drawLongBoxNote(c, place, swidth, slength, x, height) {
 			c.drawImage(holdBoxCanvasL, 52, 34, 1, 34, lr + height + 27, x + width/2 - 17, length - 71, 34); //D
 			c.globalAlpha = 1;
 			break;
-			
+
 		case 2:
 			if (gradual) {
 				if (height + lr + gradualPx >= windowHeight/2) {
@@ -1620,13 +1620,13 @@ function drawLongBoxNote(c, place, swidth, slength, x, height) {
 //	}
 }
 
-function drawBpmchange(c,height,value) 
+function drawBpmchange(c,height,value)
 {
-		c.fillStyle = "rgba(255,255,255,0.6)";
-		c.fillRect(0, windowHeight - ud - (height + 5),windowWidth,10);
-		c.fillStyle = "rgba(255,255,255,1)";
-		c.fillText(value*4+"",windowWidth-lr-40,windowHeight - ud - (height + 35));
-		return;
+	c.fillStyle = "rgba(255,255,255,0.6)";
+	c.fillRect(0, windowHeight - ud - (height + 5),windowWidth,10);
+	c.fillStyle = "rgba(255,255,255,1)";
+	c.fillText(value*4+"",windowWidth-lr-40,windowHeight - ud - (height + 35));
+	return;
 }
 
 function hitAnime(place, type, width, x, frames) {
@@ -1663,7 +1663,7 @@ function hitAnime(place, type, width, x, frames) {
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 360;
 				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.sin(sv) * shootRange; 
+				sx2 = sx1 + Math.sin(sv) * shootRange;
 				sy2 = sy1 + Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
@@ -1685,7 +1685,7 @@ function hitAnime(place, type, width, x, frames) {
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 20 - 10;
 				sv = getNumberInNormalDistribution(1.5, 1)*Math.PI;
-				sx2 = sx1 + Math.sin(sv) * shootRange; 
+				sx2 = sx1 + Math.sin(sv) * shootRange;
 				sy2 = sy1 + Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
@@ -1708,7 +1708,7 @@ function hitAnime(place, type, width, x, frames) {
 				sd1 = Math.random() * 360;
 				//sv = getNumberInNormalDistribution(1.5, 1)*Math.PI;
 				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 - Math.sin(sv) * shootRange; 
+				sx2 = sx1 - Math.sin(sv) * shootRange;
 				sy2 = sy1 + Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
@@ -1730,7 +1730,7 @@ function hitAnime(place, type, width, x, frames) {
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 20 - 10;
 				sv = getNumberInNormalDistribution(1.5, 1)*Math.PI;
-				sx2 = sx1 + Math.sin(sv) * shootRange; 
+				sx2 = sx1 + Math.sin(sv) * shootRange;
 				sy2 = sy1 - Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
@@ -1750,7 +1750,7 @@ function hitAnime(place, type, width, x, frames) {
 				sy1 = windowHeight - ud;
 				sd1 = Math.random() * 360;
 				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.cos(sv) * shootRange; 
+				sx2 = sx1 + Math.cos(sv) * shootRange;
 				sy2 = sy1 - Math.sin(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
@@ -1762,7 +1762,7 @@ function hitAnime(place, type, width, x, frames) {
 				sy1 = windowHeight - ud;
 				sd1 = Math.random() * 360;
 				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.cos(sv) * 10; 
+				sx2 = sx1 + Math.cos(sv) * 10;
 				sy2 = sy1 - Math.min(Math.random() * shootRange*(1/Math.abs(sx1 - x - 0.2*width)*width), 200);
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
@@ -1772,7 +1772,7 @@ function hitAnime(place, type, width, x, frames) {
 				sy1 = windowHeight - ud;
 				sd1 = Math.random() * 20 - 100;
 				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.cos(sv) * 10; 
+				sx2 = sx1 + Math.cos(sv) * 10;
 				sy2 = sy1 - Math.min(Math.random() * shootRange*(1/Math.abs(sx1 - x - 0.2*width)*width), 200);
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
@@ -1785,7 +1785,7 @@ function hitAnime(place, type, width, x, frames) {
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 360;
 				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.sin(sv) * shootRange; 
+				sx2 = sx1 + Math.sin(sv) * shootRange;
 				sy2 = sy1 + Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
@@ -1807,7 +1807,7 @@ function hitAnime(place, type, width, x, frames) {
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 20 - 10;
 				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.sin(sv) * shootRange; 
+				sx2 = sx1 + Math.sin(sv) * shootRange;
 				sy2 = sy1 + Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
@@ -1820,7 +1820,7 @@ function hitAnime(place, type, width, x, frames) {
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 360;
 				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 - Math.sin(sv) * shootRange; 
+				sx2 = sx1 - Math.sin(sv) * shootRange;
 				sy2 = sy1 + Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
@@ -1842,14 +1842,14 @@ function hitAnime(place, type, width, x, frames) {
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 20 - 10;
 				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.sin(sv) * shootRange; 
+				sx2 = sx1 + Math.sin(sv) * shootRange;
 				sy2 = sy1 - Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
 			break;
-		}
-	
+	}
+
 }
 
 function drawTextInBox(c, mes, x, y, w, h, alpha) {
@@ -1893,14 +1893,14 @@ function comparer_old(x, y) {
 function comparer(x, y) {
 	return x.m_id - y.m_id;
 }
-function getNumberInNormalDistribution(mean,std_dev){    
-    return mean+(uniform2NormalDistribution()*std_dev);
+function getNumberInNormalDistribution(mean,std_dev){
+	return mean+(uniform2NormalDistribution()*std_dev);
 }
 
 function uniform2NormalDistribution(){
-    var sum=0.0;
-    for(var i=0; i<6; i++){
-        sum=sum+Math.random();
-    }
-    return sum-3.0;
+	var sum=0.0;
+	for(var i=0; i<6; i++){
+		sum=sum+Math.random();
+	}
+	return sum-3.0;
 }
