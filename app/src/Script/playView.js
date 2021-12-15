@@ -1462,7 +1462,7 @@ playView.prototype = {
 					{
 						basicMenu[1][0]="[1]  NORMAL note";
 						basicMenu[2][0]="[2]  CHAIN note";
-						basicMenu[3][0]="[3]  Hold note";
+						basicMenu[3][0]="[3]  HOLD note";
 					}
 
 					if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 566, ry + 604) && musicCtrl) {
@@ -1521,7 +1521,7 @@ playView.prototype = {
 
 					basicMenu[6][0] = "     Mark at " + (thisTime / spq / 32).toFixed(3);
 					basicMenu[7][0] = "[M]  Start from " + Number(markSecion).toFixed(3);
-					basicMenu[12][0] = "     -----------------";
+					basicMenu[12][0] = "     Coming Soon";
 					basicMenu[13][0] = "     Particles " + (showParticles ? "ON" : "OFF");
 					basicMenu[14][0] = "     Hitsound " + (showHitSound ? "Vol " + Math.round(hitSoundGainNode.gain.value * 100) + "%" : "OFF");
 					basicMenu[15][0] = "     Music Volume " + Math.round(musicCtrl.volume * 100) + "%";
