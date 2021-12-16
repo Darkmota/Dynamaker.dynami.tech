@@ -32,19 +32,21 @@ startMenuScene.prototype = {
 	up: function(coordinate) {
 
 	},
+	//Jmak - Fixed pointer issue
 	move: function(coordinate) {
+		//New & Edit map
 		var onOne = false;
 		if (inArea(mainMouse.coordinate, windowWidth * 0.42, windowHeight * 0.60, windowWidth * 0.16, windowHeight * 0.023)) {
 			this.choice = 1;
 			onOne = true;
 		}
-
-		if (inArea(mainMouse.coordinate, windowWidth * 0.25, windowHeight * 0.415, windowWidth * 0.50, windowHeight * 0.04)) {
+		//Map Browse
+		if (inArea(mainMouse.coordinate, windowWidth * 0.25, windowHeight * 0.39, windowWidth * 0.50, windowHeight * 0.04)) {
 			this.choice = 2;
 			onOne = true;
 		}
-
-		if (inArea(mainMouse.coordinate, windowWidth * 0.25, windowHeight * 0.510, windowWidth * 0.50, windowHeight * 0.04)) {
+		//Audio Browse
+		if (inArea(mainMouse.coordinate, windowWidth * 0.25, windowHeight * 0.48, windowWidth * 0.50, windowHeight * 0.04)) {
 			this.choice = 3;
 			onOne = true;
 		}
@@ -95,7 +97,7 @@ startMenuScene.prototype = {
 			}
 
 			//map browse
-			ctx.fillText("Map Browse (.dy/.xml)", windowWidth * 0.25, windowHeight * 0.4);
+			ctx.fillText("Map Browse (.dy/.xml)", windowWidth * 0.25, windowHeight * 0.41);
 			if (mapFileCtrl) {
 				ctx.textAlign = "right";
 				ctx.fillStyle = "#0FF";
@@ -198,7 +200,7 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "20px Dynamix";
-			ctx.fillText("Modified by TLChicken, Jmak, Vertrak, keanucode, Jono997, Protoz, Syncable and whitelava3203", windowWidth * 0.5, windowHeight * 0.79);
+			ctx.fillText("Modified by TLChicken, Jmak, Vertrak, keanucode, Jono997, special thanks to whitelava3203", windowWidth * 0.5, windowHeight * 0.79);
 
 			ctx.font = "25px Dynamix";
 			if (isFullScreen) {
@@ -263,7 +265,7 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "35px Dynamix";
-			ctx.fillText("We recommend using 48000Hz .wav to minimise offset and framerate issues.", windowWidth * 0.5, windowHeight * 0.90)
+			ctx.fillText("48000Hz .wav is recommended to minimise offset and framerate issues.", windowWidth * 0.5, windowHeight * 0.90)
 		}
 
 
@@ -271,6 +273,12 @@ startMenuScene.prototype = {
 		ctx.font = "25px Dynamix";
 		ctx.textAlign = "center";
 		ctx.fillText("Version 1.21.4", windowWidth * 0.5, windowHeight - 35);
+
+		//Jmak - Copyright Information
+		ctx.fillStyle = "#0FF";
+		ctx.font = "15px Dynamix";
+		ctx.textAlign = "right";
+		ctx.fillText("©Assets Copyrighted by C4Cat", windowWidth * 0.98, windowHeight - 35);
 
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";
