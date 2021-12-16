@@ -26,10 +26,10 @@ var pauseShadowH = 120;
 
 var basicMenu = [
 	["     Edit side", 6, 38],
-	["[1]  NORMAL note", 46, 38, rgba(0, 255, 255, 0.8)],
-	["[2]  CHAIN note", 86, 38, rgba(255, 128, 128, 0.8)],
-	["[3]  HOLD note", 126, 38, rgba(255, 255, 0, 0.8)],
-	["[4]  EDIT mode", 166, 38, rgba(255, 255, 255, 0.8)],
+	["[1]  Normal note", 46, 38, rgba(0, 255, 255, 0.8)],
+	["[2]  Chain note", 86, 38, rgba(255, 128, 128, 0.8)],
+	["[3]  Hold note", 126, 38, rgba(255, 255, 0, 0.8)],
+	["[4]  Edit mode", 166, 38, rgba(255, 255, 255, 0.8)],
 	["[_]  Pause/Play", 206, 38],
 	["     Mark here", 246, 38, rgba(128, 128, 255, 0.8)],
 	["[M]  Start from mark", 286, 38, rgba(128, 128, 255, 0.8)],
@@ -44,9 +44,6 @@ var basicMenu = [
 ];
 var deleteMenu = [
 	["     Delete", 6, 38]
-	//,
-//	["     Copy", 46, 38],
-//	["     Paste", 86, 38]
 ];
 function shootParticle(frames, type, x1, y1, d1, x2, y2, d2) {
 	if (! showParticles || (musicCtrl && musicCtrl.paused)) return;
@@ -325,24 +322,19 @@ playView.prototype = {
 			ctx.fillText(audioRate.toFixed(1) + " x Rate (S- W+)", windowWidth*0.82, windowHeight - 55);
 
 			if (hOn) {
-				ctx.textAlign = "right";
-				ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
-				ctx.fillText("(F11) fullscreen", windowWidth*0.82, windowHeight - 80);
-			}
-
-			if (hOn) {
 				ctx.textAlign = "left";
 				ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
 				//Left Region
-				ctx.fillText("(B) invert scolling direction", windowWidth*0.25, windowHeight - 80);
-				ctx.fillText("(Z) lock/unlock bar", windowWidth*0.25, windowHeight - 55);
-				ctx.fillText("(X) lock/unlock X-axis", windowWidth*0.25, windowHeight - 30);
+				ctx.fillText("(B) scroll direction", windowWidth*0.26, windowHeight - 80);
+				ctx.fillText("(Z) un/lock bar", windowWidth*0.26, windowHeight - 55);
+				ctx.fillText("(X) un/lock X-axis", windowWidth*0.26, windowHeight - 30);
 				//Middle Region
+				ctx.fillText("(←↓→)  barlines", windowWidth*0.41, windowHeight - 80);
 				ctx.fillText("(C- V+) ±division", windowWidth*0.41, windowHeight - 55);
 				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.41, windowHeight - 30);
 				//Right Region
-				ctx.fillText("(←↓→)  barlines", windowWidth*0.53, windowHeight - 80);
-				ctx.fillText("(Shift← →) undo/redo", windowWidth*0.53, windowHeight - 55);
+				ctx.fillText("(F11) fullscreen", windowWidth*0.53, windowHeight - 80);
+				ctx.fillText("(Shift← →) un/redo", windowWidth*0.53, windowHeight - 55);
 				ctx.fillText("(L) reduce note lag", windowWidth*0.53, windowHeight - 30);
 			}
 //		ctx.fillText(offset + " s offset (O- P+)", windowWidth, windowHeight - 25);
@@ -1460,9 +1452,9 @@ playView.prototype = {
 					}
 					else if(editSide==0||editSide==1||editSide==2)
 					{
-						basicMenu[1][0]="[1]  NORMAL note";
-						basicMenu[2][0]="[2]  CHAIN note";
-						basicMenu[3][0]="[3]  HOLD note";
+						basicMenu[1][0]="[1]  Normal note";
+						basicMenu[2][0]="[2]  Chain note";
+						basicMenu[3][0]="[3]  Hold note";
 					}
 
 					if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 566, ry + 604) && musicCtrl) {
