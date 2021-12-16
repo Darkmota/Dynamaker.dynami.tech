@@ -89,8 +89,6 @@ startMenuScene.prototype = {
 			drawJBox(ctx, windowWidth * 0.25, windowHeight * 0.540, windowWidth * 0.50, windowHeight * 0.01, 0, windowHeight * 0.54, 0, windowHeight * 0.54 + 10, rgba(0, 255, 255, 0.0), "#0FF");
 			ctx.fillStyle = "#0FF";
 
-
-
 			if (this.choice == 2) {
 				//ctx.fillRect(windowWidth * 0.25, windowHeight * 0.415, windowWidth * 0.50, windowHeight * 0.04);
 				ctx.fillStyle = "#0F0";
@@ -194,59 +192,19 @@ startMenuScene.prototype = {
 
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
-			ctx.font = "40px Dynamix";
-			ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5, windowHeight * 0.75);
+			ctx.font = "50px Dynamix";
+			ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5, windowHeight * 0.23);
 
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
-			ctx.font = "20px Dynamix";
-			ctx.fillText("Modified by TLChicken, Jmak, Vertrak, keanucode, Jono997, special thanks to whitelava3203", windowWidth * 0.5, windowHeight * 0.79);
-
 			ctx.font = "25px Dynamix";
-			if (isFullScreen) {
-				var tx = "??";
-				switch  (browser) {
-					case "Chrome":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
-						break;
+			ctx.fillText("Modified by TLChicken, Jmak, Vertrak, keanucode and Jono997", windowWidth * 0.5, windowHeight * 0.28);
 
-					case "Firefox":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
-						break;
-
-					case "Edge":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
-						break;
-
-					case "IE":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
-						break;
-				}
-
-				ctx.fillText(tx, windowWidth * 0.5, windowHeight * 0.83);
-				ctx.fillText("if your pointer can't be always above the green point, keep adjusting", windowWidth * 0.5, windowHeight * 0.86);
-			}
-			else {
-				var tx = "?"
-				switch  (browser) {
-					case "Chrome":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
-						break;
-
-					case "Firefox":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
-						break;
-
-					case "Edge":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
-						break;
-
-					case "IE":
-						tx = "[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ H ] to show editor controls, [ Ctrl -/Shift + ] to zoom in/out";
-						break;
-				}
-				ctx.fillText(tx, windowWidth * 0.5, windowHeight * 0.84);
-			}
+			//Jmak - Changed and deleted unnecessary code
+			ctx.textAlign = "center";
+			ctx.fillStyle = "#0FF";
+			ctx.font = "25px Dynamix";
+			ctx.fillText("[ F11 ] to fullscreen, [ Alt ] to show control menu, [ Ctrl -/Shift + ] to zoom in/out", windowWidth * 0.5, windowHeight * 0.75);
 
 			if (this.choice == 1 && musicFileOk) {
 				ctx.fillStyle = "#0F0";
@@ -264,21 +222,21 @@ startMenuScene.prototype = {
 
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
-			ctx.font = "35px Dynamix";
-			ctx.fillText("48000Hz .wav is recommended to minimise offset and framerate issues.", windowWidth * 0.5, windowHeight * 0.90)
+			ctx.font = "25px Dynamix";
+			ctx.fillText("48000Hz .wav is recommended to minimise offset and framerate issues.", windowWidth * 0.5, windowHeight * 0.80)
 		}
-
 
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix";
 		ctx.textAlign = "center";
 		ctx.fillText("Version 1.21.4", windowWidth * 0.5, windowHeight - 35);
 
-		//Jmak - Copyright Information
+		//Jmak - Copyright Information and Special Thanks
 		ctx.fillStyle = "#0FF";
 		ctx.font = "15px Dynamix";
 		ctx.textAlign = "right";
-		ctx.fillText("©Assets Copyrighted by C4Cat", windowWidth * 0.98, windowHeight - 35);
+		ctx.fillText("©Assets Copyrighted by C4Cat", windowWidth * 0.98, windowHeight - 1000);
+		ctx.fillText("Special thanks to Syncable and whitelava3203", windowWidth * 0.23, windowHeight - 1000);
 
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";
