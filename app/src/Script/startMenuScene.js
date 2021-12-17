@@ -235,8 +235,8 @@ startMenuScene.prototype = {
 		ctx.fillStyle = "#0FF";
 		ctx.font = "15px Dynamix";
 		ctx.textAlign = "right";
-		ctx.fillText("©Assets Copyrighted by C4Cat", windowWidth * 0.98, windowHeight - 1000);
-		ctx.fillText("Special thanks to Syncable and whitelava3203", windowWidth * 0.23, windowHeight - 1000);
+		ctx.fillText("©Assets Copyrighted by C4Cat", windowWidth * 0.98, windowHeight * 0.05);
+		ctx.fillText("Special thanks to Syncable and whitelava3203", windowWidth * 0.23, windowHeight * 0.05);
 
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";
@@ -245,11 +245,6 @@ startMenuScene.prototype = {
 		ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5 + windowWidth*(-1 + 2*((absFrameCount + 25)%50/50)), windowHeight*0.03);
 		ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5 + windowWidth*(1 - 2*(absFrameCount%50/50)), windowHeight*1.05);
 		ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5 + windowWidth*(1 - 2*((absFrameCount + 25)%50/50)), windowHeight*1.05);
-
-
-
-
-
 
 		ctx.fillStyle = rgba(0, 255, 0, 1);
 		if (mainMouse.coordinate && isFullScreen) {
