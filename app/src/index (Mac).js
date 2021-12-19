@@ -11,15 +11,12 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-   //Old width: 1770,
-   //Old height: 1020,
-   width: 1745,
-   height: 1012,
+   width: 1770,
+   height: 1020,
    fullscreen: false,
-   autoHideMenuBar: true,
    //Jmak & keanucode - declare first launch zoom
    webPreferences: {
-     zoomFactor: 0.9,
+     zoomFactor: 1,
    },
  });
 
