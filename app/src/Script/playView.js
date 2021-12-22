@@ -24,6 +24,7 @@ var hitNote = 0;
 var hitDouble = false;
 var pauseShadowH = 120;
 
+//TLC and Jmak - .dy, Mixer Height, Hitsound Vol
 var basicMenu = [
 	["     Edit side", 6, 38],
 	["[1]  Normal note", 46, 38, rgba(0, 255, 255, 0.8)],
@@ -239,7 +240,7 @@ playView.prototype = {
 		ctx.globalAlpha = jb((1 - Math.abs(Math.round(thisTime / spu) - thisTime / spu) * 2) * .6 + .4, 0, 1);
 		drawJBox(ctx, 0, windowHeight - ud - 450, windowWidth, 450, windowWidth / 2, windowHeight - ud - 450, windowWidth / 2, windowHeight - ud, rgba(0, 255, 255, 0), rgba(0, 255, 255, .32));
 
-
+		//Jmak - Font, title and difficulty opacity
 		//bottomMessage
 		{
 			ctx.textBaseline = "top";
@@ -1049,28 +1050,29 @@ playView.prototype = {
 							shadowAnimeList[i] = false;
 							continue;
 						}
-
+						//Jmak - Particles refinement
 						ctx.save();
-						//			var whiteAlpha = shadowRate < 1 ? 1 - Math.sqrt(Math.max(1 - (1*shadowRate - 1)*(1*shadowRate - 1), 0)) : 0;
-						//			var colorAlpha = Math.max(1 - shadowRate - whiteAlpha, 0);
 						ctx.translate(x1 + (x2 - x1)*shadowRate, y1 + (y2 - y1)*shadowRate);
-						ctx.rotate((d1 + d2*shadowRate) * Math.PI/180);
-						ctx.scale(1 - Math.pow(shadowRate, 3), 1 - Math.pow(shadowRate, 3));
+						ctx.rotate((d1 + d2*shadowRate) * Math.PI/360);
+						//ctx.scale(1 - Math.pow(shadowRate, 3), 1 - Math.pow(shadowRate, 3));
+						ctx.scale(1.5 - Math.pow(shadowRate, 5), 1.5 - Math.pow(shadowRate, 3));
 						switch (type) {
-							case 0: // purple
-								ctx.globalAlpha = 0.7 - 0.7*Math.pow(shadowRate, 2);
+							case 0: // Purple
+							//	ctx.globalAlpha = 0.7 - 0.7*Math.pow(shadowRate, 2);
+							//	ctx.drawImage(purpleParticleCanvas, -58, -73);
+								ctx.globalAlpha = 0.55 - 0.55*Math.pow(shadowRate, 5);
 								ctx.drawImage(purpleParticleCanvas, -58, -73);
-								//					ctx.globalAlpha = whiteAlpha;
-								//					ctx.drawImage(whiteParticleCanvas, -64, -73);
 								break;
-							case 1: // yellow
-								ctx.globalAlpha = 0.9 - 0.9*Math.pow(shadowRate, 3);
+							case 1: // Yellow
+							//	ctx.globalAlpha = 0.9 - 0.9*Math.pow(shadowRate, 2);
+							//	ctx.drawImage(yellowParticleCanvas, -58, -73);
+								ctx.globalAlpha = 0.55 - 0.55*Math.pow(shadowRate, 25);
 								ctx.drawImage(yellowParticleCanvas, -58, -73);
-								//					ctx.globalAlpha = 1 - shadowRate;
-								//					ctx.drawImage(whiteParticleCanvas, -64, -73);
 								break;
-							case 2: // white
-								ctx.globalAlpha = 0.95 - 0.95*Math.pow(shadowRate, 2);
+							case 2: // White
+							//	ctx.globalAlpha = 0.95 - 0.95*Math.pow(shadowRate, 2);
+							//	ctx.drawImage(whiteParticleCanvas, -58, -73);
+								ctx.globalAlpha = 0.28 - 0.28 *Math.pow(shadowRate, 2);
 								ctx.drawImage(whiteParticleCanvas, -58, -73);
 							default:
 								break;
@@ -1108,7 +1110,7 @@ playView.prototype = {
 			}
 
 
-
+			//TLC - added Mixer resctriction
 			//bar
 			barL = Math.round((barL + barTargetL)/2);
 			if (barL < 198) {
@@ -1516,10 +1518,11 @@ playView.prototype = {
 						default:
 							break;
 					}
-
+					//TLC & Jmak - Added Mixer restriction (0.4)
 					basicMenu[6][0] = "     Mark at " + (thisTime / spq / 32).toFixed(3);
 					basicMenu[7][0] = "[M]  Start from " + Number(markSecion).toFixed(3);
-					basicMenu[12][0] = "     Mixer " + (restrictMixerHeight ? "ABOVE" : "BELOW") + " 0.4";
+					basicMenu[12][0] = "     Mixer Limiter " + (restrictMixerHeight ? "ON" : "OFF");
+					//basicMenu[12][0] = "     Mixer " + (restrictMixerHeight ? "ABOVE" : "BELOW") + " 0.4";
 					basicMenu[13][0] = "     Particles " + (showParticles ? "ON" : "OFF");
 					basicMenu[14][0] = "     Hitsound " + (showHitSound ? "Vol " + Math.round(hitSoundGainNode.gain.value * 100) + "%" : "OFF");
 					basicMenu[15][0] = "     Music Volume " + Math.round(musicCtrl.volume * 100) + "%";
@@ -1544,7 +1547,6 @@ playView.prototype = {
 					drawBox(ctx, rx, ry, 400, 50, 0.8, 8);
 					var thisMenu = deleteMenu;
 					break;
-				//if with Copy & Paste, drawBox(ctx, rx, ry, 400, 130, 0.8, 8);
 
 			}
 			ctx.textAlign = "left";

@@ -173,7 +173,7 @@ settingsForNewMapScene.prototype = {
 				err += "Invalid BarPerMinute; "
 			}
 			if (! offsetName || isNaN(Number(offsetName.value))) {
-				err += "Invalid Offset; "
+				err += "Invalid offset; "
 			}
 		}
 		
@@ -201,7 +201,7 @@ settingsForNewMapScene.prototype = {
 		ctx.fillText("DIFFICULTY", windowWidth * 0.11, windowHeight * 0.45);
 		ctx.fillText("LEFT SIDE", windowWidth * 0.11, windowHeight * 0.635);
 		ctx.textAlign = "right";
-		ctx.fillText("BeatPerMinute", windowWidth * 0.71, windowHeight * 0.263);
+		//ctx.fillText("BeatPerMinute", windowWidth * 0.71, windowHeight * 0.263);
 		ctx.fillText("BarPerMinute", windowWidth * 0.88, windowHeight * 0.263);
 		ctx.fillText("OFFSET (sec)", windowWidth * 0.88, windowHeight * 0.45);
 		ctx.fillText("RIGHT SIDE", windowWidth * 0.88, windowHeight * 0.635);

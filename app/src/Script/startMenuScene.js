@@ -33,6 +33,7 @@ startMenuScene.prototype = {
 
 	},
 	//Jmak - Fixed pointer issue
+	//TLC - Expanded selection area
 	move: function(coordinate) {
 		//New & Edit map
 		var onOne = false;
@@ -71,8 +72,8 @@ startMenuScene.prototype = {
 				break;
 		}
 
-		//
-		ctx.font = "32px Dynamix";
+		//Jmak - Fixed font for Map/Audio browse
+		ctx.font = "32px Dynamix,Noto Sans CJK KR Black";
 		ctx.textAlign = "left";
 		ctx.textBaseline = "alphabetic";
 		ctx.fillStyle = "#0FF";
