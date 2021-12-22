@@ -27,10 +27,10 @@ var hitUrl = ["./audio/hit.wav", "./audio/clap.wav", "./audio/drum.wav", "./audi
 var hitCtrl = [];
 var hitBuffer = [10, 10, 10, 10, 60];
 var hitTypeMap = [];
-//N,S,H,Sub
-hitTypeMap[0] = [0,4,0,4];//Down
-hitTypeMap[1] = [3,4,3,4];//Left
-hitTypeMap[2] = [3,4,3,4];//Right
+				   //N,S,H,Sub
+	hitTypeMap[0] = [0,4,0,4];//Down
+	hitTypeMap[1] = [3,4,3,4];//Left
+	hitTypeMap[2] = [3,4,3,4];//Right
 var totalHitBuffer = 0;
 var audioNow = false;
 var audioReady = false;
@@ -203,6 +203,9 @@ var isVideo = false;
 //TLC - Other vars
 var hOn = false;
 
+//TLC - Restrict Mixer Height toggle
+var restrictMixerHeight = false;
+
 
 document.oncontextmenu = function stop(){
 	return false;
@@ -239,7 +242,7 @@ pauseCanvas = document.createElement("canvas"); pauseContext = pauseCanvas.getCo
 yellowParticleCanvas = document.createElement("canvas"); yellowParticleContext = yellowParticleCanvas.getContext("2d"); yellowParticleCanvas.width = 116; yellowParticleCanvas.height = 146;
 purpleParticleCanvas = document.createElement("canvas"); purpleParticleContext = purpleParticleCanvas.getContext("2d"); purpleParticleCanvas.width = 116; purpleParticleCanvas.height = 146;
 whiteParticleCanvas = document.createElement("canvas"); whiteParticleContext = whiteParticleCanvas.getContext("2d"); whiteParticleCanvas.width = 116; whiteParticleCanvas.height = 146;
-barCanvas = document.createElement("canvas"); barContext = barCanvas.getContext("2d"); barCanvas.width = 79; barCanvas.height = 234;  //131+67 741+67
+barCanvas = document.createElement("canvas"); barContext = barCanvas.getContext("2d"); barCanvas.width = 79; barCanvas.height = 234;  //131+67 741+67   
 playCanvas = document.createElement("canvas"); playContext = playCanvas.getContext("2d"); playCanvas.width = 2048; playCanvas.height = 1320;
 numberCanvas = document.createElement("canvas"); numberContext = numberCanvas.getContext("2d"); numberCanvas.width = 1541; numberCanvas.height = 176;
 bgCanvas = document.createElement("canvas"); bgContext = bgCanvas.getContext("2d"); bgCanvas.width = 1920; bgCanvas.height = 1080;
@@ -273,7 +276,7 @@ imgLoad(playSrc, function() {
 	hardshipContext.drawImage(playSrc, 0, 416, 380, 215, 0, 0, 380, 215);
 	perfectJudgeContext.drawImage(playSrc, 951, 203, 438, 153, 0, 0, 438, 153);
 	perfectShineContext.drawImage(playSrc, 913, 0, 514, 201, 0, 0, 514, 201);
-
+	
 	mixerShadowContextD.drawImage(playSrc, 951, 359, 381, 437, 0, 0, 381, 437);
 	mixerShadowContextL.save();
 	mixerShadowContextL.translate(437, 0);
@@ -285,7 +288,7 @@ imgLoad(playSrc, function() {
 	mixerShadowContextR.rotate(270 * Math.PI/180);
 	mixerShadowContextR.drawImage(mixerShadowCanvasD, 0, 0);
 	mixerShadowContextR.restore();
-
+	
 	normalNoteContextD.drawImage(playSrc, 1, 105, 45, 28, 0, 0, 45, 28);
 	normalNoteContextL.save();
 	normalNoteContextL.translate(28, 0);
@@ -297,7 +300,7 @@ imgLoad(playSrc, function() {
 	normalNoteContextR.rotate(270 * Math.PI/180);
 	normalNoteContextR.drawImage(normalNoteCanvasD, 0, 0);
 	normalNoteContextR.restore();
-
+	
 	chainNoteContextD.drawImage(playSrc, 1, 16, 122, 77, 0, 0, 122, 77);
 	chainNoteContextL.save();
 	chainNoteContextL.translate(77, 0);
@@ -309,7 +312,7 @@ imgLoad(playSrc, function() {
 	chainNoteContextR.rotate(270 * Math.PI/180);
 	chainNoteContextR.drawImage(chainNoteCanvasD, 0, 0);
 	chainNoteContextR.restore();
-
+	
 	holdBoxContextD.drawImage(playSrc, 0, 677, 69, 108, 0, 0, 69, 108);
 	holdBoxContextL.save();
 	holdBoxContextL.translate(108, 0);
@@ -321,7 +324,7 @@ imgLoad(playSrc, function() {
 	holdBoxContextR.rotate(270 * Math.PI/180);
 	holdBoxContextR.drawImage(holdBoxCanvasD, 0, 0);
 	holdBoxContextR.restore();
-
+	
 	perfectShadowContextD.drawImage(playSrc, 361, 38, 545, 905, 0, 0, 545, 905);
 	perfectShadowContextL.save();
 	perfectShadowContextL.translate(905, 0);
@@ -333,30 +336,30 @@ imgLoad(playSrc, function() {
 	perfectShadowContextR.rotate(270 * Math.PI/180);
 	perfectShadowContextR.drawImage(perfectShadowCanvasD, 0, 0);
 	perfectShadowContextR.restore();
-
+	
 	blankContextD.drawImage(playSrc, 147, 0, 160, 100, 0, 0, 160, 100);
 	blankContextU.save();
 	blankContextU.translate(160, 100);
 	blankContextU.rotate(180 * Math.PI/180);
 	blankContextU.drawImage(blankCanvasD, 0, 0);
 	blankContextU.restore();
-
+	
 	redContextD.drawImage(playSrc, 147, 100, 160, 100, 0, 0, 160, 100);
 	redContextU.save();
 	redContextU.translate(160, 100);
 	redContextU.rotate(180 * Math.PI/180);
 	redContextU.drawImage(redCanvasD, 0, 0);
 	redContextU.restore();
-
+	
 	blueContextD.drawImage(playSrc, 147, 200, 160, 100, 0, 0, 160, 100);
 	blueContextU.save();
 	blueContextU.translate(160, 100);
 	blueContextU.rotate(180 * Math.PI/180);
 	blueContextU.drawImage(blueCanvasD, 0, 0);
 	blueContextU.restore();
-
+	
 	pauseContext.drawImage(playSrc, 339, 8, 17, 92, 0, 0, 17, 92);
-
+	
 	yellowParticleContext.drawImage(playSrc, 1, 814, 116, 146, 0, 0, 116, 146);
 
 	purpleParticleContext.drawImage(playSrc, 117, 814, 116, 146, 0, 0, 116, 146);
@@ -388,10 +391,10 @@ imgLoad(numberSrc, function() {
 
 var mainPlayView = new playView();
 var mainFpsWatcher = new fpsWatcher();
-mainFpsWatcher.set();
+	mainFpsWatcher.set();
 var mainKeybord = new keyboard();
-mainKeybord.set();
-
+	mainKeybord.set();
+ 
 mapFileElement = document.createElement("input");
 mapFileElement.type = "file";
 mapFileElement.multiple  = true;
@@ -405,7 +408,7 @@ musicFileElement.type = "file";
 musicFileElement.accept = "audio/*,video/*";
 musicFileElement.style = "display:none";
 musicFileElement.addEventListener("change", function () {
-	musicFileCtrl = this.files[0];
+	musicFileCtrl = this.files[0]; 
 }, false);
 
 
@@ -424,7 +427,7 @@ window.onload = function () {
 			else {
 				setTime(musicCtrl.currentTime + 100 / hiSpeed);
 			}
-			resetAnime();
+	       	resetAnime();
 		}
 		else {
 			if (rollReverse) {
@@ -433,19 +436,19 @@ window.onload = function () {
 			else {
 				setTime(musicCtrl.currentTime - 100 / hiSpeed);
 			}
-			resetAnime();
+	       	resetAnime();
 		}
 	}
 	var gameDiv = document.getElementById("game");
 	addEvent(gameDiv,'mousewheel',onMouseWheel);
 	addEvent(gameDiv,'DOMMouseScroll',onMouseWheel);
-
+		
 	backgroundFileElement = document.createElement("input");
 	backgroundFileElement.type = "file";
 	backgroundFileElement.accept = "image/png,image/jpg,image/jpeg";
 	backgroundFileElement.style = "display:none";
 	backgroundFileElement.addEventListener("change", function () {
-		backgroundFileCtrl = this.files[0];
+		backgroundFileCtrl = this.files[0]; 
 		bgSrc.src = window.URL.createObjectURL(backgroundFileCtrl);
 		imgLoad(bgSrc, function() {
 			bgContext.save();
@@ -465,7 +468,7 @@ window.onload = function () {
 	hardshipName = document.getElementById("hardship");
 	leftName = document.getElementById("left");
 	rightName = document.getElementById("right");
-
+	
 	try {
 		window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		AC = new window.AudioContext();
@@ -539,10 +542,10 @@ var main = function () {
 	// }
 	// else {
 	// 	if (! showCS) {
-	// 		ctx.fillStyle = "#111";
+	// 		ctx.fillStyle = "#111";	
 	// 	}
 	// 	else {
-	// 		ctx.fillStyle = "rgba(32,32,32,1)";
+	// 		ctx.fillStyle = "rgba(32,32,32,1)";	
 	// 	}
 	// 	ctx.fillRect(0, 0, windowWidth, windowHeight);
 	// 	ctx.fillStyle = "rgba(0,0,0,1)";
