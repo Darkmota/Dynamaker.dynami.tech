@@ -37,7 +37,7 @@ var basicMenu = [
 	["     Save as .xml", 366, 38],
 	["     Save as .dy", 406, 38],
 	["     Background", 446, 38],
-	["     -----------------", 486, 38],
+	["     Mixer Height", 486, 38],
 	["     Animation", 526, 38],
 	["     Hitsound Vol", 566, 38],
 	["     Music Volume", 606, 38]
@@ -1107,20 +1107,26 @@ playView.prototype = {
 				shadowAnimeList = $.extend(true, [], newShadowAnimeList);
 			}
 
+
+
 			//bar
 			barL = Math.round((barL + barTargetL)/2);
 			if (barL < 198) {
 				barL = 198;
 			}
-			if (barL > 908) {
+			if (barL > 908 && !restrictMixerHeight) {
 				barL = 908;
+			} else if (barL > 858 && restrictMixerHeight) {
+				barL = 858;
 			}
 			barR = Math.round((barR + barTargetR)/2);
 			if (barR < 198) {
 				barR = 198;
 			}
-			if (barR > 908) {
+			if (barR > 908 && !restrictMixerHeight && restrictMixerHeight) {
 				barR = 908;
+			} else if (barR > 858) {
+				barR = 858;
 			}
 			if (CMap.m_leftRegion == "MIXER") { //198~808
 				ctx.drawImage(barCanvas, 0, 0, 79, 234, lr - 40, barL - 117, 79, 234);
@@ -1513,7 +1519,7 @@ playView.prototype = {
 
 					basicMenu[6][0] = "     Mark at " + (thisTime / spq / 32).toFixed(3);
 					basicMenu[7][0] = "[M]  Start from " + Number(markSecion).toFixed(3);
-					basicMenu[12][0] = "     Coming Soon";
+					basicMenu[12][0] = "     Mixer " + (restrictMixerHeight ? "ABOVE" : "BELOW") + " 0.4";
 					basicMenu[13][0] = "     Particles " + (showParticles ? "ON" : "OFF");
 					basicMenu[14][0] = "     Hitsound " + (showHitSound ? "Vol " + Math.round(hitSoundGainNode.gain.value * 100) + "%" : "OFF");
 					basicMenu[15][0] = "     Music Volume " + Math.round(musicCtrl.volume * 100) + "%";

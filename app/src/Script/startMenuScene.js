@@ -41,12 +41,12 @@ startMenuScene.prototype = {
 			onOne = true;
 		}
 		//Map Browse
-		if (inArea(mainMouse.coordinate, windowWidth * 0.25, windowHeight * 0.39, windowWidth * 0.50, windowHeight * 0.04)) {
+		if (inArea(mainMouse.coordinate, windowWidth * 0.25, windowHeight * 0.39, windowWidth * 0.50, windowHeight * 0.065)) {
 			this.choice = 2;
 			onOne = true;
 		}
 		//Audio Browse
-		if (inArea(mainMouse.coordinate, windowWidth * 0.25, windowHeight * 0.48, windowWidth * 0.50, windowHeight * 0.04)) {
+		if (inArea(mainMouse.coordinate, windowWidth * 0.25, windowHeight * 0.48, windowWidth * 0.50, windowHeight * 0.07)) {
 			this.choice = 3;
 			onOne = true;
 		}
