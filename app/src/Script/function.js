@@ -1428,6 +1428,7 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 				c.drawImage(holdNoteCanvasL, sX, sY, sW, sH, dX, dY, dW, dH);
 			}
 			c.globalAlpha = 1;
+			//1
 			break;
 
 		case 2:
@@ -1508,6 +1509,7 @@ function drawLongNote(c, place, swidth, length, x, height, extra, hitting) {
 				c.drawImage(holdNoteCanvasR, sX, sY, sW, sH, dX, dY, dW, dH);
 			}
 			c.globalAlpha = 1;
+			//1
 			break;
 	}
 	c.fillStyle = "rgba(255,255,0,1.0)";
@@ -1567,6 +1569,7 @@ function drawLongBoxNote(c, place, swidth, slength, x, height) {
 			c.drawImage(holdBoxCanvasL, 52, 0, 1, 32, lr + height + 27, x - width/2 - 18, length - 71, 32); //U
 			c.drawImage(holdBoxCanvasL, 52, 34, 1, 34, lr + height + 27, x + width/2 - 17, length - 71, 34); //D
 			c.globalAlpha = 1;
+			//1
 			break;
 
 		case 2:
@@ -1584,40 +1587,9 @@ function drawLongBoxNote(c, place, swidth, slength, x, height) {
 			c.drawImage(holdBoxCanvasR, 55, 0, 1, 32, windowWidth - lr - (height +  length) + 43, x - width/2 - 18, length - 72, 32); //U
 			c.drawImage(holdBoxCanvasR, 55, 36, 1, 32, windowWidth - lr - (height +  length) + 43, x + width/2 - 15, length - 72, 32); //D
 			c.globalAlpha = 1;
+			//1
 			break;
-//		case 1:
-//			c.drawImage(holdBoxCanvasL, 0, 0, 52, 34, lr + height - 25, x - width/2 - 18, 52, 34); //LU
-//			c.drawImage(holdBoxCanvasL, 0, 35, 52, 34, lr + height - 25, x + width/2 - 16, 52, 34); //LD
-//			c.drawImage(holdBoxCanvasL, 52, 0, 55, 34, lr + height + length - 44, x - width/2 - 18, 55, 34); //RU
-//			c.drawImage(holdBoxCanvasL, 52, 35, 55, 34, lr + height + length - 44, x + width/2 - 16, 55, 34); //RD
-//			c.drawImage(holdBoxCanvasL, 0, 34, 52, 1, lr + height - 25, x - width/2 + 16, 52, width - 32); //L
-//			c.drawImage(holdBoxCanvasL, 52, 34, 55, 1, lr + (height + length) - 44, x - width/2 + 16, 55, width - 32); //R
-//			c.drawImage(holdBoxCanvasL, 52, 0, 1, 32, lr + height + 27, x - width/2 - 18, length - 71, 32); //U
-//			c.drawImage(holdBoxCanvasL, 52, 34, 1, 34, lr + height + 27, x + width/2 - 17, length - 71, 34); //D
-//			break;
-//		case 2:
-//			c.drawImage(holdBoxCanvasR, 0, 0, 55, 34, windowWidth - lr - (height +  length) - 12, x - width/2 - 18, 55, 34); //LU
-//			c.drawImage(holdBoxCanvasR, 0, 34, 55, 34, windowWidth - lr - (height +  length) - 12, x + width/2 - 17, 55, 34); //LD
-//			c.drawImage(holdBoxCanvasR, 56, 0, 52, 34, windowWidth - lr - height - 29, x - width/2 - 18, 52, 34); //RU
-//			c.drawImage(holdBoxCanvasR, 56, 35, 52, 34, windowWidth - lr - height - 29, x + width/2 - 16, 52, 34); //RD
-//			c.drawImage(holdBoxCanvasR, 0, 34, 55, 1, windowWidth - lr - (height +  length) - 12, x - width/2 + 16, 55, width - 33); //L
-//			c.drawImage(holdBoxCanvasR, 55, 34, 52, 1, windowWidth - lr - height - 30, x - width/2 + 16, 52, width - 32); //R
-//			c.drawImage(holdBoxCanvasR, 55, 0, 1, 32, windowWidth - lr - (height +  length) + 43, x - width/2 - 18, length - 72, 32); //U
-//			c.drawImage(holdBoxCanvasR, 55, 34, 1, 34, windowWidth - lr - (height +  length) + 43, x + width/2 - 17, length - 72, 34); //D
-//			break;
 	}
-//	c.fillStyle = "rgba(255,255,0,1.0)";
-//	switch (place) {
-//		case 0:
-//			c.fillRect(x - width/2, windowHeight - ud - (height + 5), width, 10);
-//			break;
-//		case 1:
-//			c.fillRect(lr + (height - 5), x - width/2, 10, width);
-//			break;
-//		case 2:
-//			c.fillRect(windowWidth - lr - (height + 5), x - width/2, 10, width);
-//			break;
-//	}
 }
 
 function drawBpmchange(c,height,value)
@@ -1659,34 +1631,43 @@ function hitAnime(place, type, width, x, frames) {
 			var shootFrame = 16;
 			width = 234;
 			for (var i = 0; i < Math.ceil(width / 30 +0.1); ++i) {
+				//Jmak w/ GOD - Particles Revamp
+				//Purple
 				sx1 = lr;
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 360;
-				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.sin(sv) * shootRange;
-				sy2 = sy1 + Math.cos(sv) * shootRange;
+				//sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
+				sv = 0;
+				//sx2 = sx1 + (Math.sin(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				//sy2 = sy1 - 0;
+				sy2 = sy1 + (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				sx2 = sx1 - 0;
 				sd2 = Math.random() * 360 - 180;
+				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
+				sy2 = sy1 - (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
 			shootRange = 6;
-			var shootFrame = 8;
-			for (var i = 0; i < Math.ceil(width / 13+0.1); ++i) {
+			//White
+			var shootFrame = 6;
+			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {
 				sx1 = lr;
-				sy1 = jb(x + width*getNumberInNormalDistribution(0.0, 0.25), x - width/2, x + width/2);
+				sy1 = jb(x - width*getNumberInNormalDistribution(0.0, 0.25), x - width/2, x + width/2);
 				sd1 = Math.random() * 360;
 				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.min(Math.random() * shootRange*(1/Math.abs(sy1 - (x) - 0.0*width)*width), 200);
+				sx2 = sx1 - Math.min(Math.random() * shootRange*(1/Math.abs(sy1 - (x) + 0.0*width)*width), 200);
 				sy2 = sy1 + Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
-			for (var i = 0; i < Math.ceil(width / 13+0.1); ++i) {
+			//Smoke
+			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {
 				sx1 = lr;
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 20 - 10;
 				sv = getNumberInNormalDistribution(1.5, 1)*Math.PI;
 				sx2 = sx1 + Math.sin(sv) * shootRange;
-				sy2 = sy1 + Math.cos(sv) * shootRange;
+				sy2 = sy1 - Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
@@ -1703,18 +1684,25 @@ function hitAnime(place, type, width, x, frames) {
 			var shootFrame = 16;
 			width = 234;
 			for (var i = 0; i < Math.ceil(width / 30+0.1); ++i) {
+				//Jmak w/ GOD - Particles Revamp
+				//Purple
 				sx1 = windowWidth - lr;
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 360;
-				//sv = getNumberInNormalDistribution(1.5, 1)*Math.PI;
-				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 - Math.sin(sv) * shootRange;
-				sy2 = sy1 + Math.cos(sv) * shootRange;
+				//sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
+				sv = 0;
+				//sx2 = sx1 + (Math.sin(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				//sy2 = sy1 - 0;
+				sy2 = sy1 + (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				sx2 = sx1 - 0;
 				sd2 = Math.random() * 360 - 180;
+				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
+				sy2 = sy1 - (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
 			shootRange = 6;
-			var shootFrame = 8;
+			//White
+			var shootFrame = 6;
 			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {
 				sx1 = windowWidth - lr;
 				sy1 = jb(x - width*getNumberInNormalDistribution(0.0, 0.25), x - width/2, x + width/2);
@@ -1725,6 +1713,7 @@ function hitAnime(place, type, width, x, frames) {
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
+			//Smoke
 			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {
 				sx1 = windowWidth - lr;
 				sy1 = x - width/2 + Math.random()*width;
@@ -1742,21 +1731,30 @@ function hitAnime(place, type, width, x, frames) {
 	var stype = 0;
 	var sx1, sy1, sd1, sx2, sy2, sd2;
 	var shootRange = 270;
+	//case 0 1 2 Bottom Left Right
 	switch (place) {
 		case 0:
+			//Jmak w/ GOD - Particles Revamp
+			//Bottom
+			//Purple
 			var shootFrame = 16;
-			for (var i = 0; i < Math.ceil(width / 30 + 0.1); ++i) {
-				sx1 = x - width/2 + Math.random()*width;
+			for (var i = 4; i < Math.ceil(width / 30 + 0.1); ++i) {
+				//sx1 = x - width/2 + Math.random()*width;
+				sx1 = x;
 				sy1 = windowHeight - ud;
 				sd1 = Math.random() * 360;
-				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.cos(sv) * shootRange;
-				sy2 = sy1 - Math.sin(sv) * shootRange;
+				//sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
+				sv = 0;
+				sx2 = sx1 + (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				sy2 = sy1 - 0;
 				sd2 = Math.random() * 360 - 180;
+				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
+				sx2 = sx1 - (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
 			shootRange = 6;
-			var shootFrame = 8;
+			//White
+			var shootFrame = 6;
 			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {
 				sx1 = jb(x + width*getNumberInNormalDistribution(0.2, 0.25), x - width/2, x + width/2);
 				sy1 = windowHeight - ud;
@@ -1765,86 +1763,129 @@ function hitAnime(place, type, width, x, frames) {
 				sx2 = sx1 + Math.cos(sv) * 10;
 				sy2 = sy1 - Math.min(Math.random() * shootRange*(1/Math.abs(sx1 - x - 0.2*width)*width), 200);
 				sd2 = Math.random() * 360 - 180;
-				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
+				//shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
+			//Smoke
 			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {
 				sx1 = x + (Math.random() - 0.5)*width;
 				sy1 = windowHeight - ud;
 				sd1 = Math.random() * 20 - 100;
-				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.cos(sv) * 10;
-				sy2 = sy1 - Math.min(Math.random() * shootRange*(1/Math.abs(sx1 - x - 0.2*width)*width), 200);
+				sv = 0;
+				sx2 = sx1 + (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				sy2 = sy1 - 0;
 				sd2 = Math.random() * 360 - 180;
+				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
+				sx2 = sx1 - (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
 				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
 			break;
 		case 1:
+			//Left
 			var shootFrame = 16;
 			for (var i = 0; i < Math.ceil(width / 30 +0.1); ++i) {
+			//Jmak w/ GOD - Particles Revamp
+			//Purple
 				sx1 = lr;
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 360;
-				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.sin(sv) * shootRange;
-				sy2 = sy1 + Math.cos(sv) * shootRange;
+				//sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
+				sv = 0;
+				//sx2 = sx1 + (Math.sin(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				//sy2 = sy1 - 0;
+				sy2 = sy1 + (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				sx2 = sx1 - 0;
 				sd2 = Math.random() * 360 - 180;
+				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
+				sy2 = sy1 - (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
 			shootRange = 6;
-			var shootFrame = 8;
-			for (var i = 0; i < Math.ceil(width / 13+0.1); ++i) {
+			//White
+			var shootFrame = 6;
+			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {
 				sx1 = lr;
-				sy1 = jb(x + width*getNumberInNormalDistribution(0.2, 0.25), x - width/2, x + width/2);
+				sy1 = jb(x - width*getNumberInNormalDistribution(0.0, 0.25), x - width/2, x + width/2);
 				sd1 = Math.random() * 360;
 				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 + Math.min(Math.random() * shootRange*(1/Math.abs(sy1 - (x) - 0.2*width)*width), 200);
+				sx2 = sx1 - Math.min(Math.random() * shootRange*(1/Math.abs(sy1 - (x) + 0.0*width)*width), 200);
 				sy2 = sy1 + Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
-				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
+				//shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
-			for (var i = 0; i < Math.ceil(width / 13+0.1); ++i) {
+			//Smoke
+			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {
 				sx1 = lr;
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 20 - 10;
-				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
+				sv = getNumberInNormalDistribution(1.5, 1)*Math.PI;
 				sx2 = sx1 + Math.sin(sv) * shootRange;
-				sy2 = sy1 + Math.cos(sv) * shootRange;
+				sy2 = sy1 - Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
+				//shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
+				//
+				sv = 0;
+				//sx2 = sx1 + (Math.sin(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				//sy2 = sy1 - 0;
+				sy2 = sy1 + (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				sx2 = sx1 - 0;
+				sd2 = Math.random() * 360 - 180;
+				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
+				sy2 = sy1 - (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
 				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
 			break;
 		case 2:
+			//Jmak w/ GOD - Particles Revamp
+			//Right
+			//Purple
 			var shootFrame = 16;
 			for (var i = 0; i < Math.ceil(width / 30+0.1); ++i) {
+			//Purple
 				sx1 = windowWidth - lr;
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 360;
-				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 - Math.sin(sv) * shootRange;
-				sy2 = sy1 + Math.cos(sv) * shootRange;
+				//sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
+				sv = 0;
+				//sx2 = sx1 + (Math.sin(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				//sy2 = sy1 - 0;
+				sy2 = sy1 + (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				sx2 = sx1 - 0;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
+				sy2 = sy1 - (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);	
 			}
-			shootRange = 6;
-			var shootFrame = 8;
-			for (var i = 0; i < Math.ceil(width / 13+0.1); ++i) {
+			shootRange = 6;	
+			//White
+			var shootFrame = 6;
+			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {
 				sx1 = windowWidth - lr;
-				sy1 = jb(x - width*getNumberInNormalDistribution(0.2, 0.25), x - width/2, x + width/2);
+				sy1 = jb(x - width*getNumberInNormalDistribution(0.0, 0.25), x - width/2, x + width/2);
 				sd1 = Math.random() * 360;
 				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
-				sx2 = sx1 - Math.min(Math.random() * shootRange*(1/Math.abs(sy1 - (x) + 0.2*width)*width), 200);
+				sx2 = sx1 - Math.min(Math.random() * shootRange*(1/Math.abs(sy1 - (x) + 0.0*width)*width), 200);
 				sy2 = sy1 + Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
-				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
+				//shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
-			for (var i = 0; i < Math.ceil(width / 13+0.1); ++i) {
+			//Smoke
+			for (var i = 0; i < Math.ceil(width / 13 + 0.1); ++i) {
 				sx1 = windowWidth - lr;
 				sy1 = x - width/2 + Math.random()*width;
 				sd1 = Math.random() * 20 - 10;
-				sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
+				sv = getNumberInNormalDistribution(1.5, 1)*Math.PI;
 				sx2 = sx1 + Math.sin(sv) * shootRange;
 				sy2 = sy1 - Math.cos(sv) * shootRange;
 				sd2 = Math.random() * 360 - 180;
+				//shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
+				sv = 0;
+				//sx2 = sx1 + (Math.sin(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				//sy2 = sy1 - 0;
+				sy2 = sy1 + (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				sx2 = sx1 - 0;
+				sd2 = Math.random() * 360 - 180;
+				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
+				sy2 = sy1 - (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
 				shootParticle(shootFrame + Math.floor(Math.random()*4), 2, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
 			break;

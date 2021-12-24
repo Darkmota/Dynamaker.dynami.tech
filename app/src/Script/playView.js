@@ -622,13 +622,13 @@ playView.prototype = {
 					if (dis >= 0 && dis <= windowHeight - ud) {
 						noteShow.push([1, 0, width, x, dis, ((editSide == 0 && equal(thisNote.m_position, magPos)) ? 2 : 0) + ((editSide == 0 && equal(thisNote.m_width, magWidth)) ? 1 : 0), thisNote.m_id]);
 					}
-//						drawSlideNote(ctx, 0, width, x, dis);
 					if (! noteDownHit[i] && ((autoMode && touchTime < thisTime) || Math.abs(touchTime - thisTime) <= currentPerfectJudge)) {
 						noteDownHit[i] = true;
 						hitAnime(0, 1, width, x, Math.floor(10.0/audioRate));
 					}
 					break;
 
+				//Jmak w/ GOD - Hold particles amount is Hardcoded
 				case "HOLD":
 					var subTime = GetBar(noteDown[noteDown[i].m_subId].m_time);
 					var dis2 = hiSpeed*(subTime - thisTime);
@@ -644,13 +644,11 @@ playView.prototype = {
 						dis2 = windowHeight - ud +100;
 					}
 					if (dis <= 0) {
-						shootParticle(18 + Math.floor(Math.random()*24), 1, x + (Math.random() - 0.5)*width, windowHeight - ud, Math.random()*360, x + (Math.random()*2 - 1)*width, windowHeight - ud + (Math.random() - 0.5)*2*ud, (Math.random() - 0.5)*180);
+						shootParticle(10 + Math.floor(Math.random()*24), 1, x + (Math.random() - 0.5)*width, windowHeight - ud, Math.random()*360, x + (Math.random()*2 - 1)*width*2, windowHeight - ud + (Math.random() - 0.5)*2*ud*2, (Math.random() - 0.5)*180);
 						extra = 180 - Math.round(- dis) % 180;
 						dis = 0;
 					}
 					noteHoldShow.push([0, width, dis2 - dis, x, dis, extra, ((editSide == 0 && equal(thisNote.m_position, magPos)) ? 2 : 0) + ((editSide == 0 && equal(thisNote.m_width, magWidth)) ? 1 : 0), noteDownHit[i], thisNote.m_id]);
-//					drawLongNote(ctx, 0, width, dis2 - dis, x, dis, extra);
-//					drawLongBoxNote(ctx, 0, width, dis2 - dis, x, dis, extra);
 					break;
 
 				case "SUB":
@@ -697,6 +695,7 @@ playView.prototype = {
 					}
 					break;
 
+				//Jmak w/ GOD - Hold particles amount is Hardcoded
 				case "HOLD":
 					var subTime = GetBar(noteLeft[noteLeft[i].m_subId].m_time);
 					var dis2 = hiSpeed*(subTime - thisTime);
@@ -712,7 +711,7 @@ playView.prototype = {
 						dis2 = windowWidth - lr +100;
 					}
 					if (dis <= 0) {
-						shootParticle(18 + Math.floor(Math.random()*24), 1, lr, x + (Math.random() - 0.5)*width, Math.random()*360, lr + (Math.random() - 0.5)*2*ud, x + (Math.random() - 0.5)*2*width, (Math.random() - 0.5)*180);
+						shootParticle(10 + Math.floor(Math.random()*24), 1, lr, x + (Math.random() - 0.5)*width, Math.random()*360, lr + (Math.random() - 0.5)*2*ud*2, x + (Math.random() - 0.5)*2*width*2, (Math.random() - 0.5)*180);
 						extra = 180 - Math.round(- dis) % 180;
 						dis = 0;
 					}
@@ -785,6 +784,7 @@ playView.prototype = {
 					}
 					break;
 
+				//Jmak w/ GOD - Hold particles amount is Hardcoded
 				case "HOLD":
 					var subTime = GetBar(noteRight[noteRight[i].m_subId].m_time);
 					var dis2 = hiSpeed*(subTime - thisTime);
@@ -800,34 +800,12 @@ playView.prototype = {
 						dis2 = windowWidth - lr +100;
 					}
 					if (dis <= 0) {
-						shootParticle(18 + Math.floor(Math.random()*24), 1, windowWidth - lr, x + (Math.random() - 0.5)*width, Math.random()*360, windowWidth - lr + (Math.random() - 0.5)*2*ud, x + (Math.random() - 0.5)*2*width, (Math.random() - 0.5)*180);
+						shootParticle(10 + Math.floor(Math.random()*24), 1, windowWidth - lr, x + (Math.random() - 0.5)*width, Math.random()*360, windowWidth - lr + (Math.random() - 0.5)*2*ud*2, x + (Math.random() - 0.5)*2*width*2, (Math.random() - 0.5)*180);
 						extra = 180 - Math.round(- dis) % 180;
 						dis = 0;
 					}
 					noteHoldShow.push([2, width, dis2 - dis, x, dis, extra, ((editSide == 2 && equal(thisNote.m_position, magPos)) ? 2 : 0) + ((editSide == 2 && equal(thisNote.m_width, magWidth)) ? 1 : 0), noteRightHit[i], thisNote.m_id]);
-//					drawLongNote(ctx, 2, width, dis2 - dis, x, dis, extra);
-//					drawLongBoxNote(ctx, 2, width, dis2 - dis, x, dis, extra);
 					break;
-//					var x = windowHeight/2 + (-2.5 + Number(thisNote.m_position))*150;
-//					var width = thisNote.m_width*150 - 30;
-//					var subTime = noteRight[noteRightMap[noteRight[i].m_id]].m_time*(spu);
-//					var dis2 = hiSpeed*(subTime - thisTime);
-//					if (dis2 >= 0) {
-//						if (dis2 >= windowWidth - lr) {
-//							dis2 = windowWidth - lr;
-//						}
-//						if (dis <= 0 || touchTime - thisTime <= lcurrentPerfectJudge) {
-//							drawLongNote(ctx, 2, width, dis2, x, 0);
-//							if ((autoMode && touchTime < thisTime && ! noteRightHit[i]) || Math.abs(touchTime - thisTime) <= currentPerfectJudge && ! noteRightHit[i]) {
-//								noteRightHit[i] = true;
-//								hitAnime(2, 2, thisNote.m_width*150 - 30, x, Math.floor((subTime - thisTime)*60));
-//							}
-//						}
-//						else if (dis > 0 && dis <= windowWidth - lr + 5) {
-//							drawLongNote(ctx, 2, width, dis2 - dis, x, dis);
-//						}
-//					}
-//					break;
 
 				case "SUB":
 					if (! noteRightHit[i] && ((autoMode && touchTime < thisTime) || Math.abs(touchTime - thisTime) <= currentPerfectJudge)) {
@@ -1059,20 +1037,17 @@ playView.prototype = {
 						switch (type) {
 							case 0: // Purple
 							//	ctx.globalAlpha = 0.7 - 0.7*Math.pow(shadowRate, 2);
-							//	ctx.drawImage(purpleParticleCanvas, -58, -73);
-								ctx.globalAlpha = 0.55 - 0.55*Math.pow(shadowRate, 5);
+								ctx.globalAlpha = 0.35 - 0.35*Math.pow(shadowRate, 2.5);
 								ctx.drawImage(purpleParticleCanvas, -58, -73);
 								break;
 							case 1: // Yellow
 							//	ctx.globalAlpha = 0.9 - 0.9*Math.pow(shadowRate, 2);
-							//	ctx.drawImage(yellowParticleCanvas, -58, -73);
-								ctx.globalAlpha = 0.55 - 0.55*Math.pow(shadowRate, 25);
+								ctx.globalAlpha = 0.55 - 0.55*Math.pow(shadowRate, 2);
 								ctx.drawImage(yellowParticleCanvas, -58, -73);
 								break;
 							case 2: // White
 							//	ctx.globalAlpha = 0.95 - 0.95*Math.pow(shadowRate, 2);
-							//	ctx.drawImage(whiteParticleCanvas, -58, -73);
-								ctx.globalAlpha = 0.28 - 0.28 *Math.pow(shadowRate, 2);
+								ctx.globalAlpha = 0.35 - 0.35 *Math.pow(shadowRate, 3);
 								ctx.drawImage(whiteParticleCanvas, -58, -73);
 							default:
 								break;
