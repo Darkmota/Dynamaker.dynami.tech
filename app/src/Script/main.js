@@ -204,7 +204,7 @@ var isVideo = false;
 var hOn = false;
 
 //TLC - Restrict Mixer Height toggle
-var restrictMixerHeight = false;
+var restrictMixerHeight = true;
 
 
 document.oncontextmenu = function stop(){
@@ -254,17 +254,21 @@ holdNoteCanvasR = document.createElement("canvas"); holdNoteContextR = holdNoteC
 holdBoxCanvasD = document.createElement("canvas"); holdBoxContextD = holdBoxCanvasD.getContext("2d"); holdBoxCanvasD.width = 69; holdBoxCanvasD.height = 108;
 holdBoxCanvasL = document.createElement("canvas"); holdBoxContextL = holdBoxCanvasL.getContext("2d"); holdBoxCanvasL.width = 108; holdBoxCanvasL.height = 69;
 holdBoxCanvasR = document.createElement("canvas"); holdBoxContextR = holdBoxCanvasR.getContext("2d"); holdBoxCanvasR.width = 108; holdBoxCanvasR.height = 69;
+
 chainNoteCanvasD = document.createElement("canvas"); chainNoteContextD = chainNoteCanvasD.getContext("2d"); chainNoteCanvasD.width = 122; chainNoteCanvasD.height = 77;
 chainNoteCanvasL = document.createElement("canvas"); chainNoteContextL = chainNoteCanvasL.getContext("2d"); chainNoteCanvasL.width = 77; chainNoteCanvasL.height = 122;
 chainNoteCanvasR = document.createElement("canvas"); chainNoteContextR = chainNoteCanvasR.getContext("2d"); chainNoteCanvasR.width = 77; chainNoteCanvasR.height = 122;
+
 normalNoteCanvasD = document.createElement("canvas"); normalNoteContextD = normalNoteCanvasD.getContext("2d"); normalNoteCanvasD.width = 45; normalNoteCanvasD.height = 28;
 normalNoteCanvasL = document.createElement("canvas"); normalNoteContextL = normalNoteCanvasL.getContext("2d"); normalNoteCanvasL.width = 28; normalNoteCanvasL.height = 45;
 normalNoteCanvasR = document.createElement("canvas"); normalNoteContextR = normalNoteCanvasR.getContext("2d"); normalNoteCanvasR.width = 28; normalNoteCanvasR.height = 45;
+
 perfectShadowCanvasD = document.createElement("canvas"); perfectShadowContextD = perfectShadowCanvasD.getContext("2d"); perfectShadowCanvasD.width = 545; perfectShadowCanvasD.height = 905;
 perfectShadowCanvasL = document.createElement("canvas"); perfectShadowContextL = perfectShadowCanvasL.getContext("2d"); perfectShadowCanvasL.width = 905; perfectShadowCanvasL.height = 545;
 perfectShadowCanvasR = document.createElement("canvas"); perfectShadowContextR = perfectShadowCanvasR.getContext("2d"); perfectShadowCanvasR.width = 905; perfectShadowCanvasR.height = 545;
 perfectJudgeCanvas = document.createElement("canvas"); perfectJudgeContext = perfectJudgeCanvas.getContext("2d"); perfectJudgeCanvas.width = 438; perfectJudgeCanvas.height = 153;
 perfectShineCanvas = document.createElement("canvas"); perfectShineContext = perfectShineCanvas.getContext("2d"); perfectShineCanvas.width = 514; perfectShineCanvas.height = 201;
+
 mixerShadowCanvasD = document.createElement("canvas"); mixerShadowContextD = mixerShadowCanvasD.getContext("2d"); mixerShadowCanvasD.width = 381; mixerShadowCanvasD.height = 437;
 mixerShadowCanvasL = document.createElement("canvas"); mixerShadowContextL = mixerShadowCanvasL.getContext("2d"); mixerShadowCanvasL.width = 437; mixerShadowCanvasL.height = 381;
 mixerShadowCanvasR = document.createElement("canvas"); mixerShadowContextR = mixerShadowCanvasR.getContext("2d"); mixerShadowCanvasR.width = 437; mixerShadowCanvasR.height = 381;
