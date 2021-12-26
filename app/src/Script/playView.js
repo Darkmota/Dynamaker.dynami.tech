@@ -1037,17 +1037,17 @@ playView.prototype = {
 						switch (type) {
 							case 0: // Purple
 							//	ctx.globalAlpha = 0.7 - 0.7*Math.pow(shadowRate, 2);
-								ctx.globalAlpha = 0.35 - 0.35*Math.pow(shadowRate, 2.5);
+								ctx.globalAlpha = 0.45 - 0.45*Math.pow(shadowRate, 4);
 								ctx.drawImage(purpleParticleCanvas, -58, -73);
 								break;
 							case 1: // Yellow
 							//	ctx.globalAlpha = 0.9 - 0.9*Math.pow(shadowRate, 2);
-								ctx.globalAlpha = 0.55 - 0.55*Math.pow(shadowRate, 2);
+								ctx.globalAlpha = 0.65 - 0.65*Math.pow(shadowRate, 1.8);
 								ctx.drawImage(yellowParticleCanvas, -58, -73);
 								break;
 							case 2: // White
 							//	ctx.globalAlpha = 0.95 - 0.95*Math.pow(shadowRate, 2);
-								ctx.globalAlpha = 0.35 - 0.35 *Math.pow(shadowRate, 3);
+								ctx.globalAlpha = 0.35 - 0.35 *Math.pow(shadowRate, 2.5);
 								ctx.drawImage(whiteParticleCanvas, -58, -73);
 							default:
 								break;

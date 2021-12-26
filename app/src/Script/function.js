@@ -1628,7 +1628,7 @@ function hitAnime(place, type, width, x, frames) {
 			var stype = 0;
 			var sx1, sy1, sd1, sx2, sy2, sd2;
 			var shootRange = 270;
-			var shootFrame = 16;
+			var shootFrame = 24;
 			width = 234;
 			for (var i = 0; i < Math.ceil(width / 30 +0.1); ++i) {
 				//Jmak w/ GOD - Particles Revamp
@@ -1681,7 +1681,7 @@ function hitAnime(place, type, width, x, frames) {
 			var stype = 0;
 			var sx1, sy1, sd1, sx2, sy2, sd2;
 			var shootRange = 270;
-			var shootFrame = 16;
+			var shootFrame = 24;
 			width = 234;
 			for (var i = 0; i < Math.ceil(width / 30+0.1); ++i) {
 				//Jmak w/ GOD - Particles Revamp
@@ -1737,7 +1737,7 @@ function hitAnime(place, type, width, x, frames) {
 			//Jmak w/ GOD - Particles Revamp
 			//Bottom
 			//Purple
-			var shootFrame = 16;
+			var shootFrame = 24;
 			for (var i = 4; i < Math.ceil(width / 30 + 0.1); ++i) {
 				//sx1 = x - width/2 + Math.random()*width;
 				sx1 = x;
@@ -1745,11 +1745,11 @@ function hitAnime(place, type, width, x, frames) {
 				sd1 = Math.random() * 360;
 				//sv = jb((Math.random() + 1)*Math.PI, Math.PI, Math.PI*2);
 				sv = 0;
-				sx2 = sx1 + (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				sx2 = sx1 + (Math.cos(sv) * shootRange * (Math.random() * 2.7 + 0.6));
 				sy2 = sy1 - 0;
 				sd2 = Math.random() * 360 - 180;
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
-				sx2 = sx1 - (Math.cos(sv) * shootRange * (Math.random() * 1.5 + 0.25));
+				sx2 = sx1 - (Math.cos(sv) * shootRange * (Math.random() * 2.7 + 0.6));
 				shootParticle(shootFrame, 0, sx1, sy1, sd1, sx2, sy2, sd2);
 			}
 			shootRange = 6;
@@ -1781,7 +1781,7 @@ function hitAnime(place, type, width, x, frames) {
 			break;
 		case 1:
 			//Left
-			var shootFrame = 16;
+			var shootFrame = 24;
 			for (var i = 0; i < Math.ceil(width / 30 +0.1); ++i) {
 			//Jmak w/ GOD - Particles Revamp
 			//Purple
@@ -1838,7 +1838,7 @@ function hitAnime(place, type, width, x, frames) {
 			//Jmak w/ GOD - Particles Revamp
 			//Right
 			//Purple
-			var shootFrame = 16;
+			var shootFrame = 24;
 			for (var i = 0; i < Math.ceil(width / 30+0.1); ++i) {
 			//Purple
 				sx1 = windowWidth - lr;
