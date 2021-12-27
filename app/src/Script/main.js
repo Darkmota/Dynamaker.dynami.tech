@@ -197,14 +197,22 @@ var whiteParticleContext = null;
 var canvas = null;
 var ctx = null;
 
-//TLC - mp4 Support
+//------------- TLC Vars ------------------------//
+
+/** Added for mp4 Support, true if video was loaded. */
 var isVideo = false;
 
-//TLC - Other vars
+/** Toggle for whether to show Help menu. */
 var hOn = false;
 
-//TLC - Restrict Mixer Height toggle
+/** Restrict Mixer Height toggle. */
 var restrictMixerHeight = true;
+
+//TLC Options
+/** false: Arrow keys toggle 2 options of bar lines instead of 3. The solid bar line option is left out. */
+var includeSolidBarLine = false;
+
+//----------------------------------------------//
 
 
 document.oncontextmenu = function stop(){
@@ -412,7 +420,8 @@ musicFileElement.type = "file";
 musicFileElement.accept = "audio/*,video/*";
 musicFileElement.style = "display:none";
 musicFileElement.addEventListener("change", function () {
-	musicFileCtrl = this.files[0]; 
+	musicFileCtrl = this.files[0];
+	musicName.value = musicFileCtrl.name.substr(0, musicFileCtrl.name.length - 4);
 }, false);
 
 
@@ -472,6 +481,9 @@ window.onload = function () {
 	hardshipName = document.getElementById("hardship");
 	leftName = document.getElementById("left");
 	rightName = document.getElementById("right");
+
+	bpmName.value = 0;
+	offsetName.value = 0;
 	
 	try {
 		window.AudioContext = window.AudioContext || window.webkitAudioContext;

@@ -114,7 +114,7 @@ keyboard.prototype = {
 				undo();
 			}
 			else {
-				showL = (showL + 1) % 3;
+				showL = (showL + 1) % 6;
 			}
 		}
 		if (kble(38)) { //up38 9tab
@@ -126,11 +126,11 @@ keyboard.prototype = {
 				redo();
 			}
 			else {
-				showR = (showR + 1) % 3;
+				showR = (showR + 1) % 6;
 			}
 		}
 		if (kble(40)) { //down
-			showD = (showD + 1) % 3;
+			showD = (showD + 1) % 6;
 		}
 		if (kble(66)) { // B
 			rollReverse = ! rollReverse;

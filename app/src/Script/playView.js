@@ -357,8 +357,12 @@ playView.prototype = {
                     ctx.shadowBlur = 3;
             */
 			//editLine
-			if (showD >= 1) {
-				ctx.globalAlpha = showD == 1 ? 0.5 : 1;
+			if ((includeSolidBarLine && showD % 3 != 0) || (!includeSolidBarLine && showD % 2 == 1)) {
+				ctx.globalAlpha = !includeSolidBarLine
+					? 0.5
+					: showD % 3 == 1
+						? 0.5
+						: 1;
 				for (var qsection = Math.ceil(thisTime/spq); hiSpeed*(qsection*spq - thisTime) <= windowHeight - ud; ++qsection) {
 					var lineDis = hiSpeed*(qsection*spq - thisTime);
 					var lineColor1 = rgba(128, 128, 128, 0.0);
@@ -423,8 +427,12 @@ playView.prototype = {
 				ctx.restore();
 			}
 			ctx.textAlign = "center";
-			if (showL >= 1) {
-				ctx.globalAlpha = showL == 1 ? 0.5 : 1;
+			if ((includeSolidBarLine && showL % 3 != 0) || (!includeSolidBarLine && showL % 2 == 1)) {
+				ctx.globalAlpha = !includeSolidBarLine
+					? 0.5
+					: showL % 3 == 1
+						? 0.5
+						: 1;
 				for (var qsection = Math.ceil(thisTime/spq); hiSpeed*(qsection*spq - thisTime) <= windowWidth/2 - lr; ++qsection) {
 					var lineDis = hiSpeed*(qsection*spq - thisTime);
 					var lineColor1 = rgba(128, 128, 128, 0.0);
@@ -488,8 +496,12 @@ playView.prototype = {
 				}
 				ctx.restore();
 			}
-			if (showR >= 1) {
-				ctx.globalAlpha = showR == 1 ? 0.5 : 1;
+			if ((includeSolidBarLine && showR % 3 != 0) || (!includeSolidBarLine && showR % 2 == 1)) {
+				ctx.globalAlpha = !includeSolidBarLine
+					? 0.5
+					: showR % 3 == 1
+						? 0.5
+						: 1;
 				for (var qsection = Math.ceil(thisTime/spq); hiSpeed*(qsection*spq - thisTime) <= windowWidth/2 - lr; ++qsection) {
 					var lineDis = hiSpeed*(qsection*spq - thisTime);
 					var lineColor1 = rgba(128, 128, 128, 0.0);

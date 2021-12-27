@@ -1,11 +1,13 @@
+
 var onOne = false;
 var err = "";
+
+//TLC Dumb Global Vars
+var backBtnHoverTLC = false;
+
 function settingsForNewMapScene() {
 	this.banKeyboard = true;
 	var breath = 0;
-	musicName.value = musicFileCtrl.name.substr(0, musicFileCtrl.name.length - 4);
-	bpmName.value = 0;
-	offsetName.value = 0;
 	musicName.style.display = "inline";
 	bpmName.style.display = "inline";
 	offsetName.style.display = "inline";
@@ -14,33 +16,33 @@ function settingsForNewMapScene() {
 	rightName.style.display = "inline";
 	CMap = {
 		"-xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
-	    "-xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
-	    "m_path": false,
-	    "m_barPerMin": 120,
-	    "m_timeOffset": 0,
-	    "m_leftRegion": "MIXER",
-	    "m_rightRegion": "PAD",
-	    "m_mapID": false,
-	    "m_notes": {
-	    	"m_notes": {
-	    		"CMapNoteAsset" : []
-	    	}
-	    },
-	    "m_notesLeft": {
-	    	"m_notes": {
-	    		"CMapNoteAsset" : []
-	    	}
-	    },
-	    "m_notesRight": {
-	    	"m_notes": {
-	    		"CMapNoteAsset" : []
-	    	}
-	    },
-	    "m_argument": {
-	    	"m_bpmchange": {
-	    		"CBpmchange" : []
-	    	}
-	    }
+		"-xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+		"m_path": false,
+		"m_barPerMin": 120,
+		"m_timeOffset": 0,
+		"m_leftRegion": "MIXER",
+		"m_rightRegion": "PAD",
+		"m_mapID": false,
+		"m_notes": {
+			"m_notes": {
+				"CMapNoteAsset" : []
+			}
+		},
+		"m_notesLeft": {
+			"m_notes": {
+				"CMapNoteAsset" : []
+			}
+		},
+		"m_notesRight": {
+			"m_notes": {
+				"CMapNoteAsset" : []
+			}
+		},
+		"m_argument": {
+			"m_bpmchange": {
+				"CBpmchange" : []
+			}
+		}
 	};
 }
 
@@ -152,6 +154,19 @@ settingsForNewMapScene.prototype = {
 			loaded++;
 			scene = false;
 		}
+
+		if (backBtnHoverTLC) {
+			// Reload Window
+
+			musicName.style.display = "none";
+			bpmName.style.display = "none";
+			offsetName.style.display = "none";
+			hardshipName.style.display = "none";
+			leftName.style.display = "none";
+			rightName.style.display = "none";
+
+			scene = new startMenuScene();
+		}
 	},
 	up: function(coordinate) {
 		
@@ -160,6 +175,11 @@ settingsForNewMapScene.prototype = {
 		onOne = false;
 		if (inArea(mainMouse.coordinate, windowWidth * 0.11, windowHeight * 0.28, windowWidth * 0.3, windowHeight * 0.1)) {
 			onOne = true;
+		}
+
+		backBtnHoverTLC = false;
+		if (inArea(mainMouse.coordinate, windowWidth * 0.11, windowHeight * 0.8, windowWidth * 0.15, windowHeight * 0.05)) {
+			backBtnHoverTLC = true;
 		}
 		
 	},
@@ -176,7 +196,7 @@ settingsForNewMapScene.prototype = {
 				err += "Invalid offset; "
 			}
 		}
-		
+
 		ctx.font = "32px Dynamix";
 		ctx.textAlign = "center";
 		ctx.textBaseline = "alphabetic";
@@ -184,7 +204,7 @@ settingsForNewMapScene.prototype = {
 		ctx.fillText(err, windowWidth/2, windowHeight*0.05);
 		ctx.fillStyle = "#0FF";
 		ctx.textAlign = "left";
-		
+
 		drawBox(ctx, windowWidth * 0.11, windowHeight * 0.28, windowWidth * 0.3, windowHeight * 0.1, 0.8, 10);
 		ctx.fillStyle = "#0FF";
 		if (onOne) {
@@ -206,6 +226,19 @@ settingsForNewMapScene.prototype = {
 		ctx.fillText("OFFSET (sec)", windowWidth * 0.88, windowHeight * 0.45);
 		ctx.fillText("RIGHT SIDE", windowWidth * 0.88, windowHeight * 0.635);
 		
+		// TLC Back Button - Button Graphic
+		drawBox(ctx, windowWidth * 0.11, windowHeight * 0.8, windowWidth * 0.15, windowHeight * 0.05, 0.8, 10);
+		ctx.fillStyle = "#0FF";
+		if (backBtnHoverTLC) {
+			ctx.fillRect(windowWidth * 0.11, windowHeight * 0.8, windowWidth * 0.15, windowHeight * 0.05);
+			ctx.fillStyle = "#000";
+			ctx.fillText("BACK", windowWidth * 0.215, windowHeight * 0.8305);
+		}
+		else {
+			ctx.fillText("BACK", windowWidth * 0.215, windowHeight * 0.8305);
+		}
+
+
 		//Jmak - BPM Help and Version
 		ctx.fillStyle = "#0FF";
 		ctx.font = "25px Dynamix";
@@ -216,10 +249,10 @@ settingsForNewMapScene.prototype = {
 		ctx.font = "25px Dynamix";
 		ctx.textAlign = "center";
 		ctx.fillText("Version 1.12.4", windowWidth * 0.5, windowHeight - 35);
-		
+
 		this.breath = Math.abs(frameCount - 54) / 54;
 		ctx.fillStyle = rgba(0, 255, 255, this.breath * 0.1 + 0.2);
-		
+
 		//Jmak - Animated Text
 		ctx.font = "180px Dynamix";
 		ctx.textAlign = "center";
@@ -233,14 +266,14 @@ settingsForNewMapScene.prototype = {
 		ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5 + windowWidth*(-1 + 2*((absFrameCount + 25)%50/50)), windowHeight*0.03);
 		ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5 + windowWidth*(1 - 2*(absFrameCount%50/50)), windowHeight*1.05);
 		ctx.fillText("DynaMaker by omegaPi", windowWidth * 0.5 + windowWidth*(1 - 2*((absFrameCount + 25)%50/50)), windowHeight*1.05);
-		
-		
+
+
 		ctx.fillStyle = rgba(0, 255, 0, 1);
 		if (mainMouse.coordinate && isFullScreen) {
 			ctx.fillRect(mainMouse.coordinate.x - 7, mainMouse.coordinate.y - 7, 15,15);
 			//ctx.fillText(mainMouse.coordinate.x + "," + mainMouse.coordinate.y, mainMouse.coordinate.x, mainMouse.coordinate.y);
 		}
-		
-		
+
+
 	}
 }
