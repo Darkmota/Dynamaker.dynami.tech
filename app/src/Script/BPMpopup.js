@@ -55,6 +55,7 @@ function bpmPopup()
 	cha.style.backgroundColor = "#191919";
 	cha.style.borderColor = "#0FF";
 	cha.onclick =
+		//NO VERTRAK I'M NOT A CODER
 		//delete popup box on valid input
 		function YEETUS_DELETUS()
 		{
@@ -68,7 +69,7 @@ function bpmPopup()
 				{
 					var fuk = document.createElement("P");
 					fuk.id = "HEY_STOP_THAT";
-					fuk.innerHTML = "Invalid BPM<BR>(JMAK stop that)";
+					fuk.innerHTML = "<br>Invalid BPM";
 					fuk.style.color = "#F00";
 					fuk.style.margin = "0";
 					fuk.style.textAlign = "center";
