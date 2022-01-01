@@ -245,7 +245,7 @@ playView.prototype = {
 		{
 			ctx.textBaseline = "top";
 			//message
-			ctx.font = "bold 48px Orbitron,Noto Sans CJK KR Black";
+			ctx.font = "bold 48px Orbitron,NotoSans";
 			ctx.fillStyle = "#FFF";
 			ctx.textAlign = "left";
 			ctx.globalAlpha = 0.35;

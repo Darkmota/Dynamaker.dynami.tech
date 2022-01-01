@@ -73,7 +73,7 @@ startMenuScene.prototype = {
 		}
 
 		//Jmak - Fixed font for Map/Audio browse
-		ctx.font = "32px Dynamix,Noto Sans CJK KR Black";
+		ctx.font = "32px Dynamix,NotoSans";
 		ctx.textAlign = "left";
 		ctx.textBaseline = "alphabetic";
 		ctx.fillStyle = "#0FF";
