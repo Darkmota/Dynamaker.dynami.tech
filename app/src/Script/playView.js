@@ -47,7 +47,7 @@ var deleteMenu = [
 	["     Delete", 6, 38]
 ];
 function shootParticle(frames, type, x1, y1, d1, x2, y2, d2) {
-	if (! showParticles || (musicCtrl && musicCtrl.paused)) return;
+	if (! showParticles  || (musicCtrl && musicCtrl.paused && !showCS)) return;
 	shadowAnimeList.push([frames, frames, x1, y1, d1, x2, y2, d2, type]);
 }
 
@@ -68,6 +68,22 @@ playView.prototype = {
 		//test
 //		holdBottom = [];
 //		drawMiddleImage(redCanvasU, 0, 0, 160, 93, windowWidth/2, windowHeight/2, 1);
+
+		// Controlling the frame rate of the animations
+		let currDate = new Date();
+		let modifyParticlesInNextFrame = true;
+
+		if (isParticles60FPS) {
+			// let currFrameNo = getFrameNumberOutOf60FromSongTime(thisTime);
+			let currFrameNo = getFrameNumberOutOf60FromMs(currDate.getMilliseconds());
+			console.log(currFrameNo);
+			if (currFrameNo > previousFrameWithParticles) {
+				previousFrameWithParticles = currFrameNo % 60 == 59 ? -1 : currFrameNo % 60;
+			} else {
+				modifyParticlesInNextFrame = false;
+			}
+		}
+
 		//file check
 		{
 			if (loaded < 5 + totalHitBuffer) return;
@@ -600,6 +616,16 @@ playView.prototype = {
 		 at once just like previously.
 		 Changed main side center line + side lines to be thinner to be more consistent with Dynamix.
 
+		 Changed help text to be enabled by toggling.
+		 Fixed the faint blue glow at the bottom half of the screen that pulses according to the song's BPM like in Dynamix.
+		 Add hitsound volume slider and moved hitsound ON/OFF option in the right click menu.
+		 Add ability to restrict the height of mixers in the right click menu. (Above or below 0.4)
+		 Fixed the size of the right click menu, and appearance (Now it will never open with the menu partially outside the screen).
+		 Add option to remove the solid guiding barlines from being displayed after pressing arrow keys.
+		 Limit the frame rate of particles and animations to 60FPS.
+
+		 Add hold particles continue showing when the song is paused. (Like in Dynamix)
+
 		 */
 		var leftTargetDetected = false;
 		var rightTargetDetected = false;
@@ -964,6 +990,9 @@ playView.prototype = {
 			if (mixerLT > 0) mixerLT--;
 			if (mixerRT > 0) mixerRT--;
 
+
+
+
 			for (var i = 0; i < hitAnimeList.length; ++i) {
 				var thisAnime = hitAnimeList[i];
 				var width = thisAnime[2];
@@ -1013,13 +1042,21 @@ playView.prototype = {
 					}
 				}
 				ctx.globalAlpha = 1;
-				thisAnime[0]--;
+
+				if (modifyParticlesInNextFrame) {
+					thisAnime[0]--;
+				}
 				if (thisAnime[0] == 0) {
 					hitAnimeList[i] = false;
 				}
 			}
 
-			if (! low) {
+
+
+			
+
+			if (! low ) {
+
 				shadowAnimeList.sort(function(x, y) {
 					return x[8] - y[8];
 				})
@@ -1079,7 +1116,10 @@ playView.prototype = {
 						//				break;
 						//			}
 					}
-					thisAnime[0]--;
+
+					if (modifyParticlesInNextFrame) {
+						thisAnime[0]--;
+					}
 					if (thisAnime[0] == 0) {
 						shadowAnimeList[i] = false;
 					}
@@ -1097,7 +1137,7 @@ playView.prototype = {
 			}
 
 
-			//TLC - added Mixer resctriction
+			//TLC - added Mixer restriction
 			//bar
 			barL = Math.round((barL + barTargetL)/2);
 			if (barL < 198) {
@@ -1147,14 +1187,16 @@ playView.prototype = {
 		ctx.fillStyle = "#FFF";
 		ctx.fillRect(0, 0, (thisTime - offset*spu)/doration*windowWidth, 7);
 
-		if (hitThisFrame > 0) {
-			hitThisFrame--;
-		}
-		if (hitThisFrame2 > 0) {
-			hitThisFrame2--;
-		}
-		if (hitDouble > 0) {
-			hitDouble--;
+		if (modifyParticlesInNextFrame) {
+			if (hitThisFrame > 0) {
+				hitThisFrame--;
+			}
+			if (hitThisFrame2 > 0) {
+				hitThisFrame2--;
+			}
+			if (hitDouble > 0) {
+				hitDouble--;
+			}
 		}
 
 		//mouse

@@ -1945,3 +1945,33 @@ function uniform2NormalDistribution(){
 	}
 	return sum-3.0;
 }
+
+
+/**
+ * Gets the segment of a second that a frame is in if a second is split into 60 segments.
+ * @param currTime the time that the frame occurs (in seconds).
+ * @returns {number} the segment number of the frame.
+ */
+function getFrameNumberOutOf60FromSongTime(currTime) {
+	let timeFrac = currTime - Math.floor(currTime);
+	return Math.floor(timeFrac * 60);
+}
+
+
+/**
+ * Gets the segment of a second that a certain millisecond is in if a second is split into 60 segments.
+ * @param currMs the millisecond that the frame is occurring in.
+ * @returns {number} the segment number that the millisecond is in.
+ */
+function getFrameNumberOutOf60FromMs(currMs) {
+	return Math.floor((currMs / 1000) * 60);
+}
+
+
+
+
+
+
+
+
+
