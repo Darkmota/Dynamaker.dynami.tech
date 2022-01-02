@@ -208,6 +208,11 @@ var hOn = false;
 /** Restrict Mixer Height toggle. */
 var restrictMixerHeight = true;
 
+/** Restrict Particles to 60FPS. */
+var isParticles60FPS = true;
+// var particlesShownInFrameArr = Array.apply(null, Array(60)).map((val, i) => false);
+var previousFrameWithParticles = -1;
+
 //TLC Options
 /** false: Arrow keys toggle 2 options of bar lines instead of 3. The solid bar line option is left out. */
 var includeSolidBarLine = false;
