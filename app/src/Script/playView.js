@@ -47,7 +47,7 @@ var deleteMenu = [
 	["     Delete", 6, 38]
 ];
 function shootParticle(frames, type, x1, y1, d1, x2, y2, d2) {
-	if (! showParticles || (musicCtrl && musicCtrl.paused)) return;
+	if (! showParticles  || (musicCtrl && musicCtrl.paused && !showCS)) return;
 	shadowAnimeList.push([frames, frames, x1, y1, d1, x2, y2, d2, type]);
 }
 
@@ -623,6 +623,8 @@ playView.prototype = {
 		 Fixed the size of the right click menu, and appearance (Now it will never open with the menu partially outside the screen).
 		 Add option to remove the solid guiding barlines from being displayed after pressing arrow keys.
 		 Limit the frame rate of particles and animations to 60FPS.
+
+		 Add hold particles continue showing when the song is paused. (Like in Dynamix)
 
 		 */
 		var leftTargetDetected = false;
