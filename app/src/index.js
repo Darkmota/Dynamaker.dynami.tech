@@ -155,18 +155,18 @@ const template = [
          {
             role: 'toggledevtools'
          },
-         {
-            type: 'separator'
-         },
-         {
-            role: 'resetzoom'
-         },
-         {
-            role: 'zoomin'
-         },
-         {
-            role: 'zoomout'
-         },
+         // {
+         //    type: 'separator'
+         // },
+         // {
+         //    role: 'resetzoom'
+         // },
+         // {
+         //    role: 'zoomin'
+         // },
+         // {
+         //    role: 'zoomout'
+         // },
          {
             type: 'separator'
          },
@@ -192,12 +192,30 @@ const template = [
       role: 'Help',
       submenu: [
          {
-            label:'About',
+            label:'DynaMaker Modified',
             click() { 
                 shell.openExternal('https://github.com/jmakxd/dynamaker-modified')
             },
             accelerator: 'CmdOrCtrl+Shift+C'
-        }
+        },
+        {
+            label:'DynaMaker Guide',
+            click() { 
+                shell.openExternal('https://tlchicken.github.io/dynamaker-guide/')
+            }
+         },
+         {
+            label:'DyM Chart Tool',
+            click() { 
+                  shell.openExternal('https://github.com/Jono997/dym-chart-tool')
+            }
+         },
+         {
+            label:'DynaMaker',
+            click() { 
+                  shell.openExternal('https://dynamaker.tunergames.com/')
+            }
+         }
       ]
    }
 ]

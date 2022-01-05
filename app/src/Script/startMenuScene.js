@@ -205,7 +205,7 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix";
-			ctx.fillText("[ F11 ] to fullscreen, [ Alt ] to show control menu, [ Ctrl -/Shift + ] to zoom in/out", windowWidth * 0.5, windowHeight * 0.75);
+			ctx.fillText("[ F11 ] to toggle fullscreen, [ Alt ] to show control menu", windowWidth * 0.5, windowHeight * 0.75);
 
 			if (this.choice == 1 && musicFileOk) {
 				ctx.fillStyle = "#0F0";
