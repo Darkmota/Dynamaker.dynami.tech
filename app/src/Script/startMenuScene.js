@@ -205,7 +205,7 @@ startMenuScene.prototype = {
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#0FF";
 			ctx.font = "25px Dynamix";
-			ctx.fillText("[ F11 ] to toggle fullscreen, [ Alt ] to show control menu", windowWidth * 0.5, windowHeight * 0.75);
+			ctx.fillText("[ F11 ] to toggle fullscreen, [ Alt ] to show control menu, [ Ctrl -/Shift + ] to zoom in/out", windowWidth * 0.5, windowHeight * 0.75);
 
 			if (this.choice == 1 && musicFileOk) {
 				ctx.fillStyle = "#0F0";
@@ -236,7 +236,7 @@ startMenuScene.prototype = {
 		ctx.fillStyle = "#0FF";
 		ctx.font = "15px Dynamix";
 		ctx.textAlign = "right";
-		ctx.fillText("©Assets Copyrighted by C4Cat", windowWidth * 0.95, windowHeight * 0.05);
+		ctx.fillText("©Assets Copyrighted by C4Cat", windowWidth * 0.96, windowHeight * 0.05);
 		ctx.fillText("Special thanks to AXIS5, Syncable and whitelava3203", windowWidth * 0.28, windowHeight * 0.05);
 
 		ctx.font = "180px Dynamix";

@@ -11,14 +11,10 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-   width: 1745,
-   height: 1012,
+   width: 1618,
+   height: 940,
    fullscreen: false,
    autoHideMenuBar: true,
-   //Jmak & keanucode - declare first launch zoom
-   webPreferences: {
-     zoomFactor: 0.9,
-   },
  });
 
   // and load the index.html of the app.
@@ -155,18 +151,18 @@ const template = [
          {
             role: 'toggledevtools'
          },
-         // {
-         //    type: 'separator'
-         // },
-         // {
-         //    role: 'resetzoom'
-         // },
-         // {
-         //    role: 'zoomin'
-         // },
-         // {
-         //    role: 'zoomout'
-         // },
+         {
+            type: 'separator'
+         },
+         {
+            role: 'resetzoom'
+         },
+         {
+            role: 'zoomin'
+         },
+         {
+            role: 'zoomout'
+         },
          {
             type: 'separator'
          },
