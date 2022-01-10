@@ -24,7 +24,7 @@ To download, please navigate to the "Releases" tab and download the latest versi
 Downloading in China 中國下載鏈接: https://share.weiyun.com/yHDBo6GD
 
 # Special Thanks 特別鳴謝
-Syncable, 錫爾/Sylvex, Aploplex, 天堂EGHD
+Syncable, 錫爾/Sylvex, Aploplex, 天堂EGHD, AXIS5
 
 # Copyright Disclaimer 版權聲明
 All assets used in DynaMaker are borrowed from Dynamix, created by C4Cat Entertainment Limited.
