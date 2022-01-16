@@ -35,6 +35,9 @@ DynaMaker Website Version 網頁版: https://dynamaker.tunergames.com/
 
 # Failed Experiments
 Lane Flash - Hold and sub notes can't be detected properly
+
 Auto re-scaling - Mouse is out of canvas if re-scaled
+
 First launch zoom - 100% fullscreen is no longer possible (doesn't fit the whole screen)
+
 Hold particles frequency - Hardcoded
