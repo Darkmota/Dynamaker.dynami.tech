@@ -1631,7 +1631,7 @@ function hitAnime(place, type, width, x, frames) {
 			var shootFrame = 24;
 			width = 234;
 			for (var i = 0; i < Math.ceil(width / 30 +0.1); ++i) {
-				//Jmak w/ GOD - Particles Revamp
+				//Jmak w/ Special Guest - Particles Revamp
 				//Purple
 				sx1 = lr;
 				sy1 = x - width/2 + Math.random()*width;
@@ -1684,7 +1684,7 @@ function hitAnime(place, type, width, x, frames) {
 			var shootFrame = 24;
 			width = 234;
 			for (var i = 0; i < Math.ceil(width / 30+0.1); ++i) {
-				//Jmak w/ GOD - Particles Revamp
+				//Jmak w/ Special Guest - Particles Revamp
 				//Purple
 				sx1 = windowWidth - lr;
 				sy1 = x - width/2 + Math.random()*width;
@@ -1734,7 +1734,7 @@ function hitAnime(place, type, width, x, frames) {
 	//case 0 1 2 Bottom Left Right
 	switch (place) {
 		case 0:
-			//Jmak w/ GOD - Particles Revamp
+			//Jmak w/ Special Guest - Particles Revamp
 			//Bottom
 			//Purple
 			var shootFrame = 24;
@@ -1783,7 +1783,7 @@ function hitAnime(place, type, width, x, frames) {
 			//Left
 			var shootFrame = 24;
 			for (var i = 0; i < Math.ceil(width / 30 +0.1); ++i) {
-			//Jmak w/ GOD - Particles Revamp
+			//Jmak w/ Special Guest - Particles Revamp
 			//Purple
 				sx1 = lr;
 				sy1 = x - width/2 + Math.random()*width;
@@ -1835,7 +1835,7 @@ function hitAnime(place, type, width, x, frames) {
 			}
 			break;
 		case 2:
-			//Jmak w/ GOD - Particles Revamp
+			//Jmak w/ Special Guest - Particles Revamp
 			//Right
 			//Purple
 			var shootFrame = 24;

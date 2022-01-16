@@ -32,3 +32,9 @@ All assets used in DynaMaker are borrowed from Dynamix, created by C4Cat Enterta
 DynaMaker使用的所有資源是由C4Cat Entertainment Limited創建的Dynamix（炫光動感）借用的。
 
 DynaMaker Website Version 網頁版: https://dynamaker.tunergames.com/
+
+# Failed Experiments
+Lane Flash - Hold and sub notes can't be detected properly
+Auto re-scaling - Mouse is out of canvas if re-scaled
+First launch zoom - 100% fullscreen is no longer possible (doesn't fit the whole screen)
+Hold particles frequency - Hardcoded

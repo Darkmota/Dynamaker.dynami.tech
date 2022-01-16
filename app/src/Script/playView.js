@@ -666,7 +666,7 @@ playView.prototype = {
 					}
 					break;
 
-				//Jmak w/ GOD - Hold particles amount is Hardcoded
+				//Jmak w/ Special Guest - Hold particles amount is Hardcoded
 				case "HOLD":
 					var subTime = GetBar(noteDown[noteDown[i].m_subId].m_time);
 					var dis2 = hiSpeed*(subTime - thisTime);
@@ -733,7 +733,7 @@ playView.prototype = {
 					}
 					break;
 
-				//Jmak w/ GOD - Hold particles amount is Hardcoded
+				//Jmak w/ Special Guest - Hold particles amount is Hardcoded
 				case "HOLD":
 					var subTime = GetBar(noteLeft[noteLeft[i].m_subId].m_time);
 					var dis2 = hiSpeed*(subTime - thisTime);
@@ -822,7 +822,7 @@ playView.prototype = {
 					}
 					break;
 
-				//Jmak w/ GOD - Hold particles amount is Hardcoded
+				//Jmak w/ Special Guest - Hold particles amount is Hardcoded
 				case "HOLD":
 					var subTime = GetBar(noteRight[noteRight[i].m_subId].m_time);
 					var dis2 = hiSpeed*(subTime - thisTime);
@@ -1085,18 +1085,18 @@ playView.prototype = {
 						ctx.scale(1.5 - Math.pow(shadowRate, 5), 1.5 - Math.pow(shadowRate, 3));
 						switch (type) {
 							case 0: // Purple
-							//	ctx.globalAlpha = 0.7 - 0.7*Math.pow(shadowRate, 2);
-								ctx.globalAlpha = 0.45 - 0.45*Math.pow(shadowRate, 4);
+							//	ctx.globalAlpha = 0.45 - 0.45*Math.pow(shadowRate, 2);
+								ctx.globalAlpha = 0.7 - 0.7*Math.pow(shadowRate, 2);
 								ctx.drawImage(purpleParticleCanvas, -58, -73);
 								break;
 							case 1: // Yellow
-							//	ctx.globalAlpha = 0.9 - 0.9*Math.pow(shadowRate, 2);
-								ctx.globalAlpha = 0.65 - 0.65*Math.pow(shadowRate, 1.8);
+							//	ctx.globalAlpha = 0.9 - 0.9*Math.pow(shadowRate, 1.8);
+								ctx.globalAlpha = 0.65 - 0.65*Math.pow(shadowRate, 2);
 								ctx.drawImage(yellowParticleCanvas, -58, -73);
 								break;
 							case 2: // White
-							//	ctx.globalAlpha = 0.95 - 0.95*Math.pow(shadowRate, 2);
-								ctx.globalAlpha = 0.35 - 0.35 *Math.pow(shadowRate, 2.5);
+							//	ctx.globalAlpha = 0.95 (0.35) - 0.95*Math.pow(shadowRate, 2.5);
+								ctx.globalAlpha = 0.55 - 0.55 *Math.pow(shadowRate, 2);
 								ctx.drawImage(whiteParticleCanvas, -58, -73);
 							default:
 								break;
