@@ -213,6 +213,9 @@ var isParticles60FPS = true;
 // var particlesShownInFrameArr = Array.apply(null, Array(60)).map((val, i) => false);
 var previousFrameWithParticles = -1;
 
+/** Display Error Messages. */
+var errorMsgContainer = [];
+
 //TLC Options
 /** false: Arrow keys toggle 2 options of bar lines instead of 3. The solid bar line option is left out. */
 var includeSolidBarLine = false;
@@ -572,11 +575,46 @@ var main = function () {
 	// 	ctx.fillStyle = "rgba(0,0,0,1)";
 	// 	ctx.fillRect(0, windowHeight - ud, windowWidth, ud);
 	// }
-	mainKeybord.refresh();
-	mainPlayView.refresh();
-	mainFpsWatcher.refresh();
-	if (mainMouse) { mainMouse.refresh() }
-	if (scene) { scene.refresh() }
+
+	try {
+		mainKeybord.refresh();
+		mainPlayView.refresh();
+		mainFpsWatcher.refresh();
+		if (mainMouse) {
+			mainMouse.refresh()
+		}
+		if (scene) {
+			scene.refresh()
+		}
+
+	} catch (e) {
+		errorMsgContainer.push(e);
+	}
+
+	// TLC - Displaying of error message with info
+	if (errorMsgContainer.length >= 1) {
+		ctx.fillStyle = "red";
+		ctx.font = "52px Dynamix";
+		ctx.textAlign = "center";
+
+		ctx.fillText("An Error Occured!", windowWidth / 2, windowHeight / 8)
+		ctx.fillText("Please ensure that your chart file is not corrupted.", windowWidth / 2, 7 * windowHeight / 8);
+
+		ctx.font = "20px Dynamix";
+
+		// Starts at 2 because I don't want to add 2 to all the "lineNo" in the for loop
+		let lineNo = 2;
+
+		// Displays the latest 5 error messages
+		// Truncates the error message if it is longer than 150 characters
+		for (let i = Math.max(0, errorMsgContainer.length - 5); i < errorMsgContainer.length; i++) {
+			ctx.fillText(errorMsgContainer[i].name, windowWidth / 2, (windowHeight / 8) * lineNo);
+			ctx.fillText(errorMsgContainer[i].message.length > 150 ? errorMsgContainer[i].message.substring(0, 150) + "..." : errorMsgContainer[i].message, windowWidth / 2, (windowHeight / 8) * lineNo + windowHeight / 32);
+			ctx.fillText(errorMsgContainer[i].stack.length > 150 ? errorMsgContainer[i].stack.substring(0, 150) + "..." : errorMsgContainer[i].stack, windowWidth / 2, (windowHeight / 8) * lineNo + windowHeight / 16);
+			lineNo++;
+		}
+	}
+
 	requestAnimationFrame(main);
 };
 
