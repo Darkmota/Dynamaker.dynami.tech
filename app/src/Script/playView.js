@@ -77,7 +77,7 @@ playView.prototype = {
 			// let currFrameNo = getFrameNumberOutOf60FromSongTime(thisTime);
 			let currFrameNo = getFrameNumberOutOf60FromMs(currDate.getMilliseconds());
 			console.log(currFrameNo);
-			if (currFrameNo > previousFrameWithParticles) {
+			if (currFrameNo > previousFrameWithParticles || currFrameNo < previousFrameWithParticles) {
 				previousFrameWithParticles = currFrameNo % 60 == 59 ? -1 : currFrameNo % 60;
 			} else {
 				modifyParticlesInNextFrame = false;
