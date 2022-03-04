@@ -30,14 +30,14 @@ var basicMenu = [
 	["[1]  Normal note", 46, 38, rgba(0, 255, 255, 0.8)],
 	["[2]  Chain note", 86, 38, rgba(255, 128, 128, 0.8)],
 	["[3]  Hold note", 126, 38, rgba(255, 255, 0, 0.8)],
-	["[4]  Edit mode", 166, 38, rgba(255, 255, 255, 0.8)],
+	["[4]  編輯模式", 166, 38, rgba(255, 255, 255, 0.8)],
 	["[_]  Pause/Play", 206, 38],
 	["     Mark here", 246, 38, rgba(128, 128, 255, 0.8)],
 	["[M]  Start from mark", 286, 38, rgba(128, 128, 255, 0.8)],
-	["[R]  Replay", 326, 38],
-	["     Save as .xml", 366, 38],
-	["     Save as .dy", 406, 38],
-	["     Background", 446, 38],
+	["[R]  重頭播放", 326, 38],
+	["     另存為 .xml", 366, 38],
+	["     另存為 .dy", 406, 38],
+	["     背景", 446, 38],
 	["     Mixer Height", 486, 38],
 	["     Animation", 526, 38],
 	["     Hitsound Vol", 566, 38],
@@ -321,7 +321,7 @@ playView.prototype = {
 			ctx.globalAlpha = 1;
 
 			if (showCS) ctx.globalAlpha = 0;
-			ctx.font = "22px Dynamix";
+			ctx.font = "22px Dynamix,NotoSans";
 			ctx.fillStyle = "#FFF";
 			ctx.textAlign = "right";
 			//ctx.fillText(((realTime - baseTime)/1000).toFixed(3) + " s (REAL)", 0, 50);
@@ -329,30 +329,30 @@ playView.prototype = {
 			if (musicCtrl.paused) {
 				ctx.fillStyle = "#0F0";
 			}
-			ctx.fillText(offset + " Bar offset (O- P+)", windowWidth, windowHeight - 30);
-			ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 55);
+			ctx.fillText(offset + " 小節線延遲/偏移 (O- P+)", windowWidth, windowHeight - 30);
+			ctx.fillText(musicCtrl.currentTime.toFixed(3) + " 秒 (音樂)", windowWidth, windowHeight - 55);
 
-			ctx.fillText((hiSpeed/1000).toFixed(1) + " x Hispeed (Q- E+)", windowWidth*0.82, windowHeight - 30);
+			ctx.fillText((hiSpeed/1000).toFixed(1) + " x 下落速度 (Q- E+)", windowWidth*0.80, windowHeight - 30);
 			if (audioRate < 0.5 || audioRate > 4.0) {
 				ctx.fillStyle = "#F88";
 			}
-			ctx.fillText(audioRate.toFixed(1) + " x Rate (S- W+)", windowWidth*0.82, windowHeight - 55);
+			ctx.fillText(audioRate.toFixed(1) + " x 播放速度 (S- W+)", windowWidth*0.80, windowHeight - 55);
 
 			if (hOn) {
 				ctx.textAlign = "left";
 				ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
 				//Left Region
-				ctx.fillText("(B) scroll direction", windowWidth*0.26, windowHeight - 80);
-				ctx.fillText("(Z) un/lock bar", windowWidth*0.26, windowHeight - 55);
-				ctx.fillText("(X) un/lock X-axis", windowWidth*0.26, windowHeight - 30);
+				ctx.fillText("(B) 鼠標滾輪方向", windowWidth*0.26, windowHeight - 80);
+				ctx.fillText("(Z) 鎖定/解鎖小節", windowWidth*0.26, windowHeight - 55);
+				ctx.fillText("(X) 鎖定/解鎖X軸", windowWidth*0.26, windowHeight - 30);
 				//Middle Region
-				ctx.fillText("(←↓→)  barlines", windowWidth*0.41, windowHeight - 80);
-				ctx.fillText("(C- V+) ±division", windowWidth*0.41, windowHeight - 55);
-				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.41, windowHeight - 30);
+				ctx.fillText("(←↓→)  小節線", windowWidth*0.38, windowHeight - 80);
+				ctx.fillText("(C- V+) ±小節切分數", windowWidth*0.38, windowHeight - 55);
+				ctx.fillText("(A- D+) ±[0.01]1s", windowWidth*0.38, windowHeight - 30);
 				//Right Region
-				ctx.fillText("(F11) fullscreen", windowWidth*0.53, windowHeight - 80);
-				ctx.fillText("(Shift← →) un/redo", windowWidth*0.53, windowHeight - 55);
-				ctx.fillText("(L) reduce note lag", windowWidth*0.53, windowHeight - 30);
+				ctx.fillText("(F11) 全屏", windowWidth*0.52, windowHeight - 80);
+				ctx.fillText("(Shift← →) 撤銷/恢復", windowWidth*0.52, windowHeight - 55);
+				ctx.fillText("(L) 簡潔模式", windowWidth*0.52, windowHeight - 30);
 			}
 //		ctx.fillText(offset + " s offset (O- P+)", windowWidth, windowHeight - 25);
 //		ctx.fillText(musicCtrl.currentTime.toFixed(3) + " s (MUSIC)", windowWidth, windowHeight - 50);
@@ -1483,15 +1483,15 @@ playView.prototype = {
 					basicMenu[3][3] = ((editSide == 1 && CMap.m_leftRegion == "MIXER") || (editSide == 2 && CMap.m_rightRegion == "MIXER")) || (editSide == 3) ? rgba(128, 128, 128, 0.8) : rgba(255, 255, 0, 0.8);
 					if(editSide==3)
 					{
-						basicMenu[1][0]="[1]  BPM change";
-						basicMenu[2][0]="[2]  None";
-						basicMenu[3][0]="[3]  None";
+						basicMenu[1][0]="[1]  變速";
+						basicMenu[2][0]="[2]  無";
+						basicMenu[3][0]="[3]  無";
 					}
 					else if(editSide==0||editSide==1||editSide==2)
 					{
-						basicMenu[1][0]="[1]  Normal note";
-						basicMenu[2][0]="[2]  Chain note";
-						basicMenu[3][0]="[3]  Hold note";
+						basicMenu[1][0]="[1]  Normal 藍鍵";
+						basicMenu[2][0]="[2]  Chain 紅鍵";
+						basicMenu[3][0]="[3]  Hold 長條";
 					}
 
 					if (between(mainMouse.coordinate.x, rx, rx + 400) && between(mainMouse.coordinate.y, ry + 566, ry + 604) && musicCtrl) {
@@ -1530,38 +1530,38 @@ playView.prototype = {
 					switch (editSide){
 						case 0:
 							ctx.fillRect(rx + 100, ry + 6, 100, 38);
-							basicMenu[0][0] = "[↑]  Edit ↓";
+							basicMenu[0][0] = "[↑]  編輯 ↓";
 							break;
 						case 1:
 							ctx.fillRect(rx, ry + 6, 100, 38);
-							basicMenu[0][0] = "[↑]  Edit ←";
+							basicMenu[0][0] = "[↑]  編輯 ←";
 							break;
 						case 2:
 							ctx.fillRect(rx + 200, ry + 6, 100, 38);
-							basicMenu[0][0] = "[↑]  Edit →";
+							basicMenu[0][0] = "[↑]  編輯 →";
 							break;
 						case 3:
 							ctx.fillRect(rx + 300, ry + 6, 100, 38);
-							basicMenu[0][0] = "[#]  Edit #";
+							basicMenu[0][0] = "[#]  編輯 #";
 							break;
 						default:
 							break;
 					}
 					//TLC & Jmak - Added Mixer restriction (0.4)
-					basicMenu[6][0] = "     Mark at " + (thisTime / spq / 32).toFixed(3);
-					basicMenu[7][0] = "[M]  Start from " + Number(markSecion).toFixed(3);
-					basicMenu[12][0] = "     Mixer Limiter " + (restrictMixerHeight ? "ON" : "OFF");
+					basicMenu[6][0] = "     標記 " + (thisTime / spq / 32).toFixed(3);
+					basicMenu[7][0] = "[M]  從標記點開始 " + Number(markSecion).toFixed(3);
+					basicMenu[12][0] = "     Mixer 限制 " + (restrictMixerHeight ? "開" : "關");
 					//basicMenu[12][0] = "     Mixer " + (restrictMixerHeight ? "ABOVE" : "BELOW") + " 0.4";
-					basicMenu[13][0] = "     Particles " + (showParticles ? "ON" : "OFF");
-					basicMenu[14][0] = "     Hitsound " + (showHitSound ? "Vol " + Math.round(hitSoundGainNode.gain.value * 100) + "%" : "OFF");
-					basicMenu[15][0] = "     Music Volume " + Math.round(musicCtrl.volume * 100) + "%";
+					basicMenu[13][0] = "     粒子特效 " + (showParticles ? "開" : "關");
+					basicMenu[14][0] = "     打擊聲" + (showHitSound ? "量 " + Math.round(hitSoundGainNode.gain.value * 100) + "%" : " 關");
+					basicMenu[15][0] = "     音樂聲量 " + Math.round(musicCtrl.volume * 100) + "%";
 					if (musicCtrl) {
 						if (musicCtrl.paused) {
-							basicMenu[5][0] = "[_]  Play";
+							basicMenu[5][0] = "[_]  播放";
 							basicMenu[5][3] = "rgba(0, 255, 0, 0.8)";
 						}
 						else {
-							basicMenu[5][0] = "[_]  Pause";
+							basicMenu[5][0] = "[_]  暫停";
 							basicMenu[5][3] = "rgba(255, 0, 0, 0.8)";
 						}
 					}
