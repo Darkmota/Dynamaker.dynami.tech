@@ -193,7 +193,7 @@ settingsForNewMapScene.prototype = {
 				err += "Invalid BarPerMinute; "
 			}
 			if (! offsetName || isNaN(Number(offsetName.value))) {
-				err += "Invalid offset; "
+				err += "Invalid offset"
 			}
 		}
 

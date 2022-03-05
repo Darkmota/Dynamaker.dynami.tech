@@ -342,9 +342,9 @@ playView.prototype = {
 				ctx.textAlign = "left";
 				ctx.fillStyle = "rgba(128, 128, 128, 0.8)";
 				//Left Region
-				ctx.fillText("(B) scroll direction", windowWidth*0.26, windowHeight - 80);
-				ctx.fillText("(Z) un/lock bar", windowWidth*0.26, windowHeight - 55);
-				ctx.fillText("(X) un/lock X-axis", windowWidth*0.26, windowHeight - 30);
+				ctx.fillText("(B) scroll direction", windowWidth*0.22, windowHeight - 80);
+				ctx.fillText("(Z) hold to un/lock bar", windowWidth*0.22, windowHeight - 55);
+				ctx.fillText("(X) hold to un/lock X-axis", windowWidth*0.22, windowHeight - 30);
 				//Middle Region
 				ctx.fillText("(←↓→)  barlines", windowWidth*0.41, windowHeight - 80);
 				ctx.fillText("(C- V+) ±division", windowWidth*0.41, windowHeight - 55);
@@ -1484,7 +1484,7 @@ playView.prototype = {
 					if(editSide==3)
 					{
 						basicMenu[1][0]="[1]  BPM change";
-						basicMenu[2][0]="[2]  None";
+						basicMenu[2][0]="[2]  Save for Dynamite";
 						basicMenu[3][0]="[3]  None";
 					}
 					else if(editSide==0||editSide==1||editSide==2)
