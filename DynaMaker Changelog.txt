@@ -5,6 +5,34 @@ Originally by omegaPi 由omegaPi創建, BPM change function created by whitelava
 Supported Platforms 支援平台
 Windows (64-bit), macOS (64-bit)
 
+1.21.4 (28/3/2022)
+- Added .mp4 playback support 現已支援.mp4播放
+- Added .dy chart support 現已支援.dy譜面格式
+- Added Horneee(D) difficulty 添加Horneee難度
+- Two new language support 兩種新語言: Traditional Chinese 繁體中文， Simplified Chinese 简体中文
+  - Please download a different .exe for each language. 請各位另外下載不同語言的版本
+- Added a hit sound Volume Slider 添加打擊聲音量調整
+- Added a Back button in the New Map Menu 已在創建譜組的頁面添加返回的按鈕
+- Added error message 增加錯誤信息
+- Changed hit sound effects 更改打擊音效
+- Refined particle effect 優化粒子特效
+- Refined Start Menu 優化主頁面
+- Returned Save for Dynamite button in BPM Change Section 重新增加變速部分中的 Save for Dynamite 按鈕 
+- Right-Click Menu Adjustments 右鍵畫面的改動
+  - Added a Mixer Limiter button (Mixer will/won't go below 0.4 visually) 添加Mixer限制的按鈕（視覺上Mixer會/不會低過0.4）
+  - Repositioned hit sound + slider, particles and volume slider 重新定位了打擊聲量條，按鍵效果和音樂聲量條的位置
+  - Fixed the button [2] at # category from popping out a save window 已修正#裡的[2]按鈕會彈出存檔的視窗
+- Some visual changes 一些視覺上的改動
+  - Fixed centre shadow glow 已修正中間發光的陰影
+  - Adjusted BPM line length to stretch to fill the window 修改BPM線的寬度
+  - ()Fixed framerate issue when FPS is higher than 60 修復幀率高於60出現的問題 
+  - Fixed font issue in Start Menu 修復主頁面的字形問題
+  - Fixed mouse pointer not aligning in the Start Menu 修復鼠標在主頁面不對齊的問題
+  - Fixed right-click menu going out of screen issue 修正右鍵時屏幕範圍外選單被遮蓋的問題
+  - Fixed Hold notes particles fading away when preview is paused 修復暫停播放會令Hold音符的打擊效果逐漸消失的問題
+- Adjusted some information alignments 調整詳細信息
+  - Changed main menu descriptions 更改了主頁面的說明
+
 1.21.3 (1/9/2021)
 - Reduced app size for Windows 減少Windows程式大小
 	- 421MB -> 63MB

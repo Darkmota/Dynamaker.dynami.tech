@@ -20,11 +20,9 @@ GitHub: https://github.com/keanuplayz
 YouTube: https://www.youtube.com/channel/UCGFolmtneMB2DGChRq5MXTQ
 Twitter: https://twitter.com/KeanuRAR
 
-4. Syncable
+Special Thanks
+1. Syncable
 YouTube: https://www.youtube.com/channel/UCDEBuPDqjkCyMfQ5ZgY3P1A
-
-5. AXIS5
-Bilibili: https://space.bilibili.com/378865591
 
 BPM Change Creator:
 whitelava3203: https://github.com/whitelava3203
@@ -37,3 +35,4 @@ Testers:
 2. 錫爾/Sylvex
 3. Aploplex
 4. 天堂EGHD
+5. Protoz
