@@ -11,7 +11,7 @@ This version is packaged with Electron and JavaScript
 Windows (64-bit), macOS (64-bit), Linux (Run Source Code with Command Prompt)
 
 # Creators 創作者
-Jmak, TLC, Vertrak, keanucode, Jono997, AXIS5
+Jmak, TLC, Vertrak, keanucode, Jono997, AXIS5, i0nTempest
 
 BPM change function created by whitelava3203
 
