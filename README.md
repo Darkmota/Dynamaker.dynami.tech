@@ -8,7 +8,9 @@ This version is packaged with Electron and JavaScript
 該版本與Electron以及其他JavaScript編碼打包
 
 # Supported Platforms 支援平台
-Windows (64-bit), macOS (64-bit), Linux (Run Source Code with Command Prompt)
+Windows (64-bit), macOS (64-bit), Linux (Run Source Code with console or terminal)
+
+視窗(64位元), macOS(64位元), Linux(使用控制檯或終端運行源代碼)
 
 Use on Web Browser (thanks to NagaseIori): https://dym.iorinn.moe/app/src/
 
