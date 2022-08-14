@@ -1,6 +1,6 @@
 {
   "name": "dynamaker",
-  "version": "1.21.4",
+  "version": "1.21.4.1",
   "description": "DynaMaker",
   "main": "src/index.js",
   "scripts": {

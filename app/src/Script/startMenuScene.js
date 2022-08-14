@@ -207,9 +207,9 @@ startMenuScene.prototype = {
 			ctx.font = "25px Dynamix";
 			//i0ntempest - Shortcuts for macOS (menu bar is controlled by mouse)
 			if (navigator.userAgent.indexOf("Mac") != -1) {
-				ctx.fillText("[ Control Cmd F ] to toggle fullscreen, [ Alt ] to show menu bar, [ Cmd -/+ ] to zoom in/out", windowWidth * 0.5, windowHeight * 0.75);
+				ctx.fillText("[ Control Cmd F ] to toggle fullscreen, [ Cmd -/+ ] to zoom in/out", windowWidth * 0.5, windowHeight * 0.75);
 			} else {
-				ctx.fillText("[ F11 ] to toggle fullscreen, [ Alt ] to show menu bar, [ Ctrl -/Shift + ] to zoom in/out", windowWidth * 0.5, windowHeight * 0.75);
+				ctx.fillText("[ F11 ] to toggle fullscreen, [ Ctrl -/Shift + ] to zoom in/out", windowWidth * 0.5, windowHeight * 0.75);
 			}
 
 			if (this.choice == 1 && musicFileOk) {

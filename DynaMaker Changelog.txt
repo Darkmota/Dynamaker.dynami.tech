@@ -1,9 +1,12 @@
 DynaMaker Update Changelog 更新日誌
-Modified by TLChicken, Jmak, Vertrak, keanucode and Jono997 由上述修改
+Modified by TLChicken, Jmak, Vertrak, keanucode, Jono997, i0nTempest 由上述修改
 Originally by omegaPi 由omegaPi創建, BPM change function created by whitelava3203 BPM修改工具由whitelava3203創建
 
 Supported Platforms 支援平台
 Windows (64-bit), macOS (64-bit)
+
+1.21.4.1 (15/8/2022)
+- macOS improvements 進行macOS優化
 
 1.21.4 (28/3/2022)
 - Added .mp4 playback support 現已支援.mp4播放
