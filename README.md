@@ -10,6 +10,8 @@ This version is packaged with Electron and JavaScript
 # Supported Platforms 支援平台
 Windows (64-bit), macOS (64-bit), Linux (Run Source Code with Command Prompt)
 
+Use on Web Browser (thanks to NagaseIori): https://dym.iorinn.moe/app/src/
+
 # Creators 創作者
 Jmak, TLC, Vertrak, keanucode, Jono997, AXIS5, i0nTempest
 
