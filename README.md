@@ -1,28 +1,28 @@
 # DynaMaker
-This is a modified version of DynaMaker (combining DynaRemix and DynaMaker Website Version) that allows users to create fanmade charts for Dynamite towards charting through DynaMaker, originally created by omegaPi. 
+This is a modified version of DynaMaker that allows users to create fanmade charts for Dynamite towards charting through DynaMaker, originally created by omegaPi. 
 
 This version is packaged with Electron and JavaScript
 
-這是DynaMaker的修改版本（合拼DynaRemix 和網頁版DynaMaker），允許用戶使用更多功能為Dynamite創建自製譜面（由omegaPi創建）。
+這是DynaMaker的修改版本，允許用戶使用更多功能為Dynamite創建自製譜面（由omegaPi創建）。
 
 該版本與Electron以及其他JavaScript編碼打包
 
 # Supported Platforms 支援平台
 Windows (64-bit), macOS (64-bit), Linux (Run Source Code with console or terminal)
 
-視窗(64位元), macOS(64位元), Linux(使用控制檯或終端運行源代碼)
+Windows(64位元), macOS(64位元), Linux(使用控制檯或終端運行源代碼)
 
 Use on Web Browser (thanks to NagaseIori): https://dym.iorinn.moe/app/src/
 
 # Creators 創作者
-Jmak, TLC, Vertrak, keanucode, Jono997, AXIS5, i0nTempest
+Jmak, TLChicken, Vertrak, keanucode, Jono997, AXIS5, i0nTempest
 
 BPM change function created by whitelava3203
 
 Program originally created by omegaPi
 
 # Screenshots 截圖
-![](https://cdn.discordapp.com/attachments/984498218400374875/984501655431176202/Screenshot_09-06-2022_175600.png)
+![](https://cdn.discordapp.com/attachments/984498218400374875/1009147553683615947/unknown.png)
 
 ![](https://cdn.discordapp.com/attachments/984498218400374875/984501655716393040/Screenshot_09-06-2022_175714.png)
 
