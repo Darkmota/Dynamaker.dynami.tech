@@ -806,28 +806,73 @@ function addEvent(obj,xEvent,fn) {
     }
 }
 
-function fullScreen() {
-	var docElm = document.documentElement;
-	if (docElm.requestFullscreen) { 
-	  docElm.requestFullscreen(); 
-	}
+function updateCanvasDimensions() {
+    windowWidth = window.innerWidth;
+    windowHeight = window.innerHeight;
+    
+    // Update canvas dimensions
+    canvas.width = windowWidth;
+    canvas.height = windowHeight;
+    
+    // Update other canvases
+    if (maskCanvas) {
+        maskCanvas.width = windowWidth;
+        maskCanvas.height = windowHeight;
+    }
+    if (bgCanvas) {
+        bgCanvas.width = windowWidth;
+        bgCanvas.height = windowHeight;
+    }
+    if (playCanvas) {
+        playCanvas.width = Math.ceil(windowWidth * 1.067);
+        playCanvas.height = Math.ceil(windowHeight * 1.222);
+    }
+    
+    // Update game area dimensions
+    lr = olr * windowWidth / 1920;
+    ud = oud * windowHeight / 1080;
+    udUnit = 270 * windowWidth / 1920;
+    lrUnit = 135 * windowHeight / 1920;
+    
+    // Redraw background if needed
+    if (typeof backGroundUpdate === 'function') {
+        backGroundUpdate();
+    }
+}
 
-	//FireFox 
-	else if (docElm.mozRequestFullScreen) { 
-	  docElm.mozRequestFullScreen(); 
-	}
-	
-	//Chrome
-	else if (docElm.webkitRequestFullScreen) { 
-	  docElm.webkitRequestFullScreen(); 
-	}
-	
-	//IE11
-	else if (elem.msRequestFullscreen) {
-	 elem.msRequestFullscreen();
-	}
-	isFullScreen = true;
-	canvas.style = " height: 100%;width: 100%;margin: 0;padding: 0;display: block;";
+// Add resize event listener
+window.addEventListener('resize', updateCanvasDimensions);
+
+function fullScreen() {
+    var docElm = document.documentElement;
+    if (docElm.requestFullscreen) { 
+        docElm.requestFullscreen(); 
+    }
+    //FireFox 
+    else if (docElm.mozRequestFullScreen) { 
+        docElm.mozRequestFullScreen(); 
+    }
+    //Chrome
+    else if (docElm.webkitRequestFullScreen) { 
+        docElm.webkitRequestFullScreen(); 
+    }
+    //IE11
+    else if (docElm.msRequestFullscreen) {
+        docElm.msRequestFullscreen();
+    }
+    isFullScreen = true;
+    
+    // Update canvas dimensions for fullscreen
+    updateCanvasDimensions();
+    
+    // Apply fullscreen styles
+    Object.assign(canvas.style, {
+        height: '100%',
+        width: '100%',
+        margin: '0',
+        padding: '0',
+        display: 'block'
+    });
 }
 
 function unFullScreen() {

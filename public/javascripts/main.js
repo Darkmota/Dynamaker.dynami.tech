@@ -9,8 +9,8 @@ window.onbeforeunload = function () {
 var test;
 var BlobBuilder = Blob,
     browser = getBrowser(),
-    windowWidth = 1920,
-    windowHeight = 1080,
+    windowWidth = window.innerWidth,
+    windowHeight = window.innerHeight,
     loaded = 0,
     low = false,
     gLine = false,

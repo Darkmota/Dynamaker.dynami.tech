@@ -6,23 +6,135 @@
 	font-family: "Dynamix";
 	src: url("../Font/dynamixfeaturestandard.woff") format("woff");
 }
+:root {
+    --input-height: 100px;
+    --input-font-size: 50px;
+    --select-width: 600px;
+}
+
 body {
-	font-family: "orbitron-bold"; 
+    font-family: "orbitron-bold";
+}
+
+.game-body {
+    background-color: #000;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 #game {
-	margin：0 auto;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
 }
 
-.settings {
-	display: none;
+.hidden {
+    display: none !important;
+}
+
+.game-input, .game-select {
+    position: absolute;
+    height: var(--input-height);
+    font-size: var(--input-font-size);
+    color: rgb(255,255,255);
+    background-color: rgb(25,25,25);
+    text-align: center;
+}
+
+.game-input {
+    width: 300px;
+}
+
+.game-select {
+    width: var(--select-width);
+}
+
+.music-name {
+    width: 1500px;
+    left: 200px;
+    top: 100px;
+}
+
+.beat-input {
+    left: 1100px;
+    top: 300px;
+}
+
+.bar-input {
+    left: 1400px;
+    top: 300px;
+}
+
+.offset-input, .offset-bar-input {
+    background-color: red;
+}
+
+.offset-input {
+    left: 1100px;
+    top: 500px;
+}
+
+.offset-bar-input {
+    left: 1400px;
+    top: 500px;
+}
+
+.hardship-select {
+    left: 200px;
+    top: 500px;
+}
+
+.side-select {
+    width: var(--select-width);
+}
+
+.left-select {
+    left: 200px;
+    top: 700px;
+}
+
+.right-select {
+    left: 1100px;
+    top: 700px;
 }
 
 *{
-    -webkit-touch-callout:none;  /*系统默认菜单被禁用*/
-    -webkit-user-select:none; /*webkit浏览器*/
-    -khtml-user-select:none; /*早期浏览器*/
-    -moz-user-select:none;/*火狐*/
-    -ms-user-select:none; /*IE10*/
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
     user-select:none;
+}
+
+@media (max-width: 1920px) {
+    :root {
+        --input-height: calc(100vw * 0.052);
+        --input-font-size: calc(100vw * 0.026);
+        --select-width: calc(100vw * 0.312);
+    }
+    
+    .music-name {
+        width: calc(100vw * 0.781);
+        left: calc(100vw * 0.104);
+    }
+    
+    .beat-input, .offset-input {
+        left: calc(100vw * 0.573);
+    }
+    
+    .bar-input, .offset-bar-input {
+        left: calc(100vw * 0.729);
+    }
+    
+    .hardship-select, .left-select {
+        left: calc(100vw * 0.104);
+    }
+    
+    .right-select {
+        left: calc(100vw * 0.573);
+    }
 }
